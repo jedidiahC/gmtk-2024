@@ -9,7 +9,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private Button _startGameBtn = null;
 
     void Awake() {
-        if (_startGameBtn == null) Debug.LogError("_startGameBtn not assigned");
+        Debug.Assert(_startGameBtn != null, "_startGameBtn not assigned");
 
         _startGameBtn.onClick.AddListener(() => {
             SceneManager.LoadScene(Constants.SCENE_GAME);
