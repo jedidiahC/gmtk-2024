@@ -15,7 +15,7 @@ public class ObjectPool : MonoBehaviour {
         _objectPool = new List<PoolObject>(_initialPoolSize);
 
         for (int i = 0; i < _initialPoolSize; i++) {
-            GameObject instance = Instantiate(_poolObjectPrefab);
+            GameObject instance = Instantiate(_poolObjectPrefab, this.transform);
             PoolObject poolObject = instance.GetComponent<PoolObject>();
             poolObject.Despawn();
             _objectPool.Add(poolObject);
@@ -29,7 +29,7 @@ public class ObjectPool : MonoBehaviour {
             }
         }
 
-        GameObject newInstance = Instantiate(_poolObjectPrefab);
+        GameObject newInstance = Instantiate(_poolObjectPrefab, this.transform);
         PoolObject newPoolObject = newInstance.GetComponent<PoolObject>();
         newPoolObject.Despawn();
         _objectPool.Add(newPoolObject);

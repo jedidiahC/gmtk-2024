@@ -13,14 +13,18 @@ public class BulletPoolManager : MonoBehaviour {
         Debug.Assert(_targetPoint != null, "_targetPoint not assigned");
     }
 
-    private float _countDown = 1.0f;
-    private const float SHOT_INTERVAL = 0.15f;
+    private float _countDown = 0.5f;
+    private const float SHOT_INTERVAL = 0.025f;
     void Update() {
         if (_countDown <= 0.0f) {
             SamplePoolBullet bullet = (SamplePoolBullet)_bulletPool.GetFreePoolObject();
             if (bullet == null) return;
 
-            bullet.SetTarget(_targetPoint.position, 1.0f);
+            Vector3 ctrlPoint = Vector3.Lerp(_spawnPoint.position, _targetPoint.position, Random.Range(0.15f, 0.5f));
+            const float DEVIANCE = 4.5f;
+            ctrlPoint.y += Random.Range(-DEVIANCE, DEVIANCE);
+            ctrlPoint.x += Random.Range(-DEVIANCE, DEVIANCE);
+            bullet.SetTarget(_targetPoint.position, 1.0f, ctrlPoint);
             bullet.Spawn(_spawnPoint.position);
 
             _countDown += SHOT_INTERVAL;
