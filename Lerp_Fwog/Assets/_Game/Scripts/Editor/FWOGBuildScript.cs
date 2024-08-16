@@ -118,6 +118,8 @@ public class FWOGBuildScript
                     "python3 -m http.server --directory \"" + buildPath + "\"\n\n" +
                     #elif UNITY_EDITOR_WIN
                     "python -m http.server --directory \"" + buildPath + "\"\n\n" +
+                    "OR\n\n"+
+                    "py -m http.server --directory \"" + buildPath + "\"\n\n" +
                     #endif
                     "Then with the server running, go to your web browser and enter\n" +
                     "localhost:8000\n";
