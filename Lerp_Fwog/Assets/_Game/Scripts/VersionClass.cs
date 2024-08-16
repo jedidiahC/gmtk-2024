@@ -5,9 +5,11 @@ using UnityEngine;
 public class VersionClass
 {
 #if UNITY_STANDALONE_OSX
-	public const string DEVICE_TYPE = "m";
+	public const string DEVICE_TYPE = "mac";
 #elif UNITY_STANDALONE_WIN
-	public const string DEVICE_TYPE = "w";
+	public const string DEVICE_TYPE = "win";
+#elif UNITY_WEBGL
+	public const string DEVICE_TYPE = "web";
 #endif
 	public const string BUNDLE_VERSION = "0.1";
 

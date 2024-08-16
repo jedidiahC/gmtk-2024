@@ -5,14 +5,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using UnityEditor.Callbacks;
-using System.Threading.Tasks;
 
 
 public enum eBuildScheme { RELEASE, DEBUG };
 
 public class FWOGBuildScript
 {
-
 #if UNITY_STANDALONE
 	private static BuildTargetGroup buildTargetGroup = BuildTargetGroup.Standalone;
 #if UNITY_STANDALONE_OSX
@@ -30,7 +28,7 @@ public class FWOGBuildScript
 	private static BuildTarget buildTarget = BuildTarget.WebGL;
 #endif
 
-    public static void BuildFWOG(eBuildScheme inBuildScheme, bool inAllowAppendXCodeProj = false) {
+    public static void BuildFWOG(eBuildScheme inBuildScheme, bool run = false) {
         try {
             #region Scripting defines
             string scriptingDefines = "FWOG_" + inBuildScheme.ToString() + ";";
@@ -56,6 +54,15 @@ public class FWOGBuildScript
             PlayerSettings.SetApplicationIdentifier(buildTargetGroup, "com.fwog.lerp");
             PlayerSettings.bundleVersion = VersionClass.BUNDLE_VERSION;
 			PlayerSettings.SetScriptingBackend(buildTargetGroup, ScriptingImplementation.IL2CPP);
+            #if UNITY_WEBGL
+            // TODO: Find a way to set the WebGL Code Optimization to
+            //       Runtime Speed for release and Shorter Build Time for debug
+            if (inBuildScheme == eBuildScheme.RELEASE) {
+                PlayerSettings.WebGL.compressionFormat = WebGLCompressionFormat.Gzip;
+            } else {
+                PlayerSettings.WebGL.compressionFormat = WebGLCompressionFormat.Disabled;
+            }
+            #endif
 			#endregion
 
 			// NOTE: Set unity scenes to be included in the build.
@@ -101,6 +108,23 @@ public class FWOGBuildScript
 
 			if (buildReport.summary.totalErrors < 1) {
                 Debug.Log("FWOG " + inBuildScheme.ToString() + " build completed successfully.");
+                if (run) {
+#if UNITY_STANDALONE
+                    System.Diagnostics.Process.Start(buildPath);
+#elif UNITY_WEBGL
+                    string runInstructionStr = "You need to run the server locally...\n" +
+                    "Open Terminal/Powershell and run the following command:\n\n" +
+                    #if UNITY_EDITOR_OSX
+                    "python3 -m http.server --directory \"" + buildPath + "\"\n\n" +
+                    #elif UNITY_EDITOR_WIN
+                    "python -m http.server --directory \"" + buildPath + "\"\n\n" +
+                    #endif
+                    "Then with the server running, go to your web browser and enter\n" +
+                    "localhost:8000\n";
+
+                    EditorUtility.DisplayDialog("Run Instructions", runInstructionStr, "Got it!");
+#endif
+                }
             }
             else {
 				string buildStepsMessages = "";
@@ -136,4 +160,61 @@ public class FWOGBuildScript
         BuildTargetGroup buildTargetGroup = BuildPipeline.GetBuildTargetGroup(target);
         ResetScriptingDefineSymbols(buildTargetGroup);
     }
+
+
+//     private static void StartLocalServer(string buildPath)
+//     {
+// #if UNITY_EDITOR_OSX
+//         // On macOS, use Python's HTTP server (Python 3.x)
+//         string serverCommand = $"python3 -m http.server --directory \"{buildPath}\"";
+// #elif UNITY_EDITOR_WIN
+//         // On other platforms, use the default Python command
+//         string serverCommand = $"python -m http.server --directory \"{buildPath}\"";
+// #endif
+
+//         System.Diagnostics.ProcessStartInfo processInfo = new System.Diagnostics.ProcessStartInfo
+//         {
+//             FileName = "/bin/zsh",
+//             Arguments = $"-c \"{serverCommand}\"",
+//             WorkingDirectory = buildPath,
+//             RedirectStandardOutput = true,
+//             RedirectStandardError = true,
+//             UseShellExecute = false,
+//             CreateNoWindow = true // This does nothing?!
+//         };
+
+//         try {
+//             using (System.Diagnostics.Process process = System.Diagnostics.Process.Start(processInfo)) {
+//                 if (process == null) {
+//                     Debug.LogError("failed to start the local server.");
+//                     return;
+//                 }
+
+//                 // Read output and error streams for debugging
+//                 string output = process.StandardOutput.ReadToEnd();
+//                 string error = process.StandardError.ReadToEnd();
+
+//                 // This will hang Unity!!! Needs some other way to keep this process running...
+//                 process.WaitForExit();
+
+//                 Debug.Log("Server output: " + output);
+//                 if (!string.IsNullOrEmpty(error))
+//                 {
+//                     Debug.LogError("Server error: " + error);
+//                 }
+//             }
+//         }
+//         catch (System.Exception e)
+//         {
+//             UnityEngine.Debug.LogError($"Error starting local server: {e.Message}");
+//         }
+
+//         // Opens the browser. This works.
+//         string url = "http://localhost:8000"; // Default port for Python HTTP server
+//         System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+//         {
+//             FileName = url,
+//             UseShellExecute = true
+//         });
+//     }
 }
