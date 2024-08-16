@@ -45,7 +45,7 @@ public class EditorMenuItems
 public static class EditorMenuCheckmarkItems
 {
     private static bool _buildAndRun;
-    private const string BUILD_AND_RUN_CHECKMARK = EditorMenuItems.MENU_ITEM_PREFIX + "Build and Run";
+    private const string BUILD_AND_RUN_CHECKMARK = EditorMenuItems.MENU_ITEM_PREFIX + "Build and Run (DEBUG ONLY)";
 
     static EditorMenuCheckmarkItems()
     {
