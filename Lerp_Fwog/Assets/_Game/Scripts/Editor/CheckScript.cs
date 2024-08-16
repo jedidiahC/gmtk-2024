@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEditor;
 using UnityEditor.SceneManagement;
+using TMPro;
 
 public class CheckScript
 {
@@ -211,7 +212,7 @@ public class CheckScript
 			for (int iGameObject = 0; iGameObject < numGameObjects; iGameObject++)
 			{
 				GameObject gameObject = hierarchy[iGameObject];
-				CheckGameObjectRecursive(gameObject, "[hierarchy]");
+				CheckGameObjectRecursive(gameObject, "[hierarchy] " + inSceneName);
 
 				progress = (float)iGameObject / (float)numGameObjects;
 				EditorUtility.DisplayCancelableProgressBar(title, info, progress);
@@ -249,16 +250,21 @@ public class CheckScript
 			SerializedObject so = new SerializedObject(c);
 			var sp = so.GetIterator();
 
+   			// Iterates through all serialized properties.
 			while (sp.Next(true))
 			{
 				if (sp.propertyType == SerializedPropertyType.ObjectReference)
 				{
-					if (sp.objectReferenceValue == null
-						&& sp.objectReferenceInstanceIDValue != 0)
+					if (sp.name.StartsWith("m_")
+						|| sp.name == "data"
+						|| sp.name == "parentLinkedComponent") continue;
+
+					//Debug.Log(sp.name + ", " + sp.propertyType + ", " + sp.objectReferenceValue);
+					if (sp.objectReferenceValue == null)
 					{
 						if (ObjectNames.NicifyVariableName(sp.name) != "Prefab Parent Object")
 						{
-							ShowError(inPath + ": Project", inGameObject, c.GetType().Name, ObjectNames.NicifyVariableName(sp.name));
+							ShowError(inPath, inGameObject, c.GetType().Name, ObjectNames.NicifyVariableName(sp.name));
 						}
 					}
 				}
@@ -286,48 +292,28 @@ public class CheckScript
 			{
 				if (c.GetType() == typeof(SpriteRenderer))
 				{
-					// SpriteRenderer obj = (SpriteRenderer)c;
-					// if (obj.sharedMaterial == null) Debug.LogWarning(inPath + ": " + FullPath(inGameObject) + " contains an incorrect NULL material");
-					// else if (obj.sharedMaterial.name != "Sprites-Default"
-					// 	&& obj.sharedMaterial.name != "MobileUnlit")
-					// {
-					// 	Debug.LogWarning(inPath + ": " + FullPath(inGameObject) + " contains an incorrect material of: " + obj.sharedMaterial.name);
-					// }
+					SpriteRenderer obj = (SpriteRenderer)c;
+					if (obj.sharedMaterial == null) Debug.LogWarning(inPath + ": " + FullPath(inGameObject) + " contains an incorrect NULL material");
 				}
 				else if (c.GetType() == typeof(Image))
 				{
-					// Image obj = (Image)c;
-					// if (obj.material == null) Debug.LogWarning(inPath + ": " + FullPath(inGameObject) + " contains an incorrect NULL material");
-					// else if (c.gameObject.GetComponent<Mask>() == null)
-					// {
-					// 	if (obj.material.name != "MAT_UIFastDefault"
-					// 		&& obj.material.name != "MAT_UIDefault") Debug.LogWarning(inPath + ": " + FullPath(inGameObject) + " contains an incorrect material of: " + obj.material.name);
-					// }
-					// else
-					// {
-					// 	if (obj.material.name != "MAT_UIDefault") Debug.LogWarning(inPath + ": " + FullPath(inGameObject) + " contains an incorrect material of: " + obj.material.name);
-					// }
+					Image obj = (Image)c;
+					if (obj.material == null) Debug.LogWarning(inPath + ": " + FullPath(inGameObject) + " contains an incorrect NULL material");
 				}
 				else if (c.GetType() == typeof(Text))
 				{
-					// Text obj = (Text)c;
-					// if (obj.material == null) Debug.LogWarning(inPath + ": " + FullPath(inGameObject) + " contains an incorrect NULL material");
-					// else if (obj.material.name != "MAT_UIFastDefault"
-					// 	&& obj.material.name != "MAT_UIDefault") Debug.LogWarning(inPath + ": " + FullPath(inGameObject) + " contains an incorrect material of: " + obj.material.name + " : " + obj.material.GetInstanceID());
+					Text obj = (Text)c;
+					if (obj.material == null) Debug.LogWarning(inPath + ": " + FullPath(inGameObject) + " contains an incorrect NULL material");
+				}
+				else if (c.GetType() == typeof(TextMeshProUGUI))
+				{
+					TextMeshProUGUI obj = (TextMeshProUGUI)c;
+					if (obj.material == null) Debug.LogWarning(inPath + ": " + FullPath(inGameObject) + " contains an incorrect NULL material");
 				}
 				else if (c.GetType() == typeof(RawImage))
 				{
-					// RawImage obj = (RawImage)c;
-					// if (obj.material == null) Debug.LogWarning(inPath + ": " + FullPath(inGameObject) + " contains an incorrect NULL material");
-					// else if (obj.gameObject.name == "Story Cam Feed")
-					// {
-					// 	if (obj.material.name != "MAT_UIDefault")
-					// 		Debug.LogWarning(inPath + ": " + FullPath(inGameObject) + " contains an incorrect material of: " + obj.material.name);
-					// }
-					// else if (obj.material.name != "MAT_UIFastDefault")
-					// {
-					// 	Debug.LogWarning(inPath + ": " + FullPath(inGameObject) + " contains an incorrect material of: " + obj.material.name);
-					// }
+					RawImage obj = (RawImage)c;
+					if (obj.material == null) Debug.LogWarning(inPath + ": " + FullPath(inGameObject) + " contains an incorrect NULL material");
 				}
 			}
 
