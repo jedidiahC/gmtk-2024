@@ -12,7 +12,7 @@ public class TargetArea : MonoBehaviour {
     private bool _reachedTarget = false;
     public bool ReachedTarget { get { return _reachedTarget; } }
 
-    private Color _unreachedColor = new Color(1f, 0f, 0f, 0.5f);
+    private Color _unreachedColor = new Color(0f, 0.6f, 1f, 0.5f);
     private Color _reachedColor = new Color(0f, 1f, 0f, 0.15f);
 
     void Awake() {
