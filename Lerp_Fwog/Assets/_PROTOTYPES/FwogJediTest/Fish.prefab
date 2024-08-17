@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -3432033528859708297}
   - component: {fileID: -6332746991161263668}
   - component: {fileID: -989899347846563522}
+  - component: {fileID: 8280882870542903367}
   m_Layer: 0
   m_Name: Fish
   m_TagString: Untagged
@@ -99,7 +100,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc2825a535303f84a9bb4ca077935d2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
   speed: 2
 --- !u!58 &-6332746991161263668
 CircleCollider2D:
@@ -163,3 +163,29 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &8280882870542903367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8297698127265311916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c3831b1e25b0494c8a62c656e010f17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _creatureType: 2
+  _moveForce: 1000
+  _maxSpeed: 5
+  _rotateSpeed: 10
+  _rotateDampening: 0.85
+  _viewTargetRange: 4
+  _viewTargetAngle: 70
+  _targetTransform: {fileID: 0}
+  _steeringUpdateInterval: 0.2
+  _steeringVectorsQty: 18
+  _steeringVectorsMaxAngle: 270
+  _steeringCircleCastRadiusRatio: 0.7
+  _steeringCirclecastDistance: 3
+  _circlecastExtendedDist: 0.5

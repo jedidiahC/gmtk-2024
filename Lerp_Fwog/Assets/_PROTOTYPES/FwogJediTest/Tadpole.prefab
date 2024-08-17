@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -2858276717772586018}
   m_Layer: 0
   m_Name: Tadpole
-  m_TagString: Untagged
+  m_TagString: Tadpole
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -115,7 +115,11 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  onEscape:
+    m_PersistentCalls:
+      m_Calls: []
   _isDead: 0
+  _hasEscaped: 0
 --- !u!50 &-6049393030088306303
 Rigidbody2D:
   serializedVersion: 4
@@ -190,13 +194,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c3831b1e25b0494c8a62c656e010f17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _creatureType: 1
   _moveForce: 1000
   _maxSpeed: 5
-  _rotateSpeed: 5
+  _rotateSpeed: 10
   _rotateDampening: 0.85
+  _viewTargetRange: 4
+  _viewTargetAngle: 70
+  _targetTransform: {fileID: 0}
   _steeringUpdateInterval: 0.2
   _steeringVectorsQty: 18
   _steeringVectorsMaxAngle: 270
-  _steeringCircleCastRadius: 0.5
+  _steeringCircleCastRadiusRatio: 0.7
   _steeringCirclecastDistance: 3
   _circlecastExtendedDist: 0.5
