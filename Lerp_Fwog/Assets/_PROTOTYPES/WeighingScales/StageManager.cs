@@ -85,8 +85,10 @@ public class StageManager : MonoBehaviour {
     }
 
     private void Update() {
-        if (Input.GetKeyDown(KeyCode.Space)) ResumePhysics();
-        if (Input.GetKeyDown(KeyCode.R)) Reset();
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            if (!_isSimulating) ResumePhysics();
+            else Reset();
+        }
     }
 
     private void SetTransformToValues(Transform transform, TransformValues values) {
