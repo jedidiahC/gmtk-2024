@@ -35,17 +35,7 @@ public class WeighingScalesManager : MonoBehaviour {
         _dropObjectRB.isKinematic = true;
         _plankRB.isKinematic = true;
 
-        _launchObjTransformVals.position = _launchObjectRB.transform.position;
-        _launchObjTransformVals.rotation = _launchObjectRB.transform.rotation;
-        _launchObjTransformVals.scale = _launchObjectRB.transform.lossyScale;
-
-        _dropObjTransformVals.position = _dropObjectRB.transform.position;
-        _dropObjTransformVals.rotation = _dropObjectRB.transform.rotation;
-        _dropObjTransformVals.scale = _dropObjectRB.transform.lossyScale;
-
-        _plankTransformVals.position = _plankRB.transform.position;
-        _plankTransformVals.rotation = _plankRB.transform.rotation;
-        _plankTransformVals.scale = _plankRB.transform.lossyScale;
+        StoreTransfromValues();
     }
 
     public void ShowLevelClearText() {
@@ -65,23 +55,23 @@ public class WeighingScalesManager : MonoBehaviour {
         _plankRB.velocity = Vector2.zero;
         _plankRB.angularVelocity = 0.0f;
 
-        _launchObjectRB.transform.position = _launchObjTransformVals.position;
-        _launchObjectRB.transform.rotation = _launchObjTransformVals.rotation;
-        _launchObjectRB.transform.localScale = _launchObjTransformVals.scale;
-
-        _dropObjectRB.transform.position = _dropObjTransformVals.position;
-        _dropObjectRB.transform.rotation = _dropObjTransformVals.rotation;
-        _dropObjectRB.transform.localScale = _dropObjTransformVals.scale;
-
-        _plankRB.transform.position = _plankTransformVals.position;
-        _plankRB.transform.rotation = _plankTransformVals.rotation;
-        _plankRB.transform.localScale = _plankTransformVals.scale;
+        SetTransformToValues(_launchObjectRB.transform, _launchObjTransformVals);
+        SetTransformToValues(_dropObjectRB.transform, _dropObjTransformVals);
+        SetTransformToValues(_plankRB.transform, _plankTransformVals);
     }
 
     public void ResumePhysics() {
+        StoreTransfromValues();
+
         _launchObjectRB.isKinematic = false;
         _dropObjectRB.isKinematic = false;
         _plankRB.isKinematic = false;
+    }
+
+    private void StoreTransfromValues() {
+        _launchObjTransformVals = new TransformValues(_launchObjectRB.transform);
+        _dropObjTransformVals = new TransformValues(_dropObjectRB.transform);
+        _plankTransformVals = new TransformValues(_plankRB.transform);
     }
 
     private void Update() {
@@ -95,10 +85,21 @@ public class WeighingScalesManager : MonoBehaviour {
             _dropObjectRB.transform.localScale *= 0.9f;
         }
     }
+
+    private void SetTransformToValues(Transform transform, TransformValues values) {
+        transform.position = values.position;
+        transform.rotation = values.rotation;
+        transform.localScale = values.scale;
+    }
 }
 
 public struct TransformValues {
     public Vector3 position;
     public Quaternion rotation;
     public Vector3 scale;
+    public TransformValues(Transform transform) {
+        position = transform.position;
+        rotation = transform.rotation;
+        scale = transform.lossyScale;
+    }
 }
