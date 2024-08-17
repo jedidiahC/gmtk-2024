@@ -60,4 +60,15 @@ public static class Utils {
             (1 - t) * 3 * t * t * ctrlB.z +
             t * t * t * end.z);
     }
+
+    public static void SetGlobalScale(Transform transform, Vector3 globalScale)
+    {
+        // Calculate the required local scale to achieve the target global scale
+        Vector3 parentScale = transform.parent ? transform.parent.lossyScale : Vector3.one;
+        transform.localScale = new Vector3(
+            globalScale.x / parentScale.x,
+            globalScale.y / parentScale.y,
+            globalScale.z / parentScale.z
+        );
+    }
 }
