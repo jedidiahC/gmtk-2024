@@ -14,11 +14,13 @@ public class ScaleWalls : MonoBehaviour
     private Vector3 initialScale;
     private bool isMouseOver = false;  // To track if the mouse is over the sprite
     private float currentScalingSpeed;
+    private bool canScaleUp = true;  // To track if scaling up is allowed
 
     void Start()
     {
         initialScale = transform.localScale;  // Store the initial scale
         currentScalingSpeed = baseScalingSpeed;  // Initialize scaling speed
+        Debug.Log("ScaleWalls started on " + gameObject.name);
     }
 
     void Update()
@@ -27,7 +29,7 @@ public class ScaleWalls : MonoBehaviour
         {
             Vector3 scale = transform.localScale;
 
-            if (Input.GetMouseButton(0))  // LMB held down, scale up
+            if (Input.GetMouseButton(0) && canScaleUp)  // LMB held down, scale up only if allowed
             {
                 currentScalingSpeed = Mathf.Min(currentScalingSpeed + speedIncreaseRate * Time.deltaTime, maxScalingSpeed);
                 if (scalingAxis == ScaleAxis.X)
@@ -38,8 +40,9 @@ public class ScaleWalls : MonoBehaviour
                 {
                     scale.y += currentScalingSpeed * Time.deltaTime;  // Scale along the y-axis
                 }
+                Debug.Log("Scaling up " + gameObject.name + " to " + scale);
             }
-            else if (Input.GetMouseButton(1))  // RMB held down, scale down
+            else if (Input.GetMouseButton(1))  // RMB held down, always allow scaling down
             {
                 currentScalingSpeed = Mathf.Min(currentScalingSpeed + speedIncreaseRate * Time.deltaTime, maxScalingSpeed);
                 if (scalingAxis == ScaleAxis.X)
@@ -50,6 +53,7 @@ public class ScaleWalls : MonoBehaviour
                 {
                     scale.y -= currentScalingSpeed * Time.deltaTime;  // Scale along the y-axis
                 }
+                Debug.Log("Scaling down " + gameObject.name + " to " + scale);
             }
             else
             {
@@ -73,11 +77,31 @@ public class ScaleWalls : MonoBehaviour
     void OnMouseOver()
     {
         isMouseOver = true;  // Set flag to true when mouse is over the sprite
+        Debug.Log("Mouse is over " + gameObject.name);
     }
 
     void OnMouseExit()
     {
         isMouseOver = false;  // Reset flag when mouse leaves the sprite
         currentScalingSpeed = baseScalingSpeed;  // Reset scaling speed when the mouse exits
+        Debug.Log("Mouse exited " + gameObject.name);
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Wall"))
+        {
+            canScaleUp = false;  // Stop scaling up if the object enters a trigger with a "Wall" tag
+            Debug.Log(gameObject.name + " triggered by a wall. Scaling up stopped.");
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Wall"))
+        {
+            canScaleUp = true;  // Allow scaling up again when the object exits the trigger with the "Wall" tag
+            Debug.Log(gameObject.name + " no longer triggering a wall. Scaling up resumed.");
+        }
     }
 }
