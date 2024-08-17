@@ -7,10 +7,12 @@ public class GameTracker : MonoBehaviour
 {
     private static GameTracker _instance = null;
 
-
     UnityEvent onAllDead = new();
+    UnityEvent onAllEscape = new();
 
     [SerializeField] private List<TadpoleLife> _lives = new();
+
+    private int _escapeCount = 0;
 
     public static GameTracker GetInstance()
     {
@@ -34,6 +36,7 @@ public class GameTracker : MonoBehaviour
     {
         _lives.Add(life);
         life.onDead.AddListener(CheckAllDeadCondition);
+        life.onEscape.AddListener(CheckWinCondition);
     }
 
     void Awake()
@@ -54,7 +57,7 @@ public class GameTracker : MonoBehaviour
         foreach (TadpoleLife life in _lives)
         {
             life.onDead.AddListener(CheckAllDeadCondition);
-            AddLife(life);
+            life.onEscape.AddListener(CheckWinCondition);
         }
     }
 
@@ -70,6 +73,23 @@ public class GameTracker : MonoBehaviour
 
         Debug.Log("All dead");
         onAllDead.Invoke();
+    }
+
+    void CheckWinCondition()
+    {
+        _escapeCount++;
+        Debug.Log("Escaped" + _escapeCount);
+
+        foreach (TadpoleLife life in _lives)
+        {
+            if (!life.HasEscaped)
+            {
+                return;
+            }
+        }
+
+        Debug.Log("All escape");
+        onAllEscape.Invoke();
     }
 
     void OnDestroy()
