@@ -5,6 +5,7 @@ public class ScaleWalls : MonoBehaviour
     public enum ScaleAxis { X, Y }  // Enum to define the scaling axis
     [SerializeField] private ScaleAxis scalingAxis = ScaleAxis.X;  // Default to X-axis scaling
 
+    [SerializeField] private float revertScalingSpeed = 1.0f;  // Base speed at which the object scales
     [SerializeField] private float baseScalingSpeed = 1.0f;  // Base speed at which the object scales
     [SerializeField] private float maxScalingSpeed = 10.0f;  // Maximum scaling speed limit
     [SerializeField] private float speedIncreaseRate = 1.0f;  // Rate at which the scaling speed increases
@@ -68,6 +69,43 @@ public class ScaleWalls : MonoBehaviour
             else if (scalingAxis == ScaleAxis.Y)
             {
                 scale.y = Mathf.Clamp(scale.y, minScale, maxScale);
+            }
+
+            transform.localScale = scale;
+        }
+
+        // this is super hard coded, need to clean up
+        else
+        {
+            Vector3 scale = transform.localScale;
+            currentScalingSpeed = revertScalingSpeed;
+
+            if (Mathf.Abs(transform.localScale.x - initialScale.x) > 0.1f)
+            {
+                // scale down
+                if (transform.localScale.x > initialScale.x)
+                {
+                    scale.x -= currentScalingSpeed * Time.deltaTime;  // Scale along the x-axis
+                }
+                // scale up
+                else
+                {
+                    scale.x += currentScalingSpeed * Time.deltaTime;  // Scale along the x-axis
+                }
+            }
+
+            if (Mathf.Abs(transform.localScale.y - initialScale.y) > 0.1f)
+            {
+                // scale down
+                if (transform.localScale.y > initialScale.y)
+                {
+                    scale.y -= currentScalingSpeed * Time.deltaTime;  // Scale along the x-axis
+                }
+                // scale up
+                else
+                {
+                    scale.y += currentScalingSpeed * Time.deltaTime;  // Scale along the x-axis
+                }
             }
 
             transform.localScale = scale;
