@@ -56,6 +56,7 @@ public class StageManager : MonoBehaviour {
             curDynamic.velocity = Vector2.zero;
             curDynamic.angularVelocity = 0.0f;
             SetTransformToValues(curDynamic.transform, _dynamicTransformVals[i]);
+            curDynamic.gameObject.SetActive(true);
         }
 
         for (int i = 0; i < _targetAreas.Count; i++) {
