@@ -1,11 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class ScalableObject : MonoBehaviour
+public class UniformScalableObject : MonoBehaviour
 {
+    public UnityEvent<float> onScale = new();
+
+    [SerializeField] private float _scaleSpeedMultiplier = 1.0f;
+
     private SpriteRenderer _spriteRenderer;
     private Color _spriteColor;
+    private Vector3 _originalScale;
 
     void Awake()
     {
@@ -17,29 +23,10 @@ public class ScalableObject : MonoBehaviour
 
     private Vector3 _lastMousePos;
     private bool _mouseWasDown = false;
-    private void OnMouseDown()
-    {
-        _lastMousePos = Input.mousePosition;
-        _mouseWasDown = true;
-    }
 
-    private void OnMouseUp()
+    private void Start()
     {
-        if (_mouseWasDown)
-        {
-            _mouseWasDown = false;
-            if (!HandlerManager.Instance.AllowTransformations) return;
-
-            if (HandlerManager.Instance.GetTarget() == transform)
-            {
-                const float TOLERANCE = 1.0f;
-                if (Vector3.Distance(_lastMousePos, Input.mousePosition) < TOLERANCE)
-                {
-                    HandlerManager.Instance.SetTarget(null);
-                }
-            }
-            else HandlerManager.Instance.SetTarget(transform);
-        }
+        _originalScale = transform.localScale;
     }
 
     private void OnMouseEnter()
@@ -52,5 +39,26 @@ public class ScalableObject : MonoBehaviour
     {
         if (!HandlerManager.Instance.AllowTransformations) return;
         _spriteRenderer.color = _spriteColor;
+    }
+
+    private void OnMouseOver()
+    {
+        ScaleDelta(Input.mouseScrollDelta.y * _scaleSpeedMultiplier);
+    }
+
+    public void ScaleDelta(float dScale)
+    {
+        Vector3 newScale = transform.localScale + Vector3.one * dScale;
+        if (newScale.magnitude < 0.1)
+        {
+            return;
+        }
+        transform.localScale = newScale;
+        onScale.Invoke(GetScaleFactor());
+    }
+
+    private float GetScaleFactor()
+    {
+        return transform.localScale.x / _originalScale.x;
     }
 }
