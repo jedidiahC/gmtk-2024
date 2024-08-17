@@ -5,6 +5,8 @@ public class ScaleWalls : MonoBehaviour
     public enum ScaleAxis { X, Y }  // Enum to define the scaling axis
     [SerializeField] private ScaleAxis scalingAxis = ScaleAxis.X;  // Default to X-axis scaling
 
+    [SerializeField] private float revertScalingSpeed = 1.0f;  // Base speed at which the object scales
+    [SerializeField] private float revertWaitTime = 1.0f;  // Base speed at which the object scales
     [SerializeField] private float baseScalingSpeed = 1.0f;  // Base speed at which the object scales
     [SerializeField] private float maxScalingSpeed = 10.0f;  // Maximum scaling speed limit
     [SerializeField] private float speedIncreaseRate = 1.0f;  // Rate at which the scaling speed increases
@@ -15,12 +17,14 @@ public class ScaleWalls : MonoBehaviour
     private bool isMouseOver = false;  // To track if the mouse is over the sprite
     private float currentScalingSpeed;
     private bool canScaleUp = true;  // To track if scaling up is allowed
+    private float waitToRevert;
 
     void Start()
     {
         initialScale = transform.localScale;  // Store the initial scale
         currentScalingSpeed = baseScalingSpeed;  // Initialize scaling speed
         Debug.Log("ScaleWalls started on " + gameObject.name);
+        waitToRevert = revertWaitTime;
     }
 
     void Update()
@@ -31,6 +35,7 @@ public class ScaleWalls : MonoBehaviour
 
             if (Input.GetMouseButton(0) && canScaleUp)  // LMB held down, scale up only if allowed
             {
+                waitToRevert = revertWaitTime;
                 currentScalingSpeed = Mathf.Min(currentScalingSpeed + speedIncreaseRate * Time.deltaTime, maxScalingSpeed);
                 if (scalingAxis == ScaleAxis.X)
                 {
@@ -44,6 +49,7 @@ public class ScaleWalls : MonoBehaviour
             }
             else if (Input.GetMouseButton(1))  // RMB held down, always allow scaling down
             {
+                waitToRevert = revertWaitTime;
                 currentScalingSpeed = Mathf.Min(currentScalingSpeed + speedIncreaseRate * Time.deltaTime, maxScalingSpeed);
                 if (scalingAxis == ScaleAxis.X)
                 {
@@ -72,6 +78,44 @@ public class ScaleWalls : MonoBehaviour
 
             transform.localScale = scale;
         }
+
+        // this is super hard coded, need to clean up
+        else if (waitToRevert < 0)
+        {
+            Vector3 scale = transform.localScale;
+            currentScalingSpeed = revertScalingSpeed;
+
+            if (Mathf.Abs(transform.localScale.x - initialScale.x) > 0.1f)
+            {
+                // scale down
+                if (transform.localScale.x > initialScale.x)
+                {
+                    scale.x -= currentScalingSpeed * Time.deltaTime;  // Scale along the x-axis
+                }
+                // scale up
+                else
+                {
+                    scale.x += currentScalingSpeed * Time.deltaTime;  // Scale along the x-axis
+                }
+            }
+
+            if (Mathf.Abs(transform.localScale.y - initialScale.y) > 0.1f)
+            {
+                // scale down
+                if (transform.localScale.y > initialScale.y)
+                {
+                    scale.y -= currentScalingSpeed * Time.deltaTime;  // Scale along the x-axis
+                }
+                // scale up
+                else
+                {
+                    scale.y += currentScalingSpeed * Time.deltaTime;  // Scale along the x-axis
+                }
+            }
+
+            transform.localScale = scale;
+        }
+        waitToRevert -= Time.deltaTime;
     }
 
     void OnMouseOver()
