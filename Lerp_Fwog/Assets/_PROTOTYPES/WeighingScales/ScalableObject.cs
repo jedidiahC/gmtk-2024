@@ -9,6 +9,7 @@ public class ScalableObject : MonoBehaviour {
     void Awake() {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         Debug.Assert(_spriteRenderer != null, "_spriteRenderer is not found!");
+        Debug.Assert(gameObject.GetComponent<Collider2D>() != null, "Collider2D is not found!");
         _spriteColor = _spriteRenderer.color;
     }
 
