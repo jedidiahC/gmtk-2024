@@ -59,6 +59,7 @@ public class TadpoleMovement : MonoBehaviour
 
     void Update()
     {
+        if (_creatureType == eCreatureType.FISH) FindTadpoleTarget();
         if (!MoveToTargetInSight())
             Steering();
     }
