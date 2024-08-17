@@ -30,12 +30,8 @@ public class WeighingScalesManager : MonoBehaviour {
         Debug.Assert( _dropObjectRB != null, "_dropObjectRB not assigned");
         Debug.Assert(_plankRB != null, "_plankRB not assigned");
 
-        _levelClearText.enabled = false;
-        _launchObjectRB.isKinematic = true;
-        _dropObjectRB.isKinematic = true;
-        _plankRB.isKinematic = true;
-
         StoreTransfromValues();
+        Reset();
     }
 
     public void ShowLevelClearText() {
@@ -58,9 +54,12 @@ public class WeighingScalesManager : MonoBehaviour {
         SetTransformToValues(_launchObjectRB.transform, _launchObjTransformVals);
         SetTransformToValues(_dropObjectRB.transform, _dropObjTransformVals);
         SetTransformToValues(_plankRB.transform, _plankTransformVals);
+
+        HandlerManager.Instance.ResumeTransformations();
     }
 
     public void ResumePhysics() {
+        HandlerManager.Instance.PauseTransformations();
         StoreTransfromValues();
 
         _launchObjectRB.isKinematic = false;

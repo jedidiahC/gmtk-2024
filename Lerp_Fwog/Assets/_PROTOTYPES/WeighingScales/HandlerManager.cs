@@ -7,6 +7,14 @@ public class HandlerManager : MonoBehaviour {
     private static HandlerManager _instance = null;
     public static HandlerManager Instance { get { return _instance; } }
 
+    private bool _allowTransformations = true;
+    public bool AllowTransformations { get { return _allowTransformations; } }
+    public void ResumeTransformations() { _allowTransformations = true; }
+    public void PauseTransformations() {
+        SetTarget(null);
+        _allowTransformations = false;
+    }
+
     [SerializeField] private RuntimeTransformHandle _transformHandler = null;
     void Awake() {
         if (_instance == null) {
@@ -21,23 +29,28 @@ public class HandlerManager : MonoBehaviour {
     
     void Setup() {
         Debug.Assert(_transformHandler != null, "_transformHandler not assigned");
-        Debug.Assert(_transformHandler.handleCamera != null, "_transformHandler.handleCamera not assigned");
-        
+
         _transformHandler.axes = HandleAxes.XY;
         SetTarget(null);
+        _transformHandler.handleCamera = Camera.main;
+        PauseTransformations();
     }
 
     public void SetTarget(Transform target) {
+        if (!_allowTransformations) return;
         _transformHandler.target = target;
         _transformHandler.gameObject.SetActive(target != null);
     }
+    public Transform GetTarget() { return _transformHandler.target; }
 
     public void SwitchMode(HandleType inHandleType) {
         _transformHandler.type = inHandleType;
     }
 
     private void Update() {
-        if (Input.GetKeyDown(KeyCode.S)) {
+        if (!_allowTransformations) return;
+
+        if (Input.GetKeyDown(KeyCode.Tab)) {
             switch (_transformHandler.type) {
                 case HandleType.POSITION:
                     _transformHandler.type = HandleType.SCALE;
