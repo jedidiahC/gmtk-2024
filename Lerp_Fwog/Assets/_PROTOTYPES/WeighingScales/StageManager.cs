@@ -12,6 +12,7 @@ public class StageManager : MonoBehaviour {
     [SerializeField] private List<Rigidbody2D> _dynamics = null;
     private List<TransformValues> _dynamicTransformVals = null;
 
+    private bool _isSimulating = false;
     
     void Awake() {
         if (_instance == null) {
@@ -26,6 +27,7 @@ public class StageManager : MonoBehaviour {
         Debug.Assert(_targetAreas != null && _targetAreas.Count > 0, "_targetAreas not assigned");
         Debug.Assert(_dynamics != null && _dynamics.Count > 0, "_dynamics not assigned");
         _dynamicTransformVals = new List<TransformValues>(_dynamics.Count);
+        _isSimulating = false;
 
         StoreTransfromValues();
         Reset();
@@ -45,6 +47,7 @@ public class StageManager : MonoBehaviour {
     }
 
     public void Reset() {
+        _isSimulating = false;
         _levelClearText.enabled = false;
 
         for (int i = 0; i < _dynamics.Count; i++) {
@@ -63,6 +66,8 @@ public class StageManager : MonoBehaviour {
     }
 
     public void ResumePhysics() {
+        if (_isSimulating) return;
+        _isSimulating = true;
         HandlerManager.Instance.PauseTransformations();
         StoreTransfromValues();
 

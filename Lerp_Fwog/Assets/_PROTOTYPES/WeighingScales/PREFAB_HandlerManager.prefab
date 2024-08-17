@@ -91,7 +91,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   axes: 3
-  space: 0
+  space: 1
   type: 2
   snappingType: 1
   positionSnap: {x: 0, y: 0, z: 0}
