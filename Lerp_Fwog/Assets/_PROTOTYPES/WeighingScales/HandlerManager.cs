@@ -54,9 +54,15 @@ public class HandlerManager : MonoBehaviour {
             switch (_transformHandler.type) {
                 case HandleType.POSITION:
                     _transformHandler.type = HandleType.SCALE;
+                    _transformHandler.axes = HandleAxes.XY;
                     break;
                 case HandleType.SCALE:
+                    _transformHandler.type = HandleType.ROTATION;
+                    _transformHandler.axes = HandleAxes.Z;
+                    break;
+                case HandleType.ROTATION:
                     _transformHandler.type = HandleType.POSITION;
+                    _transformHandler.axes = HandleAxes.XY;
                     break;
             }
         }
