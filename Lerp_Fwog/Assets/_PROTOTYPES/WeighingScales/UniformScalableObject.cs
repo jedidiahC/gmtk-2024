@@ -8,6 +8,8 @@ public class UniformScalableObject : MonoBehaviour
     public UnityEvent<float> onScale = new();
 
     [SerializeField] private float _scaleSpeedMultiplier = 1.0f;
+    [SerializeField] private float _minScaleFactor = 0.5f;
+    [SerializeField] private float _maxScaleFactor = 5.0f;
 
     private SpriteRenderer _spriteRenderer;
     private Color _spriteColor;
@@ -20,9 +22,6 @@ public class UniformScalableObject : MonoBehaviour
         Debug.Assert(gameObject.GetComponent<Collider2D>() != null, "Collider2D is not found!");
         _spriteColor = _spriteRenderer.color;
     }
-
-    private Vector3 _lastMousePos;
-    private bool _mouseWasDown = false;
 
     private void Start()
     {
@@ -49,16 +48,22 @@ public class UniformScalableObject : MonoBehaviour
     public void ScaleDelta(float dScale)
     {
         Vector3 newScale = transform.localScale + Vector3.one * dScale;
-        if (newScale.magnitude < 0.1)
+        float newScaleFactor = GetScaleFactor(newScale);
+        if (newScaleFactor < _minScaleFactor || newScaleFactor > _maxScaleFactor)
         {
             return;
         }
         transform.localScale = newScale;
-        onScale.Invoke(GetScaleFactor());
+        onScale.Invoke(GetCurrScaleFactor());
     }
 
-    private float GetScaleFactor()
+    private float GetCurrScaleFactor()
     {
-        return transform.localScale.x / _originalScale.x;
+        return GetScaleFactor(transform.localScale);
+    }
+
+    private float GetScaleFactor(Vector3 scale)
+    {
+        return scale.x / _originalScale.x;
     }
 }
