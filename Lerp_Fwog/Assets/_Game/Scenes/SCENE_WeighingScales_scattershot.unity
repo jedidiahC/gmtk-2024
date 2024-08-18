@@ -2077,6 +2077,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1802944736}
+  - component: {fileID: 1802944738}
   - component: {fileID: 1802944737}
   m_Layer: 0
   m_Name: Stage Manager
@@ -2114,7 +2115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13f02b0544b984c5990fc493ad4079e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnLevelClear:
+  OnStageClear:
     m_PersistentCalls:
       m_Calls: []
   _levelClearText: {fileID: 939910417}
@@ -2128,6 +2129,20 @@ MonoBehaviour:
   - {fileID: 885476309}
   - {fileID: 1556751028}
   - {fileID: 1280786181}
+  _camera: {fileID: 1622224737}
+--- !u!114 &1802944738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1802944735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98fb2aa7ad49be04c8505adcaf720ed0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stage: {fileID: 1802944737}
 --- !u!1001 &1973671671
 PrefabInstance:
   m_ObjectHideFlags: 0

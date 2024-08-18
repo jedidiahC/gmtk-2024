@@ -180,7 +180,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _startSceneBuildIndex: 2
-  _endSceneBuildIndex: 5
+  _endSceneBuildIndex: 4
+  _globalCamera: {fileID: 1434045183}
+  _currentSceneIndex: 0
+  _activeStage: {fileID: 0}
 --- !u!1 &1434045181
 GameObject:
   m_ObjectHideFlags: 0

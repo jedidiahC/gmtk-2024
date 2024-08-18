@@ -6,18 +6,19 @@ using UnityEngine.Events;
 
 public class StageManager : MonoBehaviour
 {
-    public UnityEvent OnLevelClear = new();
+    public UnityEvent OnStageClear = new();
 
     [SerializeField] private TextMeshProUGUI _levelClearText = null;
     [SerializeField] private List<TargetArea> _targetAreas = null;
     [SerializeField] private List<Rigidbody2D> _dynamics = null;
     [SerializeField] private Camera _camera = null;
 
+    public Camera GetStageCamera() { return _camera; }
+
     private List<TransformValues> _dynamicTransformVals = null;
 
-    private StageLoader _stageLoader = null;
-
     private bool _isSimulating = false;
+    private bool _isActive = false;
 
     void Awake()
     {
@@ -26,8 +27,6 @@ public class StageManager : MonoBehaviour
 
     void Setup()
     {
-        _stageLoader = StageLoader.GetInstance();
-
         Debug.Assert(_levelClearText != null, "_levelClearText not assigned");
         Debug.Assert(_targetAreas != null && _targetAreas.Count > 0, "_targetAreas not assigned");
         Debug.Assert(_dynamics != null && _dynamics.Count > 0, "_dynamics not assigned");
@@ -39,7 +38,7 @@ public class StageManager : MonoBehaviour
         Reset();
     }
 
-    public void CheckLevelClear()
+    public void CheckStageClear()
     {
         for (int i = 0; i < _targetAreas.Count; i++)
         {
@@ -54,11 +53,7 @@ public class StageManager : MonoBehaviour
     public void CompleteLevel()
     {
         ShowLevelClearText();
-
-        if (_stageLoader != null)
-        {
-            _stageLoader.LoadNextScene();
-        }
+        OnStageClear.Invoke();
     }
 
     public void ShowLevelClearText()
@@ -106,7 +101,7 @@ public class StageManager : MonoBehaviour
     {
         foreach (var targetArea in _targetAreas)
         {
-            targetArea.OnGoalReached.AddListener(CheckLevelClear);
+            targetArea.OnGoalReached.AddListener(CheckStageClear);
         }
     }
 

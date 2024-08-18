@@ -9,10 +9,10 @@ public class StageLoader : MonoBehaviour
 
     [SerializeField] private int _startSceneBuildIndex = 0;
     [SerializeField] private int _endSceneBuildIndex = 5;
-    [SerializeField] private Camera _currentCamera = null;
+    [SerializeField] private Camera _globalCamera = null;
 
-    private int _currentSceneIndex = 0;
-
+    [SerializeField] private int _currentSceneIndex = 0;
+    [SerializeField] private StageManager _activeStage = null;
 
     public static StageLoader GetInstance() { return _instance; }
 
@@ -24,10 +24,33 @@ public class StageLoader : MonoBehaviour
             return;
         }
 
+        if (_activeStage != null)
+        {
+            _activeStage.Reset();
+        }
+
         _currentSceneIndex++;
         Debug.Log("Loading scene...");
 
         SceneManager.LoadSceneAsync(_currentSceneIndex, LoadSceneMode.Additive);
+    }
+
+    public void SetStageActive(StageManager stage)
+    {
+        if (_activeStage != null)
+        {
+            _activeStage.Reset();
+        }
+
+        _activeStage = stage;
+        UpdateCamera(stage.GetStageCamera());
+    }
+
+    // We disable the stage's camera and move the global camera to the new position.
+    private void UpdateCamera(Camera newStageCamera)
+    {
+        _globalCamera.transform.position = newStageCamera.transform.position;
+        newStageCamera.gameObject.SetActive(false);
     }
 
     void Awake()
@@ -50,7 +73,8 @@ public class StageLoader : MonoBehaviour
 
     private void Setup()
     {
+        Debug.Assert(_globalCamera != null, "_globalCamera is not assigned!");
         _currentSceneIndex = _startSceneBuildIndex;
-        // Do setup code here.
+        SceneManager.LoadSceneAsync(_currentSceneIndex, LoadSceneMode.Additive);
     }
 }
