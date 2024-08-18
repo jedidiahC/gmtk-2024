@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -42,6 +40,10 @@ public class UniformScalableObject : MonoBehaviour
 
     private void OnMouseOver()
     {
+        if (!HandlerManager.Instance.AllowTransformations)
+        {
+            return;
+        }
         ScaleDelta(Input.mouseScrollDelta.y * _scaleSpeedMultiplier);
     }
 
