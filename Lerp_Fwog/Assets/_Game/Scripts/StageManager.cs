@@ -6,9 +6,10 @@ using UnityEngine.Events;
 
 public class StageManager : MonoBehaviour
 {
+    public UnityEvent OnNextStage = new();
     public UnityEvent OnStageClear = new();
 
-    [SerializeField] private TextMeshProUGUI _levelClearText = null;
+    [SerializeField] private GameObject _levelClearCanvas = null;
     [SerializeField] private List<TargetArea> _targetAreas = null;
     [SerializeField] private List<Rigidbody2D> _dynamics = null;
     [SerializeField] private Camera _camera = null;
@@ -20,6 +21,11 @@ public class StageManager : MonoBehaviour
     private bool _isSimulating = false;
     private bool _isActive = false;
 
+    public void SetIsActive(bool isActive)
+    {
+        _isActive = isActive;
+    }
+
     void Awake()
     {
         Setup();
@@ -27,7 +33,7 @@ public class StageManager : MonoBehaviour
 
     void Setup()
     {
-        Debug.Assert(_levelClearText != null, "_levelClearText not assigned");
+        Debug.Assert(_levelClearCanvas != null, "_levelClearCanvas not assigned");
         Debug.Assert(_targetAreas != null && _targetAreas.Count > 0, "_targetAreas not assigned");
         Debug.Assert(_dynamics != null && _dynamics.Count > 0, "_dynamics not assigned");
         _dynamicTransformVals = new List<TransformValues>(_dynamics.Count);
@@ -58,13 +64,18 @@ public class StageManager : MonoBehaviour
 
     public void ShowLevelClearText()
     {
-        _levelClearText.enabled = true;
+        _levelClearCanvas.SetActive(true);
+    }
+
+    public void NextStage()
+    {
+        OnNextStage.Invoke();
     }
 
     public void Reset()
     {
         _isSimulating = false;
-        _levelClearText.enabled = false;
+        _levelClearCanvas.SetActive(false);
 
         for (int i = 0; i < _dynamics.Count; i++)
         {
@@ -116,7 +127,7 @@ public class StageManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (_isActive && Input.GetKeyDown(KeyCode.Space))
         {
             if (!_isSimulating) ResumePhysics();
             else Reset();

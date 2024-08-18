@@ -21,6 +21,7 @@ public class StageGameSetup : MonoBehaviour
         if (_stageLoader == null)
         {
             Debug.Log("Solo stage...");
+            _stage.SetIsActive(true);
             return;
         }
 
@@ -31,7 +32,7 @@ public class StageGameSetup : MonoBehaviour
     {
         Debug.Log("Setting up stage in game world...");
         _stageLoader.SetStageActive(_stage);
-        _stage.OnStageClear.AddListener(OnStageClear);
+        _stage.OnNextStage.AddListener(OnStageClear);
     }
 
     void OnStageClear()

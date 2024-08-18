@@ -40,9 +40,11 @@ public class StageLoader : MonoBehaviour
         if (_activeStage != null)
         {
             _activeStage.Reset();
+            _activeStage.SetIsActive(false);
         }
 
         _activeStage = stage;
+        _activeStage.SetIsActive(true);
         UpdateCamera(stage.GetStageCamera());
     }
 

@@ -11,4 +11,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Game/Scenes/SCENE_Game.unity
     guid: 8fea9e7591c444b60883cd2aa8f2383e
+  - enabled: 1
+    path: Assets/_Game/Scenes/SCENE_Level_ManipulationBasics.unity
+    guid: 70eb77521642e9249ba6941dc5e09107
+  - enabled: 1
+    path: Assets/_Game/Scenes/SCENE_Level_ShooterBasics.unity
+    guid: bcfb1684b10e24444828cb5f2d828541
+  - enabled: 1
+    path: Assets/_Game/Scenes/SCENE_Level_GravityBasics.unity
+    guid: b2fee71245c8a3f45853601e5f633a02
   m_configObjects: {}
