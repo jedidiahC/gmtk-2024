@@ -26,6 +26,19 @@ public class StageManager : MonoBehaviour
         _isActive = isActive;
     }
 
+    public List<TransformValues> GetCurrentSolution() { return _dynamicTransformVals; }
+
+    public void LoadTransformValues(List<TransformValues> transformValues)
+    {
+        if (transformValues == null || _dynamics == null || transformValues.Count != _dynamics.Count)
+        {
+            Debug.LogError("Unable to load transform values!");
+            return;
+        }
+
+        _dynamicTransformVals = transformValues;
+    }
+
     void Awake()
     {
         Setup();

@@ -51,7 +51,6 @@ public class UniformScalableObject : MonoBehaviour
     {
         Vector3 newScale = transform.localScale + Vector3.one * dScale;
         float newScaleFactor = GetScaleFactor(newScale);
-        Debug.Log(newScaleFactor);
         if (newScaleFactor < _minScaleFactor || newScaleFactor > _maxScaleFactor)
         {
             return;

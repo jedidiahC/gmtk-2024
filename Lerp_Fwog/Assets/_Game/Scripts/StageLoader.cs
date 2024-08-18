@@ -14,6 +14,8 @@ public class StageLoader : MonoBehaviour
     [SerializeField] private int _currentSceneIndex = 0;
     [SerializeField] private StageManager _activeStage = null;
 
+    private List<TransformValues>[] _savedSolutions;
+
     public static StageLoader GetInstance() { return _instance; }
 
     [ContextMenu("Load next scene")]
@@ -26,7 +28,7 @@ public class StageLoader : MonoBehaviour
 
         if (_activeStage != null)
         {
-            _activeStage.Reset();
+            DisableActiveStage();
         }
 
         _currentSceneIndex++;
@@ -39,13 +41,20 @@ public class StageLoader : MonoBehaviour
     {
         if (_activeStage != null)
         {
-            _activeStage.Reset();
-            _activeStage.SetIsActive(false);
+            DisableActiveStage();
         }
 
         _activeStage = stage;
         _activeStage.SetIsActive(true);
         UpdateCamera(stage.GetStageCamera());
+    }
+
+    private void DisableActiveStage()
+    {
+        Debug.Log("Disabling " + _currentSceneIndex);
+        _savedSolutions[_currentSceneIndex - _startSceneBuildIndex] = _activeStage.GetCurrentSolution();
+        _activeStage.Reset();
+        _activeStage.SetIsActive(false);
     }
 
     // We disable the stage's camera and move the global camera to the new position.
@@ -57,6 +66,7 @@ public class StageLoader : MonoBehaviour
 
     void Awake()
     {
+        _savedSolutions = new List<TransformValues>[_endSceneBuildIndex - _startSceneBuildIndex + 1];
         if (_instance == null)
         {
             _instance = this;
