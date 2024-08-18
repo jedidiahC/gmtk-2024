@@ -2,38 +2,39 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Events;
 
 public class StageManager : MonoBehaviour
 {
-    private static StageManager _instance = null;
-    public static StageManager Instance { get { return _instance; } }
+    public UnityEvent OnLevelClear = new();
 
     [SerializeField] private TextMeshProUGUI _levelClearText = null;
     [SerializeField] private List<TargetArea> _targetAreas = null;
     [SerializeField] private List<Rigidbody2D> _dynamics = null;
+    [SerializeField] private Camera _camera = null;
+
     private List<TransformValues> _dynamicTransformVals = null;
+
+    private StageLoader _stageLoader = null;
 
     private bool _isSimulating = false;
 
     void Awake()
     {
-        if (_instance == null)
-        {
-            _instance = this;
-            Setup();
-        }
-        else if (_instance != this) DestroyImmediate(gameObject);
+        Setup();
     }
-    private void OnDestroy() { if (_instance == this) _instance = null; }
 
     void Setup()
     {
+        _stageLoader = StageLoader.GetInstance();
+
         Debug.Assert(_levelClearText != null, "_levelClearText not assigned");
         Debug.Assert(_targetAreas != null && _targetAreas.Count > 0, "_targetAreas not assigned");
         Debug.Assert(_dynamics != null && _dynamics.Count > 0, "_dynamics not assigned");
         _dynamicTransformVals = new List<TransformValues>(_dynamics.Count);
         _isSimulating = false;
 
+        RegisterTargetAreas();
         StoreTransformValues();
         Reset();
     }
@@ -46,7 +47,18 @@ public class StageManager : MonoBehaviour
             else return;
         }
 
+        CompleteLevel();
+    }
+
+    [ContextMenu("Complete level")]
+    public void CompleteLevel()
+    {
         ShowLevelClearText();
+
+        if (_stageLoader != null)
+        {
+            _stageLoader.LoadNextScene();
+        }
     }
 
     public void ShowLevelClearText()
@@ -87,6 +99,14 @@ public class StageManager : MonoBehaviour
         for (int i = 0; i < _dynamics.Count; i++)
         {
             _dynamics[i].isKinematic = false;
+        }
+    }
+
+    private void RegisterTargetAreas()
+    {
+        foreach (var targetArea in _targetAreas)
+        {
+            targetArea.OnGoalReached.AddListener(CheckLevelClear);
         }
     }
 
