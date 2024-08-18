@@ -20,10 +20,9 @@ public class GameCamera : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         t += Time.deltaTime;
-        Debug.Log(t);
-        transform.position = Vector3.Slerp(_origin, _targetPosition, t);
+        transform.position = Vector3.Slerp(_origin, _targetPosition, t * t);
     }
 }
