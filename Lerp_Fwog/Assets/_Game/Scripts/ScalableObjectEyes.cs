@@ -35,5 +35,6 @@ public class ScalableObjectEyes : MonoBehaviour
     private void Update()
     {
         _eyes.transform.position = _eyeAnchor.transform.position;
+        _eyes.transform.rotation = _eyeAnchor.transform.rotation;
     }
 }
