@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e35bd865d828b84ca9718321a9f94c7, type: 3}
+  m_Name: AUDIOCLIP_ButtonHoverOver
+  m_EditorClassIdentifier: 
+  m_clips:
+  - {fileID: 8300000, guid: e7ef21adc23429547a76821a083129d1, type: 3}
+  - {fileID: 8300000, guid: 2f536d654ff0a214394fe3ca3d2deae5, type: 3}
+  - {fileID: 8300000, guid: 53ba581d9702027449cfce62029c873f, type: 3}
+  - {fileID: 8300000, guid: 2f933a14d1e82344385535113ae677f2, type: 3}
+  - {fileID: 8300000, guid: e2e322e8003c1ce4483331d2ea559263, type: 3}
+  - {fileID: 8300000, guid: 21d2d2c9d066cc543b620ae5ae299694, type: 3}
+  m_volume: 1
+  m_pitchVariance: {x: 0, y: 0}
+  m_minInterval: 0.01
