@@ -11,4 +11,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Game/Scenes/SCENE_Game.unity
     guid: 8fea9e7591c444b60883cd2aa8f2383e
+  - enabled: 1
+    path: Assets/_Game/Scenes/SCENE_WeighingScales.unity
+    guid: b66821dacf9a74e05bd3eec362d99d05
+  - enabled: 1
+    path: Assets/_Game/Scenes/SCENE_WeighingScales_gravity.unity
+    guid: 5a7fda9d9859a4ad48cb2519bd2486db
+  - enabled: 1
+    path: Assets/_Game/Scenes/SCENE_WeighingScales_scattershot.unity
+    guid: 50da6eebbc5dd4325b8bafa9b2a6eb7c
   m_configObjects: {}

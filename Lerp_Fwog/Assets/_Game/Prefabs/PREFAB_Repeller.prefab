@@ -103,7 +103,7 @@ GameObject:
   - component: {fileID: 7157439036816178799}
   - component: {fileID: 6598576524531514157}
   m_Layer: 0
-  m_Name: PREFAB_GravityWell
+  m_Name: PREFAB_Repeller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
