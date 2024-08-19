@@ -18,6 +18,7 @@ public class StageManager : MonoBehaviour
     public Camera GetStageCamera() { return _camera; }
 
     private List<TransformValues> _dynamicTransformVals = null;
+    private List<TransformValues> _originalDynamicTransformVals = null;
 
     private bool _isSimulating = false;
     private bool _isActive = false;
@@ -53,9 +54,11 @@ public class StageManager : MonoBehaviour
         Debug.Assert(_targetAreas != null && _targetAreas.Count > 0, "_targetAreas not assigned");
         Debug.Assert(_dynamics != null && _dynamics.Count > 0, "_dynamics not assigned");
         _dynamicTransformVals = new List<TransformValues>(_dynamics.Count);
+        _originalDynamicTransformVals = new List<TransformValues>(_dynamics.Count);
         _isSimulating = false;
 
         RegisterTargetAreas();
+        StoreOriginalTransformValues();
         StoreTransformValues();
         Reset();
     }
@@ -65,9 +68,12 @@ public class StageManager : MonoBehaviour
         for (int i = 0; i < _targetAreas.Count; i++)
         {
             TargetArea curTargetArea = _targetAreas[i];
-            if (curTargetArea.TargetType == TargetArea.eTargetType.Optional) {
+            if (curTargetArea.TargetType == TargetArea.eTargetType.Optional)
+            {
                 // TODO: Count optional reached and add to some score...?
-            } else {
+            }
+            else
+            {
                 if (curTargetArea.ReachedTarget) continue;
                 else return;
             }
@@ -93,7 +99,8 @@ public class StageManager : MonoBehaviour
         OnNextStage.Invoke();
     }
 
-    public void ResetUIOnly() {
+    public void ResetUIOnly()
+    {
         _levelClearCanvas.SetActive(false);
         HandlerManager.Instance.ResumeTransformations();
     }
@@ -121,6 +128,33 @@ public class StageManager : MonoBehaviour
         {
             _targetAreas[i].ResetTarget();
         }
+    }
+
+    public void ResetStage()
+    {
+        _isSimulating = false;
+        ResetUIOnly();
+
+        for (int i = 0; i < _dynamics.Count; i++)
+        {
+            Rigidbody2D curDynamic = _dynamics[i];
+            curDynamic.isKinematic = true;
+            curDynamic.velocity = Vector2.zero;
+            curDynamic.angularVelocity = 0.0f;
+            SetTransformToValues(curDynamic.transform, _originalDynamicTransformVals[i]);
+            curDynamic.gameObject.SetActive(true);
+        }
+
+        for (int i = 0; i < _targetObjects.Count; i++)
+        {
+            _targetObjects[i].Reset();
+        }
+
+        for (int i = 0; i < _targetAreas.Count; i++)
+        {
+            _targetAreas[i].ResetTarget();
+        }
+
     }
 
     public void ResumePhysics()
@@ -153,12 +187,33 @@ public class StageManager : MonoBehaviour
         }
     }
 
+    private void StoreOriginalTransformValues()
+    {
+        _originalDynamicTransformVals.Clear();
+        for (int i = 0; i < _dynamics.Count; i++)
+        {
+            _originalDynamicTransformVals.Add(new TransformValues(_dynamics[i].transform));
+        }
+    }
+
     private void Update()
     {
         if (_isActive && Input.GetKeyDown(KeyCode.Space))
         {
             if (!_isSimulating) ResumePhysics();
             else Reset();
+        }
+    }
+
+    public void Play()
+    {
+        if (_isActive && !_isSimulating)
+        {
+            ResumePhysics();
+        }
+        else
+        {
+            Reset();
         }
     }
 

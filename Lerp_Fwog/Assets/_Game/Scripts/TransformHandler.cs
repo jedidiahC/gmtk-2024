@@ -190,22 +190,22 @@ public class TransformHandler : MonoBehaviour
         if (!_targetConstraints.AllowRotation) { return; }
 
         Vector3 targetLocalEuler = _target.localEulerAngles;
-
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        float delta = 36.0f * Time.deltaTime;
+        if (Input.GetKey(KeyCode.W))
         {
-            targetLocalEuler.z -= 10.0f;
+            targetLocalEuler.z -= delta;
         }
-        if (Input.GetKeyDown(KeyCode.DownArrow))
+        if (Input.GetKey(KeyCode.S))
         {
-            targetLocalEuler.z += 10.0f;
+            targetLocalEuler.z += delta;
         }
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.D))
         {
-            targetLocalEuler.z -= 10.0f;
+            targetLocalEuler.z -= delta;
         }
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        if (Input.GetKey(KeyCode.A))
         {
-            targetLocalEuler.z += 10.0f;
+            targetLocalEuler.z += delta;
         }
 
         _target.localEulerAngles = targetLocalEuler;
@@ -216,22 +216,23 @@ public class TransformHandler : MonoBehaviour
         if (!_targetConstraints.AllowTranslation) { return; }
 
         Vector3 targetPosition = _target.position;
+        float delta = 1.5f * Time.deltaTime;
 
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKey(KeyCode.W))
         {
-            targetPosition.y += 1.0f;
+            targetPosition.y += delta;
         }
-        if (Input.GetKeyDown(KeyCode.DownArrow))
+        if (Input.GetKey(KeyCode.S))
         {
-            targetPosition.y -= 1.0f;
+            targetPosition.y -= delta;
         }
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.D))
         {
-            targetPosition.x += 1.0f;
+            targetPosition.x += delta;
         }
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        if (Input.GetKey(KeyCode.A))
         {
-            targetPosition.x -= 1.0f;
+            targetPosition.x -= delta;
         }
 
         Vector3 originalPos = _targetConstraints.OriginalTransform.position;
