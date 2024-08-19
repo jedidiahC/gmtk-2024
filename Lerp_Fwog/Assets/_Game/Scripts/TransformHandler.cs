@@ -22,6 +22,7 @@ public class TransformHandler : MonoBehaviour {
         SetSprite();
     }
     private void SetSprite() {
+        if (_spriteRen == null) return; // Might not be initialised yet.
         if (_target == null) {
             _spriteRen.sprite = null;
             return;
