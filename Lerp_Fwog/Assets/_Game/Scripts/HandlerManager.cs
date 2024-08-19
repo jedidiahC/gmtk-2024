@@ -18,8 +18,7 @@ public class HandlerManager : MonoBehaviour {
     }
     public UnityEvent OnPauseTransformations = new();
 
-
-    [SerializeField] private RuntimeTransformHandle _transformHandler = null;
+    [SerializeField] private TransformHandler _transformHandler = null;
     void Awake() {
         if (_instance == null) {
             _instance = this;
@@ -33,46 +32,26 @@ public class HandlerManager : MonoBehaviour {
     
     void Setup() {
         Debug.Assert(_transformHandler != null, "_transformHandler not assigned");
-
-        _transformHandler.axes = HandleAxes.XY;
         SetTarget(null);
-        _transformHandler.handleCamera = Camera.main;
         PauseTransformations();
     }
 
-    public void SetTarget(Transform target) {
+    public void SetTarget(Transform inTarget) {
         if (!_allowTransformations) return;
-        _transformHandler.target = target;
-        _transformHandler.gameObject.SetActive(target != null);
+        _transformHandler.SetTarget(inTarget);
     }
     public Transform GetTarget() { return _transformHandler.target; }
 
-    public void SwitchMode(HandleType inHandleType) {
-        _transformHandler.type = inHandleType;
+    public void SwitchMode(eTransformType inTransformType) {
+        _transformHandler.SetTransformType(inTransformType);
     }
 
     private void Update() {
         if (!_allowTransformations) return;
 
-        if (Input.GetKeyDown(KeyCode.Tab)) {
-            switch (_transformHandler.type) {
-                case HandleType.POSITION:
-                    _transformHandler.type = HandleType.SCALE;
-                    _transformHandler.axes = HandleAxes.XY;
-                    break;
-                case HandleType.SCALE:
-                    _transformHandler.type = HandleType.ROTATION;
-                    _transformHandler.axes = HandleAxes.Z;
-                    break;
-                case HandleType.ROTATION:
-                    _transformHandler.type = HandleType.POSITION;
-                    _transformHandler.axes = HandleAxes.XY;
-                    break;
-            }
-        }
-
-        if (Input.GetKeyDown(KeyCode.Escape)) {
-            SetTarget(null);
-        }
+        if (Input.GetKeyDown(KeyCode.Q)) SetTarget(null);
+        else if (Input.GetKeyDown(KeyCode.W)) SwitchMode(eTransformType.Translation);
+        else if (Input.GetKeyDown(KeyCode.E)) SwitchMode(eTransformType.Scale);
+        else if (Input.GetKeyDown(KeyCode.R)) SwitchMode(eTransformType.Rotation);
     }
 }
