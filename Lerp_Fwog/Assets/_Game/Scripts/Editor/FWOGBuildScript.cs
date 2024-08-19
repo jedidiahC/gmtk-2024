@@ -65,12 +65,19 @@ public class FWOGBuildScript
             #endif
 			#endregion
 
+            List<String> sceneList = new List<String>();
+            sceneList.Add(EditorMenuItems.SCENE_PATH_MENU); // NOTE: Has to be first so when building this is the default scene loaded.
+            sceneList.Add(EditorMenuItems.SCENE_PATH_GAME);
+            for (int i = 0; i < Constants.NUM_LEVELS; i++) {
+                string scenePath = EditorMenuItems.SCENE_PATH_PREFIX
+                                + Constants.SCENE_LEVEL_NAMES[i]
+                                + EditorMenuItems.SCENE_PATH_POSTFIX;
+                Debug.Log("Adding scene: " + scenePath);
+                sceneList.Add(scenePath);
+            }
+
 			// NOTE: Set unity scenes to be included in the build.
-			string[] scenes = new string[]
-            {
-                EditorMenuItems.SCENE_PATH_MENU, // NOTE: Has to be first so when building this is the default scene loaded.
-                EditorMenuItems.SCENE_PATH_GAME,
-            };
+			string[] scenes = sceneList.ToArray();
 
 			string outputFileName;
             string buildDirectory;

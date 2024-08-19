@@ -8,8 +8,10 @@ public class EditorMenuItems
 {
     public const string BUILD_AND_RUN_KEY = "EDITOR_BUILD_AND_RUN_KEY";
     public const string MENU_ITEM_PREFIX = "FWOG/";
-    public const string SCENE_PATH_MENU = "Assets/_Game/Scenes/" + Constants.SCENE_MENU + ".unity";
-    public const string SCENE_PATH_GAME = "Assets/_Game/Scenes/" + Constants.SCENE_GAME + ".unity";
+    public const string SCENE_PATH_PREFIX = "Assets/_Game/Scenes/";
+    public const string SCENE_PATH_POSTFIX = ".unity";
+    public const string SCENE_PATH_MENU = SCENE_PATH_PREFIX + Constants.SCENE_MENU + SCENE_PATH_POSTFIX;
+    public const string SCENE_PATH_GAME = SCENE_PATH_PREFIX + Constants.SCENE_GAME + SCENE_PATH_POSTFIX;
 
     [MenuItem(MENU_ITEM_PREFIX + "Open Menu Scene", false, 1)]
     private static void OpenLoadingScreenScene() { OpenScene(SCENE_PATH_MENU); }
