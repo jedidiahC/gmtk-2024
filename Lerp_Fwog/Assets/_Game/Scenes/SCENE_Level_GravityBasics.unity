@@ -169,6 +169,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75eee9f4522cf412abee8884019f43b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  OnExit:
+    m_PersistentCalls:
+      m_Calls: []
+  OnStartInteract:
+    m_PersistentCalls:
+      m_Calls: []
+  OnStopInteract:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!50 &324487962
 Rigidbody2D:
   serializedVersion: 4
@@ -823,6 +835,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _levelClearCanvas: {fileID: 904974647}
+  _targetObjects:
+  - {fileID: 7423585728694809070}
   _targetAreas:
   - {fileID: 1176366272}
   _dynamics:
@@ -1742,6 +1756,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c86f8333b8e31444ab44f74dafdc047f, type: 3}
+--- !u!114 &7423585728694809070 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1431617646896188475, guid: c86f8333b8e31444ab44f74dafdc047f, type: 3}
+  m_PrefabInstance: {fileID: 7423585728694809069}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b75c537e2db754b8c8d7a7dee7aef0dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

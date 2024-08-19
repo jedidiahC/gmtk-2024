@@ -10,6 +10,7 @@ public class StageManager : MonoBehaviour
     public UnityEvent OnStageClear = new();
 
     [SerializeField] private GameObject _levelClearCanvas = null;
+    [SerializeField] private List<TargetObject> _targetObjects = null;
     [SerializeField] private List<TargetArea> _targetAreas = null;
     [SerializeField] private List<Rigidbody2D> _dynamics = null;
     [SerializeField] private Camera _camera = null;
@@ -47,6 +48,7 @@ public class StageManager : MonoBehaviour
     void Setup()
     {
         Debug.Assert(_levelClearCanvas != null, "_levelClearCanvas not assigned");
+        Debug.Assert(_targetObjects != null && _targetObjects.Count > 0, "_targetObjects not assigned");
         Debug.Assert(_targetAreas != null && _targetAreas.Count > 0, "_targetAreas not assigned");
         Debug.Assert(_dynamics != null && _dynamics.Count > 0, "_dynamics not assigned");
         _dynamicTransformVals = new List<TransformValues>(_dynamics.Count);
@@ -61,8 +63,13 @@ public class StageManager : MonoBehaviour
     {
         for (int i = 0; i < _targetAreas.Count; i++)
         {
-            if (_targetAreas[i].ReachedTarget) continue;
-            else return;
+            TargetArea curTargetArea = _targetAreas[i];
+            if (curTargetArea.TargetType == TargetArea.eTargetType.Optional) {
+                // TODO: Count optional reached and add to some score...?
+            } else {
+                if (curTargetArea.ReachedTarget) continue;
+                else return;
+            }
         }
 
         CompleteLevel();
@@ -98,6 +105,11 @@ public class StageManager : MonoBehaviour
             curDynamic.angularVelocity = 0.0f;
             SetTransformToValues(curDynamic.transform, _dynamicTransformVals[i]);
             curDynamic.gameObject.SetActive(true);
+        }
+
+        for (int i = 0; i < _targetObjects.Count; i++)
+        {
+            _targetObjects[i].Reset();
         }
 
         for (int i = 0; i < _targetAreas.Count; i++)

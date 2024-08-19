@@ -6,8 +6,15 @@ using UnityEngine.Events;
 
 public class TargetArea : MonoBehaviour
 {
+    public enum eTargetType {
+        Mandatory,
+        Optional
+    }
+
     public UnityEvent OnGoalReached = new();
 
+    [SerializeField] private eTargetType _targetType = eTargetType.Mandatory;
+    public eTargetType TargetType { get { return _targetType; } }
     [SerializeField] private int _targetGoalNum = 0;
     [SerializeField] private RectTransform _canvasRectTransform = null;
     [SerializeField] private TextMeshProUGUI _countLeftText = null;
@@ -41,12 +48,18 @@ public class TargetArea : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Finish")
+        if (other.gameObject.tag == Constants.TAG_TARGET_OBJ)
         {
             _targetCount++;
             _flashParticleSystem.Stop();
             _flashParticleSystem.Clear();
             _flashParticleSystem.Play();
+
+            if (_targetType == eTargetType.Mandatory) {
+                TargetObject targetObj = other.gameObject.GetComponent<TargetObject>();
+                targetObj.Consume();
+            }
+
             _countLeftText.text = Mathf.Max(_targetGoalNum - _targetCount, 0).ToString();
             if (_targetCount >= _targetGoalNum)
             {
