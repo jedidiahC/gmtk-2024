@@ -136,19 +136,19 @@ public class TransformHandler : MonoBehaviour
         if (_targetConstraints.IsUniformScaling)
         {
             Vector3 scaleDelta = Vector3.one * delta;
-            if (Input.GetKey(KeyCode.UpArrow))
+            if (Input.GetKey(KeyCode.W))
             {
                 targetLocalScale += scaleDelta;
             }
-            if (Input.GetKey(KeyCode.DownArrow))
+            if (Input.GetKey(KeyCode.S))
             {
                 targetLocalScale -= scaleDelta;
             }
-            if (Input.GetKey(KeyCode.RightArrow))
+            if (Input.GetKey(KeyCode.D))
             {
                 targetLocalScale += scaleDelta;
             }
-            if (Input.GetKey(KeyCode.LeftArrow))
+            if (Input.GetKey(KeyCode.A))
             {
                 targetLocalScale -= scaleDelta;
             }
@@ -156,19 +156,19 @@ public class TransformHandler : MonoBehaviour
         else
         {
 
-            if (Input.GetKey(KeyCode.UpArrow))
+            if (Input.GetKey(KeyCode.W))
             {
                 targetLocalScale.y += delta;
             }
-            if (Input.GetKey(KeyCode.DownArrow))
+            if (Input.GetKey(KeyCode.S))
             {
                 targetLocalScale.y -= delta;
             }
-            if (Input.GetKey(KeyCode.RightArrow))
+            if (Input.GetKey(KeyCode.D))
             {
                 targetLocalScale.x += delta;
             }
-            if (Input.GetKey(KeyCode.LeftArrow))
+            if (Input.GetKey(KeyCode.A))
             {
                 targetLocalScale.x -= delta;
             }

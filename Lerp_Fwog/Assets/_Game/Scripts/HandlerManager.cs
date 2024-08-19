@@ -74,8 +74,8 @@ public class HandlerManager : MonoBehaviour
         if (!_allowTransformations) return;
 
         if (Input.GetKeyDown(KeyCode.Q)) SetTarget(null);
-        else if (Input.GetKeyDown(KeyCode.W)) SwitchMode(eTransformType.Translation);
-        else if (Input.GetKeyDown(KeyCode.E)) SwitchMode(eTransformType.Scale);
-        else if (Input.GetKeyDown(KeyCode.R)) SwitchMode(eTransformType.Rotation);
+        else if (Input.GetKeyDown(KeyCode.Alpha1)) SwitchMode(eTransformType.Translation);
+        else if (Input.GetKeyDown(KeyCode.Alpha3)) SwitchMode(eTransformType.Scale);
+        else if (Input.GetKeyDown(KeyCode.Alpha2)) SwitchMode(eTransformType.Rotation);
     }
 }
