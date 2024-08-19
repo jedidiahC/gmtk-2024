@@ -174,7 +174,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -293,7 +293,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -377,7 +377,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -503,14 +503,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c3831b1e25b0494c8a62c656e010f17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _creatureType: 0
   _moveForce: 1000
   _maxSpeed: 5
   _rotateSpeed: 5
   _rotateDampening: 0.85
+  _viewTargetRange: 0
+  _viewTargetAngle: 0
+  _targetTransform: {fileID: 0}
   _steeringUpdateInterval: 0.2
   _steeringVectorsQty: 18
   _steeringVectorsMaxAngle: 270
-  _steeringCircleCastRadius: 0.5
+  _steeringCircleCastRadiusRatio: 0
   _steeringCirclecastDistance: 3
   _circlecastExtendedDist: 0.5
 --- !u!212 &354528677
@@ -533,7 +537,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -665,7 +669,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -725,6 +729,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scalingAxis: 0
+  revertScalingSpeed: 1
+  revertWaitTime: 1
   baseScalingSpeed: 1
   maxScalingSpeed: 10
   speedIncreaseRate: 3
@@ -762,14 +768,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c3831b1e25b0494c8a62c656e010f17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _creatureType: 0
   _moveForce: 1000
   _maxSpeed: 5
   _rotateSpeed: 5
   _rotateDampening: 0.85
+  _viewTargetRange: 0
+  _viewTargetAngle: 0
+  _targetTransform: {fileID: 0}
   _steeringUpdateInterval: 0.2
   _steeringVectorsQty: 18
   _steeringVectorsMaxAngle: 270
-  _steeringCircleCastRadius: 0.5
+  _steeringCircleCastRadiusRatio: 0
   _steeringCirclecastDistance: 3
   _circlecastExtendedDist: 0.5
 --- !u!212 &639347284
@@ -792,7 +802,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -996,14 +1006,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c3831b1e25b0494c8a62c656e010f17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _creatureType: 0
   _moveForce: 1000
   _maxSpeed: 5
   _rotateSpeed: 5
   _rotateDampening: 0.85
+  _viewTargetRange: 0
+  _viewTargetAngle: 0
+  _targetTransform: {fileID: 0}
   _steeringUpdateInterval: 0.2
   _steeringVectorsQty: 18
   _steeringVectorsMaxAngle: 270
-  _steeringCircleCastRadius: 0.5
+  _steeringCircleCastRadiusRatio: 0
   _steeringCirclecastDistance: 3
   _circlecastExtendedDist: 0.5
 --- !u!212 &680773367
@@ -1026,7 +1040,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1157,7 +1171,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1251,6 +1265,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scalingAxis: 1
+  revertScalingSpeed: 1
+  revertWaitTime: 1
   baseScalingSpeed: 1
   maxScalingSpeed: 10
   speedIncreaseRate: 3
@@ -1321,7 +1337,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1436,7 +1452,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1577,14 +1593,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c3831b1e25b0494c8a62c656e010f17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _creatureType: 0
   _moveForce: 1000
   _maxSpeed: 5
   _rotateSpeed: 5
   _rotateDampening: 0.85
+  _viewTargetRange: 0
+  _viewTargetAngle: 0
+  _targetTransform: {fileID: 0}
   _steeringUpdateInterval: 0.2
   _steeringVectorsQty: 18
   _steeringVectorsMaxAngle: 270
-  _steeringCircleCastRadius: 0.5
+  _steeringCircleCastRadiusRatio: 0
   _steeringCirclecastDistance: 3
   _circlecastExtendedDist: 0.5
 --- !u!212 &959123695
@@ -1607,7 +1627,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1749,14 +1769,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c3831b1e25b0494c8a62c656e010f17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _creatureType: 0
   _moveForce: 1000
   _maxSpeed: 5
   _rotateSpeed: 5
   _rotateDampening: 0.85
+  _viewTargetRange: 0
+  _viewTargetAngle: 0
+  _targetTransform: {fileID: 0}
   _steeringUpdateInterval: 0.2
   _steeringVectorsQty: 18
   _steeringVectorsMaxAngle: 270
-  _steeringCircleCastRadius: 0.5
+  _steeringCircleCastRadiusRatio: 0
   _steeringCirclecastDistance: 3
   _circlecastExtendedDist: 0.5
 --- !u!212 &1145106258
@@ -1779,7 +1803,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1942,7 +1966,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2058,7 +2082,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2118,6 +2142,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scalingAxis: 1
+  revertScalingSpeed: 1
+  revertWaitTime: 1
   baseScalingSpeed: 1
   maxScalingSpeed: 10
   speedIncreaseRate: 3
@@ -2263,6 +2289,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scalingAxis: 0
+  revertScalingSpeed: 1
+  revertWaitTime: 1
   baseScalingSpeed: 1
   maxScalingSpeed: 10
   speedIncreaseRate: 3
@@ -2333,7 +2361,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2444,7 +2472,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2560,7 +2588,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2706,7 +2734,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2805,7 +2833,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2920,7 +2948,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3087,7 +3115,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3259,7 +3287,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3438,14 +3466,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c3831b1e25b0494c8a62c656e010f17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _creatureType: 0
   _moveForce: 1000
   _maxSpeed: 5
   _rotateSpeed: 5
   _rotateDampening: 0.85
+  _viewTargetRange: 0
+  _viewTargetAngle: 0
+  _targetTransform: {fileID: 0}
   _steeringUpdateInterval: 0.2
   _steeringVectorsQty: 18
   _steeringVectorsMaxAngle: 270
-  _steeringCircleCastRadius: 0.5
+  _steeringCircleCastRadiusRatio: 0
   _steeringCirclecastDistance: 3
   _circlecastExtendedDist: 0.5
 --- !u!212 &2085012645
@@ -3468,7 +3500,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

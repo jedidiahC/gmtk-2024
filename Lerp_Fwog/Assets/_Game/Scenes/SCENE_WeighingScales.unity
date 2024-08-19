@@ -249,7 +249,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -293,6 +293,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75eee9f4522cf412abee8884019f43b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _transformConstraints:
+    AllowScaling: 1
+    AllowTranslation: 1
+    AllowRotation: 1
+    IsUniformScaling: 0
+    MinScale: {x: 0.5, y: 0.5, z: 0.5}
+    MaxScale: {x: 5, y: 5, z: 5}
+    MinTranslationOffset: {x: 50, y: 50, z: 50}
+    MaxTranslationOffset: {x: 50, y: 50, z: 50}
+  OnEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  OnExit:
+    m_PersistentCalls:
+      m_Calls: []
+  OnStartInteract:
+    m_PersistentCalls:
+      m_Calls: []
+  OnStopInteract:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &245437549
 GameObject:
   m_ObjectHideFlags: 0
@@ -521,7 +542,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -637,6 +658,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75eee9f4522cf412abee8884019f43b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _transformConstraints:
+    AllowScaling: 1
+    AllowTranslation: 1
+    AllowRotation: 1
+    IsUniformScaling: 0
+    MinScale: {x: 0.5, y: 0.5, z: 0.5}
+    MaxScale: {x: 5, y: 5, z: 5}
+    MinTranslationOffset: {x: 50, y: 50, z: 50}
+    MaxTranslationOffset: {x: 50, y: 50, z: 50}
+  OnEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  OnExit:
+    m_PersistentCalls:
+      m_Calls: []
+  OnStartInteract:
+    m_PersistentCalls:
+      m_Calls: []
+  OnStopInteract:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &615949593
 GameObject:
   m_ObjectHideFlags: 0
@@ -675,7 +717,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -847,6 +889,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75eee9f4522cf412abee8884019f43b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _transformConstraints:
+    AllowScaling: 1
+    AllowTranslation: 1
+    AllowRotation: 1
+    IsUniformScaling: 0
+    MinScale: {x: 0.5, y: 0.5, z: 0.5}
+    MaxScale: {x: 5, y: 5, z: 5}
+    MinTranslationOffset: {x: 50, y: 50, z: 50}
+    MaxTranslationOffset: {x: 50, y: 50, z: 50}
+  OnEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  OnExit:
+    m_PersistentCalls:
+      m_Calls: []
+  OnStartInteract:
+    m_PersistentCalls:
+      m_Calls: []
+  OnStopInteract:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!50 &885476309
 Rigidbody2D:
   serializedVersion: 4
@@ -894,7 +957,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1363,7 +1426,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1700,10 +1763,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13f02b0544b984c5990fc493ad4079e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnNextStage:
+    m_PersistentCalls:
+      m_Calls: []
   OnStageClear:
     m_PersistentCalls:
       m_Calls: []
-  _levelClearText: {fileID: 939910417}
+  _levelClearCanvas: {fileID: 0}
+  _targetObjects: []
   _targetAreas:
   - {fileID: 1737871698}
   - {fileID: 2023251828}
@@ -2028,7 +2095,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
