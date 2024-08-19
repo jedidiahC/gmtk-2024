@@ -28,7 +28,7 @@ public class TargetObject : MonoBehaviour {
     }
 
     public void Reset() {
-        _rigidbody.isKinematic = false;
+        _rigidbody.isKinematic = true; // NOTE: When reset is called, stage should be paused and not simulating.
         _collider.enabled = true;
         _spriteRen.enabled = true;
     }
