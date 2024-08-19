@@ -46,7 +46,7 @@ public class UIIconInteractable : MonoBehaviour, IPointerEnterHandler, IPointerE
 
     public void ToggleIcon(bool isOn)
     {
-        Debug.Log(String.Format("{0} toggled isOn {1}", name, isOn));
+        // Debug.Log(String.Format("{0} toggled isOn {1}", name, isOn));
         isOnBool = isOn;
         _imageComponent.color = isOn ? _enabledColour : _disabledColour;
         _imageComponent.raycastTarget = isOn;
@@ -55,7 +55,7 @@ public class UIIconInteractable : MonoBehaviour, IPointerEnterHandler, IPointerE
 
     public void ToggleIsUsing(bool isUsing)
     {
-        Debug.Log(String.Format("{0} toggled isUsing {1}", name, isUsing));
+        // Debug.Log(String.Format("{0} toggled isUsing {1}", name, isUsing));
         isUsingBool = isUsing;
         if (isUsing)
         {
