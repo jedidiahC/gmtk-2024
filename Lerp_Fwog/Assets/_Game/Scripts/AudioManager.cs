@@ -27,7 +27,7 @@ public class AudioManager : MonoBehaviour {
         {
             if (_instance != this)
             {
-                // Debug.Log("why does dontDestroyOnLoad object also call this?? This message should only appear once");
+                Debug.Log("Destroying AudioManager Instance from scene:" + gameObject.scene.name);
                 _instance.PlayNextBGM(bgmClip);
                 Destroy(gameObject);
             }
