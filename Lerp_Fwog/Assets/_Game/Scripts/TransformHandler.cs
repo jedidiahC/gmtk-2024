@@ -131,23 +131,24 @@ public class TransformHandler : MonoBehaviour
         if (!_targetConstraints.AllowScaling) { return; }
 
         Vector3 targetLocalScale = _target.localScale;
+        float delta = 1.5f * Time.deltaTime;
 
         if (_targetConstraints.IsUniformScaling)
         {
-            Vector3 scaleDelta = Vector3.one * 0.1f;
-            if (Input.GetKeyDown(KeyCode.UpArrow))
+            Vector3 scaleDelta = Vector3.one * delta;
+            if (Input.GetKey(KeyCode.UpArrow))
             {
                 targetLocalScale += scaleDelta;
             }
-            if (Input.GetKeyDown(KeyCode.DownArrow))
+            if (Input.GetKey(KeyCode.DownArrow))
             {
                 targetLocalScale -= scaleDelta;
             }
-            if (Input.GetKeyDown(KeyCode.RightArrow))
+            if (Input.GetKey(KeyCode.RightArrow))
             {
                 targetLocalScale += scaleDelta;
             }
-            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            if (Input.GetKey(KeyCode.LeftArrow))
             {
                 targetLocalScale -= scaleDelta;
             }
@@ -155,21 +156,21 @@ public class TransformHandler : MonoBehaviour
         else
         {
 
-            if (Input.GetKeyDown(KeyCode.UpArrow))
+            if (Input.GetKey(KeyCode.UpArrow))
             {
-                targetLocalScale.y += 0.1f;
+                targetLocalScale.y += delta;
             }
-            if (Input.GetKeyDown(KeyCode.DownArrow))
+            if (Input.GetKey(KeyCode.DownArrow))
             {
-                targetLocalScale.y -= 0.1f;
+                targetLocalScale.y -= delta;
             }
-            if (Input.GetKeyDown(KeyCode.RightArrow))
+            if (Input.GetKey(KeyCode.RightArrow))
             {
-                targetLocalScale.x += 0.1f;
+                targetLocalScale.x += delta;
             }
-            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            if (Input.GetKey(KeyCode.LeftArrow))
             {
-                targetLocalScale.x -= 0.1f;
+                targetLocalScale.x -= delta;
             }
         }
 
