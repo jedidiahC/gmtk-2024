@@ -128,21 +128,46 @@ public class TransformHandler : MonoBehaviour
         if (!_targetConstraints.AllowScaling) { return; }
 
         Vector3 targetLocalScale = _target.localScale;
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+
+        if (_targetConstraints.IsUniformScaling)
         {
-            targetLocalScale.y += 0.1f;
+            Vector3 scaleDelta = Vector3.one * 0.1f;
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                targetLocalScale += scaleDelta;
+            }
+            if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                targetLocalScale -= scaleDelta;
+            }
+            if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                targetLocalScale += scaleDelta;
+            }
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                targetLocalScale -= scaleDelta;
+            }
         }
-        if (Input.GetKeyDown(KeyCode.DownArrow))
+        else
         {
-            targetLocalScale.y -= 0.1f;
-        }
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            targetLocalScale.x += 0.1f;
-        }
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            targetLocalScale.x -= 0.1f;
+
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                targetLocalScale.y += 0.1f;
+            }
+            if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                targetLocalScale.y -= 0.1f;
+            }
+            if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                targetLocalScale.x += 0.1f;
+            }
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                targetLocalScale.x -= 0.1f;
+            }
         }
 
         if (targetLocalScale.x < _targetConstraints.MinScale.x || targetLocalScale.x > _targetConstraints.MaxScale.x ||
