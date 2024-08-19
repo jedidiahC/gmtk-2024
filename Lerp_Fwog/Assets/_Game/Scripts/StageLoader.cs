@@ -59,7 +59,14 @@ public class StageLoader : MonoBehaviour
     private void DisableActiveStage() {
         Debug.Log("Disabling Scene: " + Constants.SCENE_LEVEL_NAMES[_currentSceneIndex]);
         _savedSolutions[_currentSceneIndex] = _activeStage.GetCurrentSolution();
-        _activeStage.Reset();
+        // RAYNER: Note - Hacky way to reset the UI immediately, but leave the objects there for resetting offscreen.
+        _activeStage.ResetUIOnly();
+        StartCoroutine(DelayedReset(_activeStage));
+        IEnumerator DelayedReset(StageManager inStageToReset) {
+            yield return new WaitForSeconds(1.0f);
+            inStageToReset.Reset();
+            Debug.Log("RAN RESET on " + inStageToReset.gameObject.scene.name);
+        }
         _activeStage.SetIsActive(false);
     }
 

@@ -93,10 +93,14 @@ public class StageManager : MonoBehaviour
         OnNextStage.Invoke();
     }
 
+    public void ResetUIOnly() {
+        _levelClearCanvas.SetActive(false);
+        HandlerManager.Instance.ResumeTransformations();
+    }
     public void Reset()
     {
         _isSimulating = false;
-        _levelClearCanvas.SetActive(false);
+        ResetUIOnly();
 
         for (int i = 0; i < _dynamics.Count; i++)
         {
@@ -117,8 +121,6 @@ public class StageManager : MonoBehaviour
         {
             _targetAreas[i].ResetTarget();
         }
-
-        HandlerManager.Instance.ResumeTransformations();
     }
 
     public void ResumePhysics()
