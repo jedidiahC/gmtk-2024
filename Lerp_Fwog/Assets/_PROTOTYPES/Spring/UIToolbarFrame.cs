@@ -17,4 +17,24 @@ public class UIToolbarFrame : MonoBehaviour
         _childIconsScripts[3].ToggleIcon(canRotate);
         _childIconsScripts[4].ToggleIcon(canScale);
     }
+
+    public void ToggleTransformInUse(eTransformType transformType)
+    {
+        _childIconsScripts[2].isUsingBool = false;
+        _childIconsScripts[3].isUsingBool = false;
+        _childIconsScripts[4].isUsingBool = false;
+
+        switch (transformType)
+        {
+            case eTransformType.Translation:
+                _childIconsScripts[2].isUsingBool = true;
+                break;
+            case eTransformType.Rotation:
+                _childIconsScripts[3].isUsingBool = true;
+                break;
+            case eTransformType.Scale:
+                _childIconsScripts[4].isUsingBool = true;
+                break;
+        }
+    }
 }

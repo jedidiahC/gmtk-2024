@@ -21,6 +21,7 @@ public class UIIconInteractable : MonoBehaviour, IPointerEnterHandler, IPointerE
     [SerializeField] private Color _enabledColour;
     [SerializeField] private Color _disabledColour;
     public float rectWidth;
+    public bool isUsingBool;
 
     private void Awake()
     {
@@ -46,6 +47,11 @@ public class UIIconInteractable : MonoBehaviour, IPointerEnterHandler, IPointerE
         _buttonComponent.interactable = isOn;
     }
 
+    public void ToggleIsUsing(bool isUsing)
+    {
+        isUsingBool = isUsing;
+    }
+
     public void OnPointerEnter(PointerEventData eventData)
     {
         _targetY = 18.0f;
@@ -55,7 +61,7 @@ public class UIIconInteractable : MonoBehaviour, IPointerEnterHandler, IPointerE
     public void OnPointerExit(PointerEventData eventData)
     {
         _targetY = 0.0f;
-        _targetScale = 0.0f;
+        _targetScale = isUsingBool ? 0.2f : 0.0f;
     }
 
     public void OnPointerClick(PointerEventData eventData)
