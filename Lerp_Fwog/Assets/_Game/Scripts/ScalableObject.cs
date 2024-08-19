@@ -21,15 +21,14 @@ public class ScalableObject : MonoBehaviour
     void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _transformConstraints.OriginalTransform = new TransformValues(transform);
 
         Debug.Assert(_spriteRenderer != null, "_spriteRenderer is not found!");
         Debug.Assert(gameObject.GetComponent<Collider2D>() != null, "Collider2D is not found!");
-        // Debug.Assert(IsScaleWithinConstraints(), "check the scale bro make sure within the constraints " + gameObject.name);
-        Debug.Assert(IsPositionWithinConstraints(), "check the scale bro make sure within the constraints " + gameObject.name);
+        Debug.Assert(IsScaleWithinConstraints(), "check the scale bro make sure within the constraints " + gameObject.name);
+        Debug.Assert(IsPositionWithinConstraints(), "check the position bro make sure within the constraints " + gameObject.name);
 
         _spriteColor = _spriteRenderer.color;
-
-        _transformConstraints.OriginalTransform = new TransformValues(transform);
     }
 
     private bool IsScaleWithinConstraints()
@@ -44,8 +43,7 @@ public class ScalableObject : MonoBehaviour
     private bool IsPositionWithinConstraints()
     {
         Vector3 originalPosition = _transformConstraints.OriginalTransform.position;
-        return
-        transform.position.x >= originalPosition.x - _transformConstraints.MinTranslationOffset.x && transform.position.x <= originalPosition.x + _transformConstraints.MaxTranslationOffset.x &&
+        return transform.position.x >= originalPosition.x - _transformConstraints.MinTranslationOffset.x && transform.position.x <= originalPosition.x + _transformConstraints.MaxTranslationOffset.x &&
         transform.position.y >= originalPosition.y - _transformConstraints.MinTranslationOffset.y && transform.position.y <= originalPosition.y + _transformConstraints.MaxTranslationOffset.y &&
         transform.position.z >= originalPosition.z - _transformConstraints.MinTranslationOffset.z && transform.position.z <= originalPosition.z + _transformConstraints.MaxTranslationOffset.z;
     }
