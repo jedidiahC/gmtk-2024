@@ -10,6 +10,7 @@ public class ScalableObjectEyes : MonoBehaviour
 
     private ScalableObject _scalable = null;
     private EyeControls _eyes = null;
+    private Vector3 _initialScale;
 
     private void Awake()
     {
@@ -18,6 +19,8 @@ public class ScalableObjectEyes : MonoBehaviour
 
         _scalable = GetComponent<ScalableObject>();
         _eyes = Instantiate(_eyePrefab).GetComponent<EyeControls>();
+        _initialScale = _eyes.transform.lossyScale;
+        _eyes.transform.SetParent(this.transform);
 
         Debug.Assert(_eyePrefab != null, "_eyes is not assigned!");
 
@@ -36,5 +39,8 @@ public class ScalableObjectEyes : MonoBehaviour
     {
         _eyes.transform.position = _eyeAnchor.transform.position;
         _eyes.transform.rotation = _eyeAnchor.transform.rotation;
+
+        float targetScaleValue = Mathf.Min(Mathf.Abs(transform.lossyScale.x), Mathf.Abs(transform.lossyScale.y));
+        Utils.SetGlobalScale(_eyes.transform, _initialScale * targetScaleValue);
     }
 }
