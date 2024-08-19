@@ -6,6 +6,8 @@ using UnityEngine.UIElements;
 
 public class ScalableObject : MonoBehaviour
 {
+    [SerializeField] private TransformConstraints _transformConstraints = new TransformConstraints(new TransformValues());
+
     public UnityEvent OnEnter = new();
     public UnityEvent OnExit = new();
     public UnityEvent OnStartInteract = new();
@@ -21,14 +23,30 @@ public class ScalableObject : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
         Debug.Assert(_spriteRenderer != null, "_spriteRenderer is not found!");
         Debug.Assert(gameObject.GetComponent<Collider2D>() != null, "Collider2D is not found!");
+        Debug.Assert(IsScaleAndPositionWithinConstraints(), "check the properties bro make sure within the constraints");
         _spriteColor = _spriteRenderer.color;
+        _transformConstraints.OriginalTransform = new TransformValues(transform);
     }
-    void Start() {
+
+    bool IsScaleAndPositionWithinConstraints()
+    {
+        Vector3 originalPosition = _transformConstraints.OriginalTransform.position;
+        return transform.localScale.x >= _transformConstraints.MinScale.x && transform.localScale.x <= _transformConstraints.MaxScale.x &&
+        transform.localScale.y >= _transformConstraints.MinScale.y && transform.localScale.y <= _transformConstraints.MaxScale.y &&
+        transform.localScale.z >= _transformConstraints.MinScale.z && transform.localScale.z <= _transformConstraints.MaxScale.z &&
+        transform.position.x > originalPosition.x - _transformConstraints.MinTranslationOffset.x && transform.position.x > originalPosition.x + _transformConstraints.MaxTranslationOffset.x &&
+        transform.position.y < originalPosition.y - _transformConstraints.MinTranslationOffset.y && transform.position.y > originalPosition.y + _transformConstraints.MaxTranslationOffset.y &&
+        transform.position.z < originalPosition.z - _transformConstraints.MinTranslationOffset.z && transform.position.z > originalPosition.z + _transformConstraints.MaxTranslationOffset.z;
+    }
+
+    void Start()
+    {
         // RAYNER: Cause this might run BEFORE HandlerMaanager is initialized. So use Start.
         HandlerManager.Instance.OnPauseTransformations.AddListener(ExitSelectedState);
     }
 
-    void OnDestroy() {
+    void OnDestroy()
+    {
         if (HandlerManager.Instance != null) HandlerManager.Instance.OnPauseTransformations.RemoveListener(ExitSelectedState);
     }
 
@@ -63,7 +81,7 @@ public class ScalableObject : MonoBehaviour
                     HandlerManager.Instance.SetTarget(null);
                 }
             }
-            else HandlerManager.Instance.SetTarget(transform);
+            else HandlerManager.Instance.SetTarget(transform, _transformConstraints);
         }
     }
 
@@ -85,7 +103,8 @@ public class ScalableObject : MonoBehaviour
         ExitSelectedState();
     }
 
-    private void ExitSelectedState() {
+    private void ExitSelectedState()
+    {
         _spriteRenderer.color = _spriteColor;
         if (_isMouseOver)
         {
