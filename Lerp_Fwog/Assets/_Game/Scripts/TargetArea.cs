@@ -13,6 +13,7 @@ public class TargetArea : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _countLeftText = null;
     [SerializeField] private SpriteRenderer _circleSpriteRen = null;
     [SerializeField] private Color _goalReachedColor = Color.green;
+    [SerializeField] private ParticleSystem _flashParticleSystem = null;
     [SerializeField] private ParticleSystem _confettiParticleSystem = null;
     private Color _circleInitialColor;
     private int _targetCount = 0;
@@ -26,6 +27,7 @@ public class TargetArea : MonoBehaviour
         Debug.Assert(_canvasRectTransform != null, "_canvasRectTransform is not assigned");
         Debug.Assert(_countLeftText != null, "_countLeftText is not assigned");
         Debug.Assert(_circleSpriteRen != null, "_circleSpriteRen is not assigned");
+        Debug.Assert(_flashParticleSystem != null, "_flashParticleSystem is not assigned");
         Debug.Assert(_confettiParticleSystem != null, "_confettiParticleSystem is not assigned");
 
         _circleInitialColor = _circleSpriteRen.color;
@@ -42,6 +44,9 @@ public class TargetArea : MonoBehaviour
         if (other.gameObject.tag == "Finish")
         {
             _targetCount++;
+            _flashParticleSystem.Stop();
+            _flashParticleSystem.Clear();
+            _flashParticleSystem.Play();
             _countLeftText.text = Mathf.Max(_targetGoalNum - _targetCount, 0).ToString();
             if (_targetCount >= _targetGoalNum)
             {
@@ -58,6 +63,8 @@ public class TargetArea : MonoBehaviour
         _targetCount = 0;
         _reachedTarget = false;
         _circleSpriteRen.color = _circleInitialColor;
+        _flashParticleSystem.Stop();
+        _flashParticleSystem.Clear();
         _confettiParticleSystem.Stop();
         _confettiParticleSystem.Clear();
         _countLeftText.text = _targetGoalNum.ToString();
