@@ -58,11 +58,13 @@ public class TransformHandler : MonoBehaviour
     public Transform target { get { return _target; } }
     private eTransformType _transformType = eTransformType.Scale;
     public eTransformType transformType { get { return _transformType; } }
+
     public void SetTransformType(eTransformType inTransformType)
     {
         _transformType = inTransformType;
         SetSprite();
     }
+
     private void SetSprite()
     {
         if (_spriteRen == null) return; // Might not be initialised yet.

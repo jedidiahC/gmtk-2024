@@ -6,21 +6,27 @@ using UnityEngine.Events;
 
 public class HandlerManager : MonoBehaviour
 {
+    public static UnityEvent<eTransformType> OnSwitchMode = new();
+
     private static HandlerManager _instance = null;
     public static HandlerManager Instance { get { return _instance; } }
 
     private bool _allowTransformations = true;
     public bool AllowTransformations { get { return _allowTransformations; } }
     public void ResumeTransformations() { _allowTransformations = true; }
+    public eTransformType GetTransformType() { return _transformHandler.transformType; }
+
     public void PauseTransformations()
     {
         SetTarget(null);
         _allowTransformations = false;
         if (OnPauseTransformations != null) OnPauseTransformations.Invoke();
     }
+
     public UnityEvent OnPauseTransformations = new();
 
     [SerializeField] private TransformHandler _transformHandler = null;
+
     void Awake()
     {
         if (_instance == null)
@@ -48,11 +54,13 @@ public class HandlerManager : MonoBehaviour
         if (!_allowTransformations) return;
         _transformHandler.SetTarget(inTarget, transformConstraints);
     }
+
     public Transform GetTarget() { return _transformHandler.target; }
 
     public void SwitchMode(eTransformType inTransformType)
     {
         _transformHandler.SetTransformType(inTransformType);
+        OnSwitchMode.Invoke(inTransformType);
     }
 
     private void Update()

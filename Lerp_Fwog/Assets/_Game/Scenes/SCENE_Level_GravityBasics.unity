@@ -134,7 +134,6 @@ GameObject:
   - component: {fileID: 324487964}
   - component: {fileID: 324487963}
   - component: {fileID: 324487962}
-  - component: {fileID: 324487961}
   m_Layer: 0
   m_Name: Plank
   m_TagString: Untagged
@@ -157,39 +156,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1579152885}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &324487961
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 324487959}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75eee9f4522cf412abee8884019f43b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _transformConstraints:
-    AllowScaling: 0
-    AllowTranslation: 0
-    AllowRotation: 0
-    IsUniformScaling: 0
-    MinScale: {x: 0, y: 0, z: 0}
-    MaxScale: {x: 0, y: 0, z: 0}
-    MinTranslationOffset: {x: 0, y: 0, z: 0}
-    MaxTranslationOffset: {x: 0, y: 0, z: 0}
-  OnEnter:
-    m_PersistentCalls:
-      m_Calls: []
-  OnExit:
-    m_PersistentCalls:
-      m_Calls: []
-  OnStartInteract:
-    m_PersistentCalls:
-      m_Calls: []
-  OnStopInteract:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!50 &324487962
 Rigidbody2D:
   serializedVersion: 4
@@ -789,6 +755,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PREFAB_Level Clear Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 1978597855879899610, guid: 1ee76cfa3c3e02646abd23399edd2b88, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3340980874872523077, guid: 1ee76cfa3c3e02646abd23399edd2b88, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1222,27 +1192,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2091753750756756198, guid: 3e1fc3875b0b20144957e50874ab9957, type: 3}
       propertyPath: _transformConstraints.MaxTranslationOffset.x
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2091753750756756198, guid: 3e1fc3875b0b20144957e50874ab9957, type: 3}
       propertyPath: _transformConstraints.MaxTranslationOffset.y
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2091753750756756198, guid: 3e1fc3875b0b20144957e50874ab9957, type: 3}
       propertyPath: _transformConstraints.MaxTranslationOffset.z
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2091753750756756198, guid: 3e1fc3875b0b20144957e50874ab9957, type: 3}
       propertyPath: _transformConstraints.MinTranslationOffset.x
-      value: 1
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2091753750756756198, guid: 3e1fc3875b0b20144957e50874ab9957, type: 3}
       propertyPath: _transformConstraints.MinTranslationOffset.y
-      value: 1
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2091753750756756198, guid: 3e1fc3875b0b20144957e50874ab9957, type: 3}
       propertyPath: _transformConstraints.MinTranslationOffset.z
-      value: 1
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2293624710870529133, guid: 3e1fc3875b0b20144957e50874ab9957, type: 3}
       propertyPath: m_Name
@@ -1680,6 +1650,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 491179079586877851, guid: 92435082e2236724faf9101df466a105, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 26.67389
+      objectReference: {fileID: 0}
+    - target: {fileID: 4971193294260277638, guid: 92435082e2236724faf9101df466a105, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 26.67389
+      objectReference: {fileID: 0}
     - target: {fileID: 5919016293022032008, guid: 92435082e2236724faf9101df466a105, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -1711,6 +1689,10 @@ PrefabInstance:
     - target: {fileID: 7275134154487967848, guid: 92435082e2236724faf9101df466a105, type: 3}
       propertyPath: m_Name
       value: PREFAB_Hud
+      objectReference: {fileID: 0}
+    - target: {fileID: 7475422735224970720, guid: 92435082e2236724faf9101df466a105, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 26.67389
       objectReference: {fileID: 0}
     - target: {fileID: 8800556557609990352, guid: 92435082e2236724faf9101df466a105, type: 3}
       propertyPath: m_Pivot.x
