@@ -243,7 +243,7 @@ MonoBehaviour:
   _versionText: {fileID: 494049816}
   _aSource: {fileID: 95958809}
   _buttonHoverClipGroup: {fileID: 11400000, guid: 941d138844089c041902b9641d7f2131, type: 2}
-  _buttonSelectClipGroup: {fileID: 11400000, guid: 144204d0512dd2840a4520346f312d3e, type: 2}
+  _buttonSelectClipGroup: {fileID: 11400000, guid: 4b9d9589071cf8a44b679b1aa4997d16, type: 2}
 --- !u!82 &95958809
 AudioSource:
   m_ObjectHideFlags: 0

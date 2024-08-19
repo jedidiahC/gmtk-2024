@@ -14,8 +14,7 @@ public class AudioManager : MonoBehaviour {
     [SerializeField] private AudioSource aSource1;
     [SerializeField] private AudioSource aSource2;
 
-    [Range(0, 1)]
-    [SerializeField] private int activeAudioSource;
+    [Range(0, 1)] private int activeAudioSource;
 
     void Awake() {
         if (_instance == null)
@@ -50,6 +49,7 @@ public class AudioManager : MonoBehaviour {
 
         DontDestroyOnLoad(gameObject);
     }
+
     public void PlayNextBGM(AudioClip nextClip)
     {
         if (nextClip == GetActiveAudioSource().clip) return;
