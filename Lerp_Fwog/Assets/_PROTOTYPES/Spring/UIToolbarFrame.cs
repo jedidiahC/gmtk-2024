@@ -37,4 +37,11 @@ public class UIToolbarFrame : MonoBehaviour
                 break;
         }
     }
+
+    public void SetAllInUseToFalse()
+    {
+        _childIconsScripts[2].ToggleIsUsing(false);
+        _childIconsScripts[3].ToggleIsUsing(false);
+        _childIconsScripts[4].ToggleIsUsing(false);
+    }
 }

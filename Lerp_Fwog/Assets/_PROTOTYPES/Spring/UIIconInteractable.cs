@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System;
 
 public class UIIconInteractable : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
@@ -22,6 +23,7 @@ public class UIIconInteractable : MonoBehaviour, IPointerEnterHandler, IPointerE
     [SerializeField] private Color _disabledColour;
     public float rectWidth;
     public bool isUsingBool;
+    public bool isOnBool;
 
     private void Awake()
     {
@@ -44,14 +46,27 @@ public class UIIconInteractable : MonoBehaviour, IPointerEnterHandler, IPointerE
 
     public void ToggleIcon(bool isOn)
     {
+        Debug.Log(String.Format("{0} toggled isOn {1}", name, isOn));
+        isOnBool = isOn;
+        _imageComponent.color = isOn ? _enabledColour : _disabledColour;
+        _imageComponent.raycastTarget = isOn;
         _buttonComponent.interactable = isOn;
     }
 
     public void ToggleIsUsing(bool isUsing)
     {
+        Debug.Log(String.Format("{0} toggled isUsing {1}", name, isUsing));
         isUsingBool = isUsing;
-        if (isUsing) { _targetScale = 0.2f; }
-        else { _targetScale = 0.0f; }
+        if (isUsing)
+        {
+            _targetY = 16.0f;
+            _targetScale = 0.2f;
+        }
+        else
+        {
+            _targetY = 0.0f;
+            _targetScale = 0.0f;
+        }
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -62,7 +77,7 @@ public class UIIconInteractable : MonoBehaviour, IPointerEnterHandler, IPointerE
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        _targetY = 0.0f;
+        _targetY = isUsingBool ? 16.0f : 0.0f;
         _targetScale = isUsingBool ? 0.2f : 0.0f;
     }
 
