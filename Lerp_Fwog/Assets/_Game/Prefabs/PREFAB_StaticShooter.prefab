@@ -55,7 +55,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -164,3 +164,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75eee9f4522cf412abee8884019f43b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _transformConstraints:
+    AllowScaling: 1
+    AllowTranslation: 1
+    AllowRotation: 1
+    IsUniformScaling: 0
+    MinScale: {x: 0.5, y: 0.5, z: 0.5}
+    MaxScale: {x: 5, y: 5, z: 5}
+    MinTranslationOffset: {x: 50, y: 50, z: 50}
+    MaxTranslationOffset: {x: 50, y: 50, z: 50}
+  OnEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  OnExit:
+    m_PersistentCalls:
+      m_Calls: []
+  OnStartInteract:
+    m_PersistentCalls:
+      m_Calls: []
+  OnStopInteract:
+    m_PersistentCalls:
+      m_Calls: []
