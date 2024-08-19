@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class StageLoader : MonoBehaviour
 {
@@ -34,7 +35,7 @@ public class StageLoader : MonoBehaviour
         _currentSceneIndex++;
         Debug.Log("Loading scene...");
 
-        SceneManager.LoadSceneAsync(_currentSceneIndex, LoadSceneMode.Additive);
+        LoadLevelScene(_currentSceneIndex, LoadSceneMode.Additive);
     }
 
     public void SetStageActive(StageManager stage)
@@ -87,6 +88,31 @@ public class StageLoader : MonoBehaviour
     {
         Debug.Assert(_globalCamera != null, "_globalCamera is not assigned!");
         _currentSceneIndex = _startSceneBuildIndex;
-        SceneManager.LoadSceneAsync(_currentSceneIndex, LoadSceneMode.Additive);
+        LoadLevelScene(_currentSceneIndex, LoadSceneMode.Additive);
+    }
+
+
+
+    private void LoadLevelScene(int inSceneIndex, LoadSceneMode inLoadSceneMode) {
+        EventSystem[] eventSystems = FindObjectsOfType<EventSystem>();
+        for (int i = 0; i < eventSystems.Length; i++) {
+            eventSystems[i].gameObject.SetActive(false);
+        }
+        // RAYNER: Note, we want to disable all eventSystems before loading the scenes.
+        //         This will completely avoid the warnings.
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        SceneManager.LoadSceneAsync(inSceneIndex, inLoadSceneMode);
+    }
+
+    void OnSceneLoaded(Scene inNewlyLoadedScene, LoadSceneMode inLoadSceneMode)
+    {
+        EventSystem[] eventSystems = FindObjectsOfType<EventSystem>();
+        for (int i = 1; i < eventSystems.Length; i++) {
+            // Only enable the first one.
+            eventSystems[i].gameObject.SetActive(i == 0);
+        }
+
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 }
