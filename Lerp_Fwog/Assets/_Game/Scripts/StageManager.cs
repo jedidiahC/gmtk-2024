@@ -26,6 +26,7 @@ public class StageManager : MonoBehaviour
     {
         _isActive = isActive;
     }
+    public bool GetIsSimulating() { return _isSimulating; }
 
     public List<TransformValues> GetCurrentSolution() { return _dynamicTransformVals; }
 
