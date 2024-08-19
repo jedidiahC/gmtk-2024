@@ -822,6 +822,7 @@ MonoBehaviour:
   - {fileID: 324487962}
   - {fileID: 1879068955}
   - {fileID: 1284744834}
+  - {fileID: 1087244296}
   _camera: {fileID: 1165462318}
 --- !u!114 &949484558
 MonoBehaviour:
@@ -851,6 +852,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &1087244296 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 4812207594918681110, guid: f6457af7df20a1e47b59e21c8c431003, type: 3}
+  m_PrefabInstance: {fileID: 1417970288}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1165462316
 GameObject:
   m_ObjectHideFlags: 0
