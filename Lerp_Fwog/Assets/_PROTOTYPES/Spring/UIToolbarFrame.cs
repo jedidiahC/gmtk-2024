@@ -20,20 +20,20 @@ public class UIToolbarFrame : MonoBehaviour
 
     public void ToggleTransformInUse(eTransformType transformType)
     {
-        _childIconsScripts[2].isUsingBool = false;
-        _childIconsScripts[3].isUsingBool = false;
-        _childIconsScripts[4].isUsingBool = false;
+        _childIconsScripts[2].ToggleIsUsing(false);
+        _childIconsScripts[3].ToggleIsUsing(false);
+        _childIconsScripts[4].ToggleIsUsing(false);
 
         switch (transformType)
         {
             case eTransformType.Translation:
-                _childIconsScripts[2].isUsingBool = true;
+                _childIconsScripts[2].ToggleIsUsing(true);
                 break;
             case eTransformType.Rotation:
-                _childIconsScripts[3].isUsingBool = true;
+                _childIconsScripts[3].ToggleIsUsing(true);
                 break;
             case eTransformType.Scale:
-                _childIconsScripts[4].isUsingBool = true;
+                _childIconsScripts[4].ToggleIsUsing(true);
                 break;
         }
     }

@@ -50,6 +50,8 @@ public class UIIconInteractable : MonoBehaviour, IPointerEnterHandler, IPointerE
     public void ToggleIsUsing(bool isUsing)
     {
         isUsingBool = isUsing;
+        if (isUsing) { _targetScale = 0.2f; }
+        else { _targetScale = 0.0f; }
     }
 
     public void OnPointerEnter(PointerEventData eventData)
