@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using RuntimeHandle;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class HandlerManager : MonoBehaviour {
     private static HandlerManager _instance = null;
@@ -13,7 +14,10 @@ public class HandlerManager : MonoBehaviour {
     public void PauseTransformations() {
         SetTarget(null);
         _allowTransformations = false;
+        if (OnPauseTransformations != null) OnPauseTransformations.Invoke();
     }
+    public UnityEvent OnPauseTransformations = new();
+
 
     [SerializeField] private RuntimeTransformHandle _transformHandler = null;
     void Awake() {

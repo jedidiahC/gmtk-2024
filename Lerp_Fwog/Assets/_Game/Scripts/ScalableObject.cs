@@ -23,11 +23,20 @@ public class ScalableObject : MonoBehaviour
         Debug.Assert(gameObject.GetComponent<Collider2D>() != null, "Collider2D is not found!");
         _spriteColor = _spriteRenderer.color;
     }
+    void Start() {
+        // RAYNER: Cause this might run BEFORE HandlerMaanager is initialized. So use Start.
+        HandlerManager.Instance.OnPauseTransformations.AddListener(ExitSelectedState);
+    }
+
+    void OnDestroy() {
+        if (HandlerManager.Instance != null) HandlerManager.Instance.OnPauseTransformations.RemoveListener(ExitSelectedState);
+    }
 
     private Vector3 _lastMousePos;
     private bool _mouseWasDown = false;
     private void OnMouseDown()
     {
+        if (!HandlerManager.Instance.AllowTransformations) return;
         _lastMousePos = Input.mousePosition;
 
         if (!_mouseWasDown)
@@ -73,8 +82,11 @@ public class ScalableObject : MonoBehaviour
     private void OnMouseExit()
     {
         if (!HandlerManager.Instance.AllowTransformations) return;
-        _spriteRenderer.color = _spriteColor;
+        ExitSelectedState();
+    }
 
+    private void ExitSelectedState() {
+        _spriteRenderer.color = _spriteColor;
         if (_isMouseOver)
         {
             _isMouseOver = false;
