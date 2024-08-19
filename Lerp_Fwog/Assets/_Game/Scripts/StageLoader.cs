@@ -35,7 +35,10 @@ public class StageLoader : MonoBehaviour
 
     [ContextMenu("Load next scene")]
     public void LoadNextScene() {
-        if (_currentSceneIndex >= Constants.NUM_LEVELS - 1) return;
+        if (_currentSceneIndex >= Constants.NUM_LEVELS - 1) {
+            // TODO: You can insert complete all levels here.
+            return;
+        }
         if (_activeStage != null) DisableActiveStage();
 
         _currentSceneIndex++;
@@ -50,6 +53,8 @@ public class StageLoader : MonoBehaviour
         _activeStage.SetIsActive(true);
         UpdateCamera(stage.GetStageCamera());
     }
+
+    public StageManager GetActiveStage() { return _activeStage; }
 
     private void DisableActiveStage() {
         Debug.Log("Disabling Scene: " + Constants.SCENE_LEVEL_NAMES[_currentSceneIndex]);
