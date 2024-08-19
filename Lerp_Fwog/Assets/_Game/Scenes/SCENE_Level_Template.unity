@@ -169,6 +169,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75eee9f4522cf412abee8884019f43b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _transformConstraints:
+    AllowScaling: 1
+    AllowTranslation: 1
+    AllowRotation: 1
+    IsUniformScaling: 0
+    MinScale: {x: 0.5, y: 0.5, z: 0.5}
+    MaxScale: {x: 5, y: 5, z: 5}
+    MinTranslationOffset: {x: 50, y: 50, z: 50}
+    MaxTranslationOffset: {x: 50, y: 50, z: 50}
   OnEnter:
     m_PersistentCalls:
       m_Calls: []
@@ -352,6 +361,66 @@ PrefabInstance:
     - target: {fileID: 2574849251428721334, guid: a11b3279e89f68a48aea234c9dac5bc1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5668521961626787012, guid: a11b3279e89f68a48aea234c9dac5bc1, type: 3}
+      propertyPath: _transformConstraints.MaxScale.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5668521961626787012, guid: a11b3279e89f68a48aea234c9dac5bc1, type: 3}
+      propertyPath: _transformConstraints.MaxScale.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5668521961626787012, guid: a11b3279e89f68a48aea234c9dac5bc1, type: 3}
+      propertyPath: _transformConstraints.MaxScale.z
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5668521961626787012, guid: a11b3279e89f68a48aea234c9dac5bc1, type: 3}
+      propertyPath: _transformConstraints.MinScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5668521961626787012, guid: a11b3279e89f68a48aea234c9dac5bc1, type: 3}
+      propertyPath: _transformConstraints.MinScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5668521961626787012, guid: a11b3279e89f68a48aea234c9dac5bc1, type: 3}
+      propertyPath: _transformConstraints.MinScale.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5668521961626787012, guid: a11b3279e89f68a48aea234c9dac5bc1, type: 3}
+      propertyPath: _transformConstraints.AllowScaling
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5668521961626787012, guid: a11b3279e89f68a48aea234c9dac5bc1, type: 3}
+      propertyPath: _transformConstraints.AllowRotation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5668521961626787012, guid: a11b3279e89f68a48aea234c9dac5bc1, type: 3}
+      propertyPath: _transformConstraints.AllowTranslation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5668521961626787012, guid: a11b3279e89f68a48aea234c9dac5bc1, type: 3}
+      propertyPath: _transformConstraints.MaxTranslationOffset.x
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5668521961626787012, guid: a11b3279e89f68a48aea234c9dac5bc1, type: 3}
+      propertyPath: _transformConstraints.MaxTranslationOffset.y
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5668521961626787012, guid: a11b3279e89f68a48aea234c9dac5bc1, type: 3}
+      propertyPath: _transformConstraints.MaxTranslationOffset.z
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5668521961626787012, guid: a11b3279e89f68a48aea234c9dac5bc1, type: 3}
+      propertyPath: _transformConstraints.MinTranslationOffset.x
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5668521961626787012, guid: a11b3279e89f68a48aea234c9dac5bc1, type: 3}
+      propertyPath: _transformConstraints.MinTranslationOffset.y
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5668521961626787012, guid: a11b3279e89f68a48aea234c9dac5bc1, type: 3}
+      propertyPath: _transformConstraints.MinTranslationOffset.z
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 6190062786431457978, guid: a11b3279e89f68a48aea234c9dac5bc1, type: 3}
       propertyPath: m_Name
@@ -1101,6 +1170,66 @@ PrefabInstance:
       propertyPath: m_Name
       value: PREFAB_CircleWeight
       objectReference: {fileID: 0}
+    - target: {fileID: 5306705628273723992, guid: df1071acf81b42241a3029556c702fe3, type: 3}
+      propertyPath: _transformConstraints.MaxScale.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5306705628273723992, guid: df1071acf81b42241a3029556c702fe3, type: 3}
+      propertyPath: _transformConstraints.MaxScale.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5306705628273723992, guid: df1071acf81b42241a3029556c702fe3, type: 3}
+      propertyPath: _transformConstraints.MaxScale.z
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5306705628273723992, guid: df1071acf81b42241a3029556c702fe3, type: 3}
+      propertyPath: _transformConstraints.MinScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5306705628273723992, guid: df1071acf81b42241a3029556c702fe3, type: 3}
+      propertyPath: _transformConstraints.MinScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5306705628273723992, guid: df1071acf81b42241a3029556c702fe3, type: 3}
+      propertyPath: _transformConstraints.MinScale.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5306705628273723992, guid: df1071acf81b42241a3029556c702fe3, type: 3}
+      propertyPath: _transformConstraints.AllowScaling
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5306705628273723992, guid: df1071acf81b42241a3029556c702fe3, type: 3}
+      propertyPath: _transformConstraints.AllowRotation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5306705628273723992, guid: df1071acf81b42241a3029556c702fe3, type: 3}
+      propertyPath: _transformConstraints.AllowTranslation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5306705628273723992, guid: df1071acf81b42241a3029556c702fe3, type: 3}
+      propertyPath: _transformConstraints.MaxTranslationOffset.x
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5306705628273723992, guid: df1071acf81b42241a3029556c702fe3, type: 3}
+      propertyPath: _transformConstraints.MaxTranslationOffset.y
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5306705628273723992, guid: df1071acf81b42241a3029556c702fe3, type: 3}
+      propertyPath: _transformConstraints.MaxTranslationOffset.z
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5306705628273723992, guid: df1071acf81b42241a3029556c702fe3, type: 3}
+      propertyPath: _transformConstraints.MinTranslationOffset.x
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5306705628273723992, guid: df1071acf81b42241a3029556c702fe3, type: 3}
+      propertyPath: _transformConstraints.MinTranslationOffset.y
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5306705628273723992, guid: df1071acf81b42241a3029556c702fe3, type: 3}
+      propertyPath: _transformConstraints.MinTranslationOffset.z
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 6945618799336995180, guid: df1071acf81b42241a3029556c702fe3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -9.17
@@ -1203,6 +1332,30 @@ PrefabInstance:
     - target: {fileID: 578421418250530245, guid: f6457af7df20a1e47b59e21c8c431003, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1598586968303921227, guid: f6457af7df20a1e47b59e21c8c431003, type: 3}
+      propertyPath: _transformConstraints.AllowRotation
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1598586968303921227, guid: f6457af7df20a1e47b59e21c8c431003, type: 3}
+      propertyPath: _transformConstraints.AllowTranslation
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1598586968303921227, guid: f6457af7df20a1e47b59e21c8c431003, type: 3}
+      propertyPath: _transformConstraints.IsUniformScaling
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1598586968303921227, guid: f6457af7df20a1e47b59e21c8c431003, type: 3}
+      propertyPath: _transformConstraints.MinTranslationOffset.x
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 1598586968303921227, guid: f6457af7df20a1e47b59e21c8c431003, type: 3}
+      propertyPath: _transformConstraints.MinTranslationOffset.y
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 1598586968303921227, guid: f6457af7df20a1e47b59e21c8c431003, type: 3}
+      propertyPath: _transformConstraints.MinTranslationOffset.z
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 4197718159841234871, guid: f6457af7df20a1e47b59e21c8c431003, type: 3}
       propertyPath: m_Name

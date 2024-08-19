@@ -134,7 +134,6 @@ GameObject:
   - component: {fileID: 324487964}
   - component: {fileID: 324487963}
   - component: {fileID: 324487962}
-  - component: {fileID: 324487961}
   m_Layer: 0
   m_Name: Plank
   m_TagString: Untagged
@@ -157,30 +156,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1579152885}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &324487961
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 324487959}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75eee9f4522cf412abee8884019f43b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnEnter:
-    m_PersistentCalls:
-      m_Calls: []
-  OnExit:
-    m_PersistentCalls:
-      m_Calls: []
-  OnStartInteract:
-    m_PersistentCalls:
-      m_Calls: []
-  OnStopInteract:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!50 &324487962
 Rigidbody2D:
   serializedVersion: 4
