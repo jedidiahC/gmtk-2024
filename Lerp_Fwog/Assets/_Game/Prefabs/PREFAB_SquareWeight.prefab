@@ -49,6 +49,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75eee9f4522cf412abee8884019f43b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _transformConstraints:
+    AllowScaling: 1
+    AllowTranslation: 1
+    AllowRotation: 1
+    IsUniformScaling: 0
+    MinScale: {x: 0.5, y: 0.5, z: 0.5}
+    MaxScale: {x: 5, y: 5, z: 5}
+    MinTranslationOffset: {x: 50, y: 50, z: 50}
+    MaxTranslationOffset: {x: 50, y: 50, z: 50}
   OnEnter:
     m_PersistentCalls:
       m_Calls: []

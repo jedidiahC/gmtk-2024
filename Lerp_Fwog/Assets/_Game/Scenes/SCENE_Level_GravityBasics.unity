@@ -169,6 +169,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75eee9f4522cf412abee8884019f43b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _transformConstraints:
+    AllowScaling: 0
+    AllowTranslation: 0
+    AllowRotation: 0
+    IsUniformScaling: 0
+    MinScale: {x: 0, y: 0, z: 0}
+    MaxScale: {x: 0, y: 0, z: 0}
+    MinTranslationOffset: {x: 0, y: 0, z: 0}
+    MaxTranslationOffset: {x: 0, y: 0, z: 0}
   OnEnter:
     m_PersistentCalls:
       m_Calls: []
@@ -1133,6 +1142,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1598586968303921227, guid: f6457af7df20a1e47b59e21c8c431003, type: 3}
+      propertyPath: _transformConstraints.MaxScale.x
+      value: 1.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1598586968303921227, guid: f6457af7df20a1e47b59e21c8c431003, type: 3}
+      propertyPath: _transformConstraints.MaxScale.y
+      value: 1.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1598586968303921227, guid: f6457af7df20a1e47b59e21c8c431003, type: 3}
+      propertyPath: _transformConstraints.MaxScale.z
+      value: 1.3
+      objectReference: {fileID: 0}
     - target: {fileID: 4197718159841234871, guid: f6457af7df20a1e47b59e21c8c431003, type: 3}
       propertyPath: m_Name
       value: PREFAB_Attractor
@@ -1145,7 +1166,8 @@ PrefabInstance:
       propertyPath: _scaleSpeedMultiplier
       value: 0.1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6598576524531514157, guid: f6457af7df20a1e47b59e21c8c431003, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1158,9 +1180,85 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1579152885}
     m_Modifications:
+    - target: {fileID: 2091753750756756198, guid: 3e1fc3875b0b20144957e50874ab9957, type: 3}
+      propertyPath: _transformConstraints.MaxScale.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2091753750756756198, guid: 3e1fc3875b0b20144957e50874ab9957, type: 3}
+      propertyPath: _transformConstraints.MaxScale.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2091753750756756198, guid: 3e1fc3875b0b20144957e50874ab9957, type: 3}
+      propertyPath: _transformConstraints.MaxScale.z
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2091753750756756198, guid: 3e1fc3875b0b20144957e50874ab9957, type: 3}
+      propertyPath: _transformConstraints.MinScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2091753750756756198, guid: 3e1fc3875b0b20144957e50874ab9957, type: 3}
+      propertyPath: _transformConstraints.MinScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2091753750756756198, guid: 3e1fc3875b0b20144957e50874ab9957, type: 3}
+      propertyPath: _transformConstraints.MinScale.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2091753750756756198, guid: 3e1fc3875b0b20144957e50874ab9957, type: 3}
+      propertyPath: _transformConstraints.AllowScaling
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2091753750756756198, guid: 3e1fc3875b0b20144957e50874ab9957, type: 3}
+      propertyPath: _transformConstraints.AllowRotation
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2091753750756756198, guid: 3e1fc3875b0b20144957e50874ab9957, type: 3}
+      propertyPath: _transformConstraints.AllowTranslation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2091753750756756198, guid: 3e1fc3875b0b20144957e50874ab9957, type: 3}
+      propertyPath: _transformConstraints.IsUniformScaling
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2091753750756756198, guid: 3e1fc3875b0b20144957e50874ab9957, type: 3}
+      propertyPath: _transformConstraints.MaxTranslationOffset.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2091753750756756198, guid: 3e1fc3875b0b20144957e50874ab9957, type: 3}
+      propertyPath: _transformConstraints.MaxTranslationOffset.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2091753750756756198, guid: 3e1fc3875b0b20144957e50874ab9957, type: 3}
+      propertyPath: _transformConstraints.MaxTranslationOffset.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2091753750756756198, guid: 3e1fc3875b0b20144957e50874ab9957, type: 3}
+      propertyPath: _transformConstraints.MinTranslationOffset.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2091753750756756198, guid: 3e1fc3875b0b20144957e50874ab9957, type: 3}
+      propertyPath: _transformConstraints.MinTranslationOffset.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2091753750756756198, guid: 3e1fc3875b0b20144957e50874ab9957, type: 3}
+      propertyPath: _transformConstraints.MinTranslationOffset.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2293624710870529133, guid: 3e1fc3875b0b20144957e50874ab9957, type: 3}
       propertyPath: m_Name
       value: PREFAB_SquareWeight
+      objectReference: {fileID: 0}
+    - target: {fileID: 9221519983697206059, guid: 3e1fc3875b0b20144957e50874ab9957, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9221519983697206059, guid: 3e1fc3875b0b20144957e50874ab9957, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9221519983697206059, guid: 3e1fc3875b0b20144957e50874ab9957, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9221519983697206059, guid: 3e1fc3875b0b20144957e50874ab9957, type: 3}
       propertyPath: m_LocalPosition.x
