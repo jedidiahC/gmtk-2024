@@ -6,12 +6,15 @@ using UnityEngine.Events;
 
 public class HandlerManager : MonoBehaviour
 {
-    public static UnityEvent<eTransformType> OnSwitchMode = new();
-
     private static HandlerManager _instance = null;
+
     public static HandlerManager Instance { get { return _instance; } }
 
+    public UnityEvent<eTransformType> OnSwitchMode = new();
+    public UnityEvent OnSetTarget = new();
+
     private bool _allowTransformations = true;
+
     public bool AllowTransformations { get { return _allowTransformations; } }
     public void ResumeTransformations() { _allowTransformations = true; }
     public eTransformType GetTransformType() { return _transformHandler.transformType; }
@@ -53,12 +56,15 @@ public class HandlerManager : MonoBehaviour
     {
         if (!_allowTransformations) return;
         _transformHandler.SetTarget(inTarget, transformConstraints);
+        OnSetTarget.Invoke();
     }
 
     public Transform GetTarget() { return _transformHandler.target; }
+    public TransformConstraints GetConstraints() { return _transformHandler.constraints; }
 
     public void SwitchMode(eTransformType inTransformType)
     {
+        Debug.Log("Switch mode " + inTransformType);
         _transformHandler.SetTransformType(inTransformType);
         OnSwitchMode.Invoke(inTransformType);
     }

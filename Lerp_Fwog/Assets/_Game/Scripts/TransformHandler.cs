@@ -58,6 +58,7 @@ public class TransformHandler : MonoBehaviour
     public Transform target { get { return _target; } }
     private eTransformType _transformType = eTransformType.Scale;
     public eTransformType transformType { get { return _transformType; } }
+    public TransformConstraints constraints { get { return _targetConstraints; } }
 
     public void SetTransformType(eTransformType inTransformType)
     {
