@@ -6,7 +6,7 @@ using UnityEngine;
 public class FishAttack : MonoBehaviour
 {
     // [SerializeField] private TadpoleLife target = null;
-    [SerializeField] private float speed = 5.0f;
+    // [SerializeField] private float speed = 5.0f;
 
     //private void Update()
     //{
