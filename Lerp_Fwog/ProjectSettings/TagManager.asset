@@ -46,3 +46,6 @@ TagManager:
   - name: Eye
     uniqueID: 1176231949
     locked: 0
+  - name: Effects
+    uniqueID: 3289365263
+    locked: 0

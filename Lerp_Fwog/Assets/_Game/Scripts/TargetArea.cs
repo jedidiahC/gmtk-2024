@@ -11,21 +11,24 @@ public class TargetArea : MonoBehaviour
     [SerializeField] private int _targetGoalNum = 0;
     [SerializeField] private RectTransform _canvasRectTransform = null;
     [SerializeField] private TextMeshProUGUI _countLeftText = null;
-    private SpriteRenderer _spriteRen = null;
+    [SerializeField] private SpriteRenderer _circleSpriteRen = null;
+    [SerializeField] private Color _goalReachedColor = Color.green;
+    [SerializeField] private ParticleSystem _confettiParticleSystem = null;
+    private Color _circleInitialColor;
     private int _targetCount = 0;
     private bool _reachedTarget = false;
     public bool ReachedTarget { get { return _reachedTarget; } }
 
-    private Color _unreachedColor = new Color(0f, 0.6f, 1f, 0.5f);
-    private Color _reachedColor = new Color(0f, 1f, 0f, 0.15f);
 
     void Awake()
     {
         Debug.Assert(_targetGoalNum > 0, "_targetGoalNum must be > 0");
         Debug.Assert(_canvasRectTransform != null, "_canvasRectTransform is not assigned");
         Debug.Assert(_countLeftText != null, "_countLeftText is not assigned");
-        _spriteRen = GetComponent<SpriteRenderer>();
-        Debug.Assert(_spriteRen != null, "_spriteRen is not found!");
+        Debug.Assert(_circleSpriteRen != null, "_circleSpriteRen is not assigned");
+        Debug.Assert(_confettiParticleSystem != null, "_confettiParticleSystem is not assigned");
+
+        _circleInitialColor = _circleSpriteRen.color;
 
         ResetTarget();
 
@@ -43,7 +46,8 @@ public class TargetArea : MonoBehaviour
             if (_targetCount >= _targetGoalNum)
             {
                 _reachedTarget = true;
-                _spriteRen.color = _reachedColor;
+                _circleSpriteRen.color = _goalReachedColor;
+                _confettiParticleSystem.Play();
                 OnGoalReached.Invoke();
             }
         }
@@ -53,7 +57,9 @@ public class TargetArea : MonoBehaviour
     {
         _targetCount = 0;
         _reachedTarget = false;
-        _spriteRen.color = _unreachedColor;
+        _circleSpriteRen.color = _circleInitialColor;
+        _confettiParticleSystem.Stop();
+        _confettiParticleSystem.Clear();
         _countLeftText.text = _targetGoalNum.ToString();
     }
 }
