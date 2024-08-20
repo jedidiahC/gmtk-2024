@@ -3,12 +3,12 @@ using UnityEditor;
 using UnityEngine;
 using UnityEditor.SceneManagement;
 
-public class HierarchyMonitorWindow : EditorWindow
+public class AutoSceneTags : EditorWindow
 {
-    [MenuItem("Window/Hierarchy Monitor")]
+    [MenuItem("Window/Auto Scene Tags")]
     static void CreateWindow()
     {
-        EditorWindow.GetWindow<HierarchyMonitorWindow>();
+        EditorWindow.GetWindow<AutoSceneTags>();
     }
 
     void OnHierarchyChange()
