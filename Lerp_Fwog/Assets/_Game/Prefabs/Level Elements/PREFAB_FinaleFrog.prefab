@@ -182,7 +182,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 4414346618048426772}
-  DEBUG_SCORE: 500
 --- !u!50 &4414346618048426772
 Rigidbody2D:
   serializedVersion: 4
