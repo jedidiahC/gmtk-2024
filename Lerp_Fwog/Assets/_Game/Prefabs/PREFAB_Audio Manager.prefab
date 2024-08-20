@@ -175,7 +175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21bd9705ec65542b9b38ac78cd527bee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bgmClip: {fileID: 8300000, guid: a64b0820248ee9f4384d6589105fcfa1, type: 3}
+  bgmClip: {fileID: 8300000, guid: a1c38e70e4ffca44e97446885dc148a4, type: 3}
   volumeMultiplier: 1
   aSource1: {fileID: 126127047749889319}
   aSource2: {fileID: 2488163510170691966}
