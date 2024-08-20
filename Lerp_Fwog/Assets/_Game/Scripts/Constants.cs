@@ -10,6 +10,11 @@ public static class Constants {
         "SCENE_Level_1_3",
         "SCENE_Level_1_4",
         "SCENE_Level_1_5",
+        "SCENE_Level_1_6",
+        "SCENE_Level_1_7",
+        "SCENE_Level_1_8",
+        "SCENE_Level_1_9",
+        "SCENE_Level_1_10",
         //"SCENE_Level_ManipulationBasics",
         //"SCENE_Level_ShooterBasics",
         //"SCENE_Level_GravityBasics"
