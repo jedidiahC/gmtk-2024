@@ -18,6 +18,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 6d3a114d48c7fb34d847e29e01e76e07, type: 3}
   - {fileID: 8300000, guid: d0279c071aefbe54793be25dfc004453, type: 3}
   - {fileID: 8300000, guid: 9bdbe595cbe09054eb82c7d3c06c4666, type: 3}
-  m_volume: 1
+  m_volume: 0.6
   m_pitchVariance: {x: -0.03, y: 0.03}
   m_minInterval: 0.05
