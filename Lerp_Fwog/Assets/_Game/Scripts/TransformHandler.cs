@@ -352,6 +352,7 @@ public class TransformHandler : MonoBehaviour
         _targetScript.SetTargetRotation(_target.localEulerAngles.z);
     }
 
+    private TranslateFrameData _translateFrameData = new TranslateFrameData();
     private void HandleTranslateInput()
     {
         if (!_targetConstraints.AllowTranslation) { return; }
@@ -376,12 +377,20 @@ public class TransformHandler : MonoBehaviour
             targetPosition.x -= delta;
         }
 
+        if (Input.GetMouseButtonDown(0)) {
+            _translateFrameData.savedWorldMousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            _translateFrameData.savedWorldMousePosition.z = 0;
+            _translateFrameData.mouseDowned = true;
+            _translateFrameData.targetPosOnMouseDown = _target.position;
+        }
         if (Input.GetMouseButton(0)) {
-            Vector3 mousePos = Input.mousePosition;
-            Vector3 mousePosWorld = Camera.main.ScreenToWorldPoint(mousePos);
+            Vector3 mousePosWorld = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mousePosWorld.z = 0;
-            targetPosition += mousePosWorld - _target.position;
-            // Debug.Log("mousePosWorld: " + mousePosWorld + ", deltaPostion: " + (mousePosWorld - _target.position));;
+            Vector3 deltaMousePos = mousePosWorld - _translateFrameData.savedWorldMousePosition;
+            targetPosition = _translateFrameData.targetPosOnMouseDown + deltaMousePos;
+        }
+        if (Input.GetMouseButtonUp(0)) {
+            _translateFrameData.mouseDowned = false;
         }
 
         Vector3 originalPos = _targetConstraints.OriginalTransform.position;
@@ -397,6 +406,12 @@ public class TransformHandler : MonoBehaviour
     }
 
 
+    struct TranslateFrameData
+    {
+        public bool mouseDowned;
+        public Vector3 savedWorldMousePosition;
+        public Vector3 targetPosOnMouseDown;
+    }
 
     struct RotateFrameData
     {
