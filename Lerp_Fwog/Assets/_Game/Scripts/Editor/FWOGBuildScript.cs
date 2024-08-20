@@ -62,6 +62,8 @@ public class FWOGBuildScript
             } else {
                 PlayerSettings.WebGL.compressionFormat = WebGLCompressionFormat.Disabled;
             }
+            PlayerSettings.defaultWebScreenWidth = 1920;
+            PlayerSettings.defaultWebScreenHeight = 1080;
             #endif
 			#endregion
 
