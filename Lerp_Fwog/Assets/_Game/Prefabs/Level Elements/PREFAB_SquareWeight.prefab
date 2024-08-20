@@ -234,13 +234,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2293624710870529133}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4326928fb13122c4cac11ca646c7c882, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _angleText: {fileID: 7366446361410123933}
-  _doAngleShit: 1
+  _doAngleShit: 0
+  _doScaleShit: 0
 --- !u!1 &2873448061624634232
 GameObject:
   m_ObjectHideFlags: 0

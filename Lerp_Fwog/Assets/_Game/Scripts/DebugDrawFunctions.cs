@@ -11,6 +11,7 @@ public class DebugDrawFunctions : MonoBehaviour
     [SerializeField] private TMP_Text _angleText;
 
     private float _currentAngle, _velocityAngle, _targetAngle;
+    private float _currentScale, _velocityScale, _targetScale;
     private float _dampingRatio = 0.5f, _angularFrequency = 0.1f, _timeStep = 1.0f;
 
     private float _angleRef;
@@ -19,16 +20,51 @@ public class DebugDrawFunctions : MonoBehaviour
     public bool _doAngleShit;
     public bool _doScaleShit;
 
+    private float fistance;
+    private Vector3 fistanceV;
+
+    private float ssssscale;
+
     private void Start()
     {
-        _angleText.gameObject.SetActive(_doAngleShit);
+        _angleText.gameObject.SetActive(_doAngleShit || _doScaleShit);
+        _targetScale = 1.0f;
+        ssssscale = transform.localScale.x;
     }
 
     private void Update()
     {
+        Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mouseWorldPosition.z = 0.0f;
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            _mouseDowned = true;
+            _savedMousePosition = mouseWorldPosition;
+            ssssscale = transform.localScale.x;
+            _currentScale = ssssscale;
+        }
+        if (Input.GetMouseButton(0))
+        {
+            _angleText.text = fistance.ToString();
+            _targetScale = fistance;
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            _mouseDowned = false;
+        }
+
+        if (_doScaleShit)
+        {
+            fistance = Vector3.Distance(_savedMousePosition, mouseWorldPosition) * Mathf.Clamp(mouseWorldPosition.x - _savedMousePosition.x, -1, 1);
+            // fistance = Mathf.Max(0.0f, fistance * 0.5f);
+            SpringMath.Lerp(ref _currentScale, ref _velocityScale, _targetScale, _dampingRatio, _angularFrequency, _timeStep);
+            transform.localScale = new Vector3(ssssscale + _targetScale, ssssscale + _targetScale, 1.0f);
+            return;
+        }
+
         if (_doAngleShit)
         {
-            Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             if (!_mouseDowned)
             {
                 _savedMousePosition = mouseWorldPosition;
