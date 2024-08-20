@@ -10,6 +10,9 @@ public class Hud : MonoBehaviour
     [SerializeField] private Button _onSelectRotate = null;
     [SerializeField] private Button _onSelectScale = null;
     [SerializeField] private UIToolbarFrame _toolbar = null;
+    [SerializeField] private AudioSource _audioSource = null;
+    [SerializeField] private AudioClipGroup _resetSound = null;
+    [SerializeField] private AudioClipGroup _changeWidget = null;
 
     private TransformConstraints _currentContraints;
     private eTransformType _currentActiveType;
@@ -32,6 +35,9 @@ public class Hud : MonoBehaviour
         Debug.Assert(_onSelectRotate != null, "_onSelectRotate is not assigned!");
         Debug.Assert(_onSelectScale != null, "_onSelectScale is not assigned!");
         Debug.Assert(_toolbar != null, "_toolbar is not assigned!");
+        Debug.Assert(_audioSource != null, "_audioSource is not assigned!");
+        Debug.Assert(_resetSound != null, "_resetSound is not assigned!");
+        Debug.Assert(_changeWidget != null, "_changeWidget is not assigned!");
 
         _toolbar.SetAllInUseToFalse();
     }
@@ -107,6 +113,7 @@ public class Hud : MonoBehaviour
 
     public void OnReset()
     {
+        _resetSound.PlayOneShot(_audioSource);
         _stage.ResetStage();
     }
 
@@ -135,5 +142,6 @@ public class Hud : MonoBehaviour
         //Debug.Log("Switched to " + transformType);
         _currentActiveType = transformType;
         _toolbar.ToggleTransformInUse(transformType);
+        _changeWidget.PlayOneShot(_audioSource);
     }
 }
