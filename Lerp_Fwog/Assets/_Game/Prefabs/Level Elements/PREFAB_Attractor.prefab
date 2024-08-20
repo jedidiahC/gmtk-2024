@@ -139,7 +139,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cdddeb8a2fd1a548a3f61b4e3370152, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: 
 --- !u!212 &3309827022318504606
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -287,6 +286,15 @@ MonoBehaviour:
   OnStopInteract:
     m_PersistentCalls:
       m_Calls: []
+  _dampingRatio: 0.5
+  _angularFrequency: 0.1
+  _timeStep: 1
+  _springPositionCurrent: {x: 0, y: 0, z: 0}
+  _springPositionVelocity: {x: 0, y: 0, z: 0}
+  _springPositionTarget: {x: 0, y: 0, z: 0}
+  _springRotationCurrent: 0
+  _springRotationVelocity: 0
+  _springRotationTarget: 0
 --- !u!1 &5203520451060666529
 GameObject:
   m_ObjectHideFlags: 0
@@ -479,7 +487,7 @@ ParticleSystem:
       m_RotationOrder: 4
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
-  scalingMode: 1
+  scalingMode: 0
   randomSeed: 0
   InitialModule:
     serializedVersion: 3
