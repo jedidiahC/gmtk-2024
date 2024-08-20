@@ -94,14 +94,16 @@ public class FWOGBuildScript
             Debug.Log("Build Directory Path: " + buildDirectory);
 
 #if UNITY_STANDALONE_OSX
-            outputFileName = "FWOG_" + inBuildScheme.ToString() + "_v" + VersionClass.BUNDLE_VERSION + ".app";
+            // outputFileName = "FWOG_" + inBuildScheme.ToString() + "_v" + VersionClass.BUNDLE_VERSION + ".app";
+            outputFileName = "one small leap for frog.app";
 #elif UNITY_STANDALONE_WIN
-            outputFileName = "FWOG_" + inBuildScheme.ToString() + "_v" + VersionClass.BUNDLE_VERSION + ".exe";
+            // outputFileName = "FWOG_" + inBuildScheme.ToString() + "_v" + VersionClass.BUNDLE_VERSION + ".exe";
+            outputFileName = "one small leap for frog.exe";
 #elif UNITY_WEBGL
-            outputFileName = "FWOG_" + inBuildScheme.ToString() + "_v" + VersionClass.BUNDLE_VERSION + "_WebGL";
+            // outputFileName = "FWOG_" + inBuildScheme.ToString() + "_v" + VersionClass.BUNDLE_VERSION + "_WebGL";
+            outputFileName = "one small leap for frog";
 #endif
             Debug.Log("Output File Name: " + outputFileName);
-            outputFileName = "one small leap for frog";
 
             if (!Directory.Exists(buildDirectory)) Directory.CreateDirectory(buildDirectory);
             if (inBuildScheme != eBuildScheme.RELEASE) { // NOTE: Respect the settings in the Build Settings, only if it's not a release build.
