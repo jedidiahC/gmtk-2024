@@ -304,6 +304,9 @@ public class TransformHandler : MonoBehaviour
             targetLocalEuler.z += delta;
         }
 
+
+
+
         _gizmoLineRen.startWidth = 0.1f;
         _gizmoLineRen.endWidth = 0.1f;
         _gizmoLineRen.loop = false;
@@ -323,38 +326,30 @@ public class TransformHandler : MonoBehaviour
         _gizmoLineRen.SetPosition(1, _target.position);
         _gizmoLineRen.SetPosition(0, _rotateFrameData.savedMousePosition);
 
-
-        Vector3 v1 = _rotateFrameData.savedMousePosition - _target.position;
-        Vector3 v2 = mouseWorldPosition - _target.position;
-        v1.z = 0;
-        v2.z = 0;
-        _rotateFrameData.angleResult = Vector3.SignedAngle(v1, v2, Vector3.forward);
-        // if (_angleResult < 0) { _angleResult += 360.0f; }
-
         if (Input.GetMouseButtonDown(0))
         {
             _rotateFrameData.mouseDowned = true;
-            _rotateFrameData.angleRef = _target.eulerAngles.z;
-            _rotateFrameData.currentAngle = 0.0f;
+            _rotateFrameData.angleOnMouseDown = _target.localEulerAngles.z;
         }
         if (Input.GetMouseButton(0))
         {
-            _rotateFrameData.targetAngle = _rotateFrameData.angleResult;
+            Vector2 from = (_rotateFrameData.savedMousePosition - _target.position).normalized;
+            Vector2 to = (mouseWorldPosition - _target.position).normalized;
+            float signedAngle = (Mathf.Atan2(to.y, to.x) - Mathf.Atan2(from.y, from.x)) * Mathf.Rad2Deg;
+
+            if (signedAngle > 180) signedAngle -= 360;
+            else if (signedAngle < -180) signedAngle += 360;
+
+            targetLocalEuler.z = _rotateFrameData.angleOnMouseDown + signedAngle;
+            Debug.Log("Signed: " + signedAngle + "_target: " + _target.localEulerAngles.z + ", onMouseDown: " + _rotateFrameData.angleOnMouseDown + ", targetLocalEuler: " + targetLocalEuler.z);
         }
         if (Input.GetMouseButtonUp(0))
         {
             _rotateFrameData.mouseDowned = false;
         }
 
-        // const float DAMPING_RATIO = 0.5f;
-        // const float ANGULAR_FREQUENCY = 0.1f;
-        // const float TIME_STEP = 1.0f;
-        // SpringMath.Lerp(ref _rotateFrameData.currentAngle, ref _rotateFrameData.velocityAngle, _rotateFrameData.targetAngle, DAMPING_RATIO, ANGULAR_FREQUENCY, TIME_STEP);
-        // targetLocalEuler = Vector3.forward * (_rotateFrameData.angleRef + _rotateFrameData.currentAngle);
-
-        // _target.localEulerAngles = targetLocalEuler;
-
-        _targetScript.SetTargetRotation(_rotateFrameData.angleRef + _rotateFrameData.targetAngle);
+        _target.localEulerAngles = targetLocalEuler;
+        _targetScript.SetTargetRotation(_target.localEulerAngles.z);
     }
 
     private void HandleTranslateInput()
@@ -407,9 +402,7 @@ public class TransformHandler : MonoBehaviour
     {
         public bool mouseDowned;
         public Vector3 savedMousePosition;
-        public float angleResult;
-        public float angleRef;
-        public float currentAngle, velocityAngle, targetAngle;
+        public float angleOnMouseDown;
     }
 
     struct ScaleFrameData
