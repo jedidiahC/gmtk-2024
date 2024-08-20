@@ -102,7 +102,7 @@ public class ScalableObject : MonoBehaviour
     {
         _springRotationTarget = targetRotation;
         if (_springRotationTarget >= 360.0f) { _springRotationTarget -= 360.0f; }
-        Debug.Log(String.Format("{0} {1}", _springRotationTarget, _springRotationCurrent));
+        // Debug.Log(String.Format("{0} {1}", _springRotationTarget, _springRotationCurrent));
     }
 
     private Vector3 _lastMousePos;
