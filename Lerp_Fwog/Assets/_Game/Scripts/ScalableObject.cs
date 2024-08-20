@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -71,8 +72,9 @@ public class ScalableObject : MonoBehaviour
         SpringMath.Lerp(ref _springPositionCurrent, ref _springPositionVelocity, _springPositionTarget, _dampingRatio, _angularFrequency, _timeStep);
         transform.position = _springPositionCurrent;
 
-        SpringMath.Lerp(ref _springRotationCurrent, ref _springRotationVelocity, _springRotationTarget, _dampingRatio, _angularFrequency, _timeStep);
-        transform.localEulerAngles = Vector3.forward * _springRotationCurrent;
+        // SpringMath.Lerp(ref _springRotationCurrent, ref _springRotationVelocity, _springRotationTarget, _dampingRatio, _angularFrequency, _timeStep);
+        // if (_springRotationCurrent > 360.0f) { _springRotationCurrent -= 360.0f; };
+        // transform.localEulerAngles = Vector3.forward * _springRotationCurrent;
     }
 
     void OnDestroy()
@@ -90,6 +92,8 @@ public class ScalableObject : MonoBehaviour
     public void SetTargetRotation(float targetRotation)
     {
         _springRotationTarget = targetRotation;
+        if (_springRotationTarget >= 360.0f) { _springRotationTarget -= 360.0f; }
+        Debug.Log(String.Format("{0} {1}", _springRotationTarget, _springRotationCurrent));
     }
 
     private Vector3 _lastMousePos;
