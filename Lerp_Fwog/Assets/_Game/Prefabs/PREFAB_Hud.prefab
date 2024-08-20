@@ -107,6 +107,7 @@ MonoBehaviour:
   _disabledColour: {r: 0.4, g: 0.37254903, b: 0.29411766, a: 1}
   rectWidth: 0
   isUsingBool: 0
+  isOnBool: 0
 --- !u!114 &5887296340028046379
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -334,6 +335,7 @@ MonoBehaviour:
   _disabledColour: {r: 153, g: 143, b: 112, a: 1}
   rectWidth: 0
   isUsingBool: 0
+  isOnBool: 0
 --- !u!114 &9105172775796591624
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -497,6 +499,7 @@ MonoBehaviour:
   _disabledColour: {r: 0.4, g: 0.37254903, b: 0.29411766, a: 1}
   rectWidth: 0
   isUsingBool: 0
+  isOnBool: 0
 --- !u!114 &2342680938773008762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -787,6 +790,7 @@ MonoBehaviour:
   _disabledColour: {r: 0.4, g: 0.37254903, b: 0.29411766, a: 1}
   rectWidth: 0
   isUsingBool: 0
+  isOnBool: 0
 --- !u!114 &8128241135349210457
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1234,6 +1238,7 @@ MonoBehaviour:
   _disabledColour: {r: 153, g: 143, b: 112, a: 1}
   rectWidth: 0
   isUsingBool: 0
+  isOnBool: 0
 --- !u!114 &1684134991412427902
 MonoBehaviour:
   m_ObjectHideFlags: 0

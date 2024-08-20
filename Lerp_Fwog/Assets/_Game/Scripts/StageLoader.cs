@@ -51,6 +51,7 @@ public class StageLoader : MonoBehaviour
 
         _activeStage = stage;
         _activeStage.SetIsActive(true);
+        _activeStage.ToggleHUD(true);
         UpdateCamera(stage.GetStageCamera());
     }
 
@@ -61,6 +62,7 @@ public class StageLoader : MonoBehaviour
         _savedSolutions[_currentSceneIndex] = _activeStage.GetCurrentSolution();
         // RAYNER: Note - Hacky way to reset the UI immediately, but leave the objects there for resetting offscreen.
         _activeStage.ResetUIOnly();
+        _activeStage.ToggleHUD(false);
         StartCoroutine(DelayedReset(_activeStage));
         IEnumerator DelayedReset(StageManager inStageToReset) {
             yield return new WaitForSeconds(1.0f);

@@ -10,6 +10,7 @@ public class StageManager : MonoBehaviour
     public UnityEvent OnStageClear = new();
 
     [SerializeField] private GameObject _levelClearCanvas = null;
+    [SerializeField] private GameObject _hudCanvas = null;
     [SerializeField] private List<TargetObject> _targetObjects = null;
     [SerializeField] private List<TargetArea> _targetAreas = null;
     [SerializeField] private List<Rigidbody2D> _dynamics = null;
@@ -50,6 +51,7 @@ public class StageManager : MonoBehaviour
     void Setup()
     {
         Debug.Assert(_levelClearCanvas != null, "_levelClearCanvas not assigned");
+        Debug.Assert(_hudCanvas != null, "_hudCanvas not assigned");
         Debug.Assert(_targetObjects != null && _targetObjects.Count > 0, "_targetObjects not assigned");
         Debug.Assert(_targetAreas != null && _targetAreas.Count > 0, "_targetAreas not assigned");
         Debug.Assert(_dynamics != null && _dynamics.Count > 0, "_dynamics not assigned");
@@ -104,6 +106,7 @@ public class StageManager : MonoBehaviour
         _levelClearCanvas.SetActive(false);
         HandlerManager.Instance.ResumeTransformations();
     }
+    public void ToggleHUD(bool inIsVisible) { _hudCanvas.SetActive(inIsVisible); }
     public void Reset()
     {
         _isSimulating = false;

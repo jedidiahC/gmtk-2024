@@ -856,6 +856,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _levelClearCanvas: {fileID: 7275134154914363455}
+  _hudCanvas: {fileID: 6313696983322971710}
   _targetObjects:
   - {fileID: 7423585728694809070}
   _targetAreas:
@@ -2012,6 +2013,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 92435082e2236724faf9101df466a105, type: 3}
+--- !u!1 &6313696983322971710 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7275134154487967848, guid: 92435082e2236724faf9101df466a105, type: 3}
+  m_PrefabInstance: {fileID: 6313696983322971709}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &7275134154914363455 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1978597855879899610, guid: 1ee76cfa3c3e02646abd23399edd2b88, type: 3}
