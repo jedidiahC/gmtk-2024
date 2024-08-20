@@ -16,6 +16,7 @@ public class GameCamera : MonoBehaviour
 
     public void LerpToCameraProperties(Camera camera)
     {
+        _camera.backgroundColor = camera.backgroundColor;
         _originPosition = transform.position;
         _originOrthoSize = camera.orthographicSize;
         _targetPosition = camera.transform.position;
@@ -29,5 +30,9 @@ public class GameCamera : MonoBehaviour
         t += Time.deltaTime;
         transform.position = Vector3.Slerp(_originPosition, _targetPosition, t * t);
         _camera.orthographicSize = Mathf.Lerp(_originOrthoSize, _targetOrthoSize, t * t);
+    }
+
+    public void SetTargetPos(Vector3 inTargetCamPos) {
+        _targetPosition = inTargetCamPos;
     }
 }
