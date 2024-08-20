@@ -10,10 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e35bd865d828b84ca9718321a9f94c7, type: 3}
-  m_Name: AUDIOCLIP_ButtonSelect
+  m_Name: AUDIOCLIP_WhooshTransition
   m_EditorClassIdentifier: 
   m_clips:
-  - {fileID: 8300000, guid: 0ce79a1f1cf4b9a4881c49ab68b3c266, type: 3}
+  - {fileID: 8300000, guid: 42a4b1ac232b40145becc4c4ccc84825, type: 3}
+  - {fileID: 8300000, guid: 338e41c40084cbc49b719086788f35f6, type: 3}
+  - {fileID: 8300000, guid: b7c0dce4e609bfd4590f1b17ed420f1f, type: 3}
+  - {fileID: 8300000, guid: 214ff9188fa42ef42a8c00f4c7c0f1d4, type: 3}
   m_volume: 1
-  m_pitchVariance: {x: 0.05, y: 0.05}
-  m_minInterval: 0.01
+  m_pitchVariance: {x: -0.03, y: 0.03}
+  m_minInterval: 0.2

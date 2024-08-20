@@ -10,10 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e35bd865d828b84ca9718321a9f94c7, type: 3}
-  m_Name: AUDIOCLIP_ButtonSelect
+  m_Name: AUDIOCLIP_StageClear
   m_EditorClassIdentifier: 
   m_clips:
-  - {fileID: 8300000, guid: 0ce79a1f1cf4b9a4881c49ab68b3c266, type: 3}
+  - {fileID: 8300000, guid: 4573586b11acf6d498912fc123580e20, type: 3}
+  - {fileID: 8300000, guid: 10c26b73a34cb2d43af4f0e194fb4ce3, type: 3}
+  - {fileID: 8300000, guid: 8d12bebb8e9272a4e8210b32622c5c59, type: 3}
   m_volume: 1
-  m_pitchVariance: {x: 0.05, y: 0.05}
-  m_minInterval: 0.01
+  m_pitchVariance: {x: -0.03, y: 0.03}
+  m_minInterval: 0.2

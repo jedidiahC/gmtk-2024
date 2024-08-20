@@ -10,10 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e35bd865d828b84ca9718321a9f94c7, type: 3}
-  m_Name: AUDIOCLIP_ButtonSelect
+  m_Name: AUDIOCLIP_Eat
   m_EditorClassIdentifier: 
   m_clips:
-  - {fileID: 8300000, guid: 0ce79a1f1cf4b9a4881c49ab68b3c266, type: 3}
+  - {fileID: 8300000, guid: b17f14bdb8a5e1e4eaf8171c71a03008, type: 3}
+  - {fileID: 8300000, guid: 68428b7787176fa418ab840d9890d4ee, type: 3}
+  - {fileID: 8300000, guid: 1966b62e3f71a8f4a83edafcbe37cbc0, type: 3}
   m_volume: 1
-  m_pitchVariance: {x: 0.05, y: 0.05}
-  m_minInterval: 0.01
+  m_pitchVariance: {x: -0.03, y: 0.03}
+  m_minInterval: 0.02
