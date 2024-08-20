@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.Events;
+using UnityEditor.Animations;
 
 public class TargetArea : MonoBehaviour
 {
@@ -30,6 +31,8 @@ public class TargetArea : MonoBehaviour
     private bool _reachedTarget = false;
     public bool ReachedTarget { get { return _reachedTarget; } }
 
+    [SerializeField] Animator _animator;
+
 
     void Awake()
     {
@@ -48,6 +51,8 @@ public class TargetArea : MonoBehaviour
 
         // Force it to be same size so text not skewed.
         Utils.SetGlobalScale(_canvasRectTransform, new Vector3(0.01f, 0.01f, 0.01f));
+
+        OnGoalReached.AddListener(delegate { _animator.SetTrigger("ate"); });
     }
 
 
@@ -86,5 +91,7 @@ public class TargetArea : MonoBehaviour
         _confettiParticleSystem.Stop();
         _confettiParticleSystem.Clear();
         _countLeftText.text = _targetGoalNum.ToString();
+
+        _animator.SetTrigger("idle");
     }
 }
