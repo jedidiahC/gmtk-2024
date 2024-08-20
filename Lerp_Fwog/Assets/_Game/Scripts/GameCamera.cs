@@ -8,14 +8,18 @@ public class GameCamera : MonoBehaviour
 {
     [SerializeField] private Camera _camera;
     [SerializeField] private Vector3 _targetPosition;
+    [SerializeField] private float _targetOrthoSize;
 
-    private Vector3 _origin;
+    private Vector3 _originPosition;
+    private float _originOrthoSize;
     float t = 0;
 
-    public void SetTargetPosition(Vector3 targetPosition)
+    public void LerpToCameraProperties(Camera camera)
     {
-        _origin = transform.position;
-        _targetPosition = targetPosition;
+        _originPosition = transform.position;
+        _originOrthoSize = camera.orthographicSize;
+        _targetPosition = camera.transform.position;
+        _targetOrthoSize = camera.orthographicSize;
         t = 0;
     }
 
@@ -23,6 +27,7 @@ public class GameCamera : MonoBehaviour
     void LateUpdate()
     {
         t += Time.deltaTime;
-        transform.position = Vector3.Slerp(_origin, _targetPosition, t * t);
+        transform.position = Vector3.Slerp(_originPosition, _targetPosition, t * t);
+        _camera.orthographicSize = Mathf.Lerp(_originOrthoSize, _targetOrthoSize, t * t);
     }
 }
