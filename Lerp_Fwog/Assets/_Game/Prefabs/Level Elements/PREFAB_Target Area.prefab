@@ -311,11 +311,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3920025689425829493}
+  - component: {fileID: -5273606049023062043}
   - component: {fileID: 5270868741668450307}
   - component: {fileID: 6366592098437318989}
   m_Layer: 0
   m_Name: PREFAB_Target Area
-  m_TagString: Untagged
+  m_TagString: TargetArea
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -340,6 +341,19 @@ Transform:
   - {fileID: 5528415099785917668}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-5273606049023062043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7559945893708619812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cdddeb8a2fd1a548a3f61b4e3370152, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneName: 
 --- !u!114 &5270868741668450307
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -8,6 +8,7 @@ using System;
 public class StageLoader : MonoBehaviour
 {
     private static StageLoader _instance = null;
+    public static string _currentStageName = null;
 
     [SerializeField] private GameCamera _globalCamera = null;
     [SerializeField] private int _currentSceneIndex = 0;
@@ -93,6 +94,7 @@ public class StageLoader : MonoBehaviour
         SceneManager.sceneLoaded += OnSceneLoaded;
         string sceneName = Constants.SCENE_LEVEL_NAMES[inSceneIndex];
         SceneManager.LoadSceneAsync(sceneName, inLoadSceneMode);
+        _currentStageName = sceneName;
     }
 
     void OnSceneLoaded(Scene inNewlyLoadedScene, LoadSceneMode inLoadSceneMode) {

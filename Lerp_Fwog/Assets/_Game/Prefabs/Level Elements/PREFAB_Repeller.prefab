@@ -98,13 +98,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 578421418250530245}
+  - component: {fileID: -205480425901686504}
   - component: {fileID: 3309827022318504606}
   - component: {fileID: 4812207594918681110}
   - component: {fileID: 7157439036816178799}
   - component: {fileID: 6598576524531514157}
   m_Layer: 0
   m_Name: PREFAB_Repeller
-  m_TagString: Untagged
+  m_TagString: DynamicObj
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -125,6 +126,19 @@ Transform:
   - {fileID: 4035741551964730993}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-205480425901686504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4197718159841234871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cdddeb8a2fd1a548a3f61b4e3370152, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneName: 
 --- !u!212 &3309827022318504606
 SpriteRenderer:
   m_ObjectHideFlags: 0

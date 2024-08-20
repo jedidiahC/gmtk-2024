@@ -5,9 +5,11 @@ public static class Constants {
     public const string TAG_TARGET_OBJ = "TargetObj";
 
     public static readonly string[] SCENE_LEVEL_NAMES = {
-        "SCENE_Level_ManipulationBasics",
-        "SCENE_Level_ShooterBasics",
-        "SCENE_Level_GravityBasics"
+        "SCENE_Level_1_1",
+        "SCENE_Level_1_2",
+        //"SCENE_Level_ManipulationBasics",
+        //"SCENE_Level_ShooterBasics",
+        //"SCENE_Level_GravityBasics"
     };
     public static readonly int NUM_LEVELS = SCENE_LEVEL_NAMES.Length;
 }

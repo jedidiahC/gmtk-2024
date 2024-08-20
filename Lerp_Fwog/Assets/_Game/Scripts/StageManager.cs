@@ -57,11 +57,14 @@ public class StageManager : MonoBehaviour
 
     void Setup()
     {
+        FillObjectsList();
+
         Debug.Assert(_levelClearCanvas != null, "_levelClearCanvas not assigned");
         Debug.Assert(_hudCanvas != null, "_hudCanvas not assigned");
         Debug.Assert(_targetObjects != null && _targetObjects.Count > 0, "_targetObjects not assigned");
         Debug.Assert(_targetAreas != null && _targetAreas.Count > 0, "_targetAreas not assigned");
-        Debug.Assert(_dynamics != null && _dynamics.Count > 0, "_dynamics not assigned");
+        // Debug.Assert(_dynamics != null && _dynamics.Count > 0, "_dynamics not assigned");
+
         _dynamicTransformVals = new List<TransformValues>(_dynamics.Count);
         _originalDynamicTransformVals = new List<TransformValues>(_dynamics.Count);
         SetSimulate(false);
@@ -73,6 +76,60 @@ public class StageManager : MonoBehaviour
         StoreOriginalTransformValues();
         StoreTransformValues();
         Reset();
+    }
+
+    private void FillObjectsList()
+    {
+        // Target Areas
+        foreach (var obj in GameObject.FindGameObjectsWithTag("TargetArea"))
+        {
+            SceneTag sceneTag = obj.GetComponent<SceneTag>();
+            if (sceneTag == null || sceneTag.sceneName != StageLoader._currentStageName) continue;
+
+            TargetArea objTargetArea = obj.GetComponent<TargetArea>();
+            if (objTargetArea == null)
+            {
+                Debug.LogError("Target Area " + obj.name + " is missing TargetArea component!");
+                continue;
+            }
+            if (!_targetAreas.Contains(objTargetArea)) _targetAreas.Add(objTargetArea);
+        }
+        // Target objects
+        foreach (var obj in GameObject.FindGameObjectsWithTag("TargetObj"))
+        {
+            SceneTag sceneTag = obj.GetComponent<SceneTag>();
+            if (sceneTag == null || sceneTag.sceneName != StageLoader._currentStageName) continue;
+
+            Rigidbody2D rb = obj.GetComponent<Rigidbody2D>();
+            TargetObject targetObj = obj.GetComponent<TargetObject>();
+            if (rb == null)
+            {
+                Debug.LogError("Target object " + obj.name + " is missing Rigidbody2D component!");
+            }
+            if (targetObj == null)
+            {
+                Debug.LogError("Target object " + obj.name + " is missing TargetObject component!");
+            }
+            if (!rb || !targetObj) continue;
+            if (!_dynamics.Contains(rb)) _dynamics.Add(rb);
+            if (!_targetObjects.Contains(targetObj)) _targetObjects.Add(targetObj);
+        }
+
+        // Dynamics
+        foreach (var obj in GameObject.FindGameObjectsWithTag("DynamicObj"))
+        {
+            SceneTag sceneTag = obj.GetComponent<SceneTag>();
+            if (sceneTag == null || sceneTag.sceneName != StageLoader._currentStageName) continue;
+
+            Rigidbody2D rb = obj.GetComponent<Rigidbody2D>();
+            if (rb == null)
+            {
+                Debug.LogError("Dynamic object " + obj.name + " is missing Rigidbody2D component!");
+                continue;
+            }
+            if (_dynamics.Contains(rb)) continue;
+            _dynamics.Add(rb);
+        }
     }
 
     public void CheckStageClear()
