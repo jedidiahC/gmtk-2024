@@ -50,7 +50,7 @@ public class FWOGBuildScript
 
             #region PlayerSettings
             PlayerSettings.companyName = "LERP_FWOG";
-            PlayerSettings.productName = "Lerp Fwog";
+            PlayerSettings.productName = "one small leap for frog";
             PlayerSettings.SetApplicationIdentifier(buildTargetGroup, "com.fwog.lerp");
             PlayerSettings.bundleVersion = VersionClass.BUNDLE_VERSION;
 			PlayerSettings.SetScriptingBackend(buildTargetGroup, ScriptingImplementation.IL2CPP);
@@ -101,6 +101,7 @@ public class FWOGBuildScript
             outputFileName = "FWOG_" + inBuildScheme.ToString() + "_v" + VersionClass.BUNDLE_VERSION + "_WebGL";
 #endif
             Debug.Log("Output File Name: " + outputFileName);
+            outputFileName = "one small leap for frog.exe";
 
             if (!Directory.Exists(buildDirectory)) Directory.CreateDirectory(buildDirectory);
             if (inBuildScheme != eBuildScheme.RELEASE) { // NOTE: Respect the settings in the Build Settings, only if it's not a release build.
