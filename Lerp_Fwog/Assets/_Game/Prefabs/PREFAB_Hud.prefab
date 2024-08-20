@@ -331,8 +331,8 @@ MonoBehaviour:
   _targetScale: 0
   rectTransform: {fileID: 0}
   _buttonComponent: {fileID: 0}
-  _enabledColour: {r: 0, g: 0, b: 0, a: 0}
-  _disabledColour: {r: 153, g: 143, b: 112, a: 1}
+  _enabledColour: {r: 1, g: 0.8, b: 0.8, a: 1}
+  _disabledColour: {r: 0.6603774, g: 0.4267533, b: 0.4267533, a: 1}
   rectWidth: 0
   isUsingBool: 0
   isOnBool: 0
@@ -1050,6 +1050,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05809e972d12d1d46a8e7166bdc5acbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _onReset: {fileID: 9105172775796591624}
   _onPlay: {fileID: 1684134991412427902}
   _onSelectTranslate: {fileID: 8128241135349210457}
   _onSelectRotate: {fileID: 5887296340028046379}
@@ -1234,8 +1235,8 @@ MonoBehaviour:
   _targetScale: 0
   rectTransform: {fileID: 0}
   _buttonComponent: {fileID: 0}
-  _enabledColour: {r: 0, g: 0, b: 0, a: 0}
-  _disabledColour: {r: 153, g: 143, b: 112, a: 1}
+  _enabledColour: {r: 0.87058824, g: 1, b: 0.8509804, a: 1}
+  _disabledColour: {r: 0.54901963, g: 0.7490196, b: 0.5850699, a: 0.5254902}
   rectWidth: 0
   isUsingBool: 0
   isOnBool: 0

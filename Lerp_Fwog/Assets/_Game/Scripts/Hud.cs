@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class Hud : MonoBehaviour
 {
+    [SerializeField] private Button _onReset = null;
     [SerializeField] private Button _onPlay = null;
     [SerializeField] private Button _onSelectTranslate = null;
     [SerializeField] private Button _onSelectRotate = null;
@@ -11,8 +12,9 @@ public class Hud : MonoBehaviour
     [SerializeField] private UIToolbarFrame _toolbar = null;
 
     private TransformConstraints _currentContraints;
-    private TransformConstraints _previousContraints;
     private eTransformType _currentActiveType;
+    private StageManager _stage;
+    public void SetStageManager(StageManager inStage) { _stage = inStage; }
 
     private void Awake()
     {
@@ -29,14 +31,38 @@ public class Hud : MonoBehaviour
     {
         HandlerManager.Instance.OnSetTarget.AddListener(OnSetTarget);
         HandlerManager.Instance.OnSwitchMode.AddListener(OnSwitchMode);
+        _onReset.onClick.AddListener(OnReset);
+        _onPlay.onClick.AddListener(OnPlay);
         _onSelectTranslate.onClick.AddListener(OnSelectTranslate);
         _onSelectRotate.onClick.AddListener(OnSelectRotate);
         _onSelectScale.onClick.AddListener(OnSelectScale);
+
+        Debug.Assert(_stage != null, "_stage is not assigned yet by StageManager!");
+    }
+
+    // TODO: Make this into event.
+    private void LateUpdate() {
+        if (_stage.GetIsSimulating()) {
+            _onPlay.interactable = false;
+            _toolbar.TogglePlayInteractable(false);
+            _onReset.interactable = true;
+            _toolbar.ToggleResetInteractable(true);
+        } else {
+            _onPlay.interactable = true;
+            _toolbar.TogglePlayInteractable(true);
+            _onReset.interactable = false;
+            _toolbar.ToggleResetInteractable(false);
+        }
     }
 
     public void OnSetTarget()
     {
-        _previousContraints = _currentContraints;
+        if (HandlerManager.Instance.GetTarget() == null) {
+            _toolbar.SetAllInUseToFalse();
+            _toolbar.ToggleTransformControls(false, false, false);
+            return;
+        }
+        
         _currentContraints = HandlerManager.Instance.GetConstraints();
         _toolbar.ToggleTransformControls(_currentContraints.AllowTranslation, _currentContraints.AllowRotation, _currentContraints.AllowScaling);
 
@@ -56,6 +82,21 @@ public class Hud : MonoBehaviour
             Debug.Log("doesn't allow scaling, changing to translate");
             HandlerManager.Instance.SwitchMode(eTransformType.Translation);
         }
+
+        if (_currentActiveType != HandlerManager.Instance.GetTransformType()) {
+            // Rayner: Note - I think should switch to the last used transform type when possible?
+            HandlerManager.Instance.SwitchMode(_currentActiveType);
+        }
+
+        _toolbar.ToggleTransformInUse(_currentActiveType);
+    }
+
+    public void OnReset() {
+        _stage.Reset();
+    }
+
+    public void OnPlay() {
+        _stage.ResumePhysics();
     }
 
     public void OnSelectTranslate()

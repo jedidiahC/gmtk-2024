@@ -44,4 +44,18 @@ public class UIToolbarFrame : MonoBehaviour
         _childIconsScripts[3].ToggleIsUsing(false);
         _childIconsScripts[4].ToggleIsUsing(false);
     }
+
+    public void TogglePlayInUse(bool inIsUsing) {
+        _childIconsScripts[0].ToggleIsUsing(inIsUsing);
+    }
+    public void TogglePlayInteractable(bool inIsInteractable) {
+        _childIconsScripts[0].ToggleIcon(inIsInteractable);
+    }
+
+    public void ToggleResetInUse(bool inIsUsing) {
+        _childIconsScripts[1].ToggleIsUsing(inIsUsing);
+    }
+    public void ToggleResetInteractable(bool inIsInteractable) {
+        _childIconsScripts[1].ToggleIcon(inIsInteractable);
+    }
 }

@@ -59,6 +59,9 @@ public class StageManager : MonoBehaviour
         _originalDynamicTransformVals = new List<TransformValues>(_dynamics.Count);
         _isSimulating = false;
 
+        Debug.Assert(_hudCanvas.GetComponent<Hud>() != null, "_hudCanvas does not have a Hud component!");
+        _hudCanvas.GetComponent<Hud>().SetStageManager(this);
+
         RegisterTargetAreas();
         StoreOriginalTransformValues();
         StoreTransformValues();
