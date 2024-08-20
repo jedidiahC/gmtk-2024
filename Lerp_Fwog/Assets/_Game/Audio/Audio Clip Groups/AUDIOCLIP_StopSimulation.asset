@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e35bd865d828b84ca9718321a9f94c7, type: 3}
-  m_Name: AUDIOCLIP_PlaySimulation
+  m_Name: AUDIOCLIP_StopSimulation
   m_EditorClassIdentifier: 
   m_clips:
-  - {fileID: 8300000, guid: 0afbcd55cb1fe80428c8ff956e4280bd, type: 3}
+  - {fileID: 8300000, guid: e710dac4708a1ae41b1555cc114823f9, type: 3}
   m_volume: 1
-  m_pitchVariance: {x: 0.9, y: 0.9}
-  m_minInterval: 0.05
+  m_pitchVariance: {x: 0.6, y: 0.6}
+  m_minInterval: 0.02

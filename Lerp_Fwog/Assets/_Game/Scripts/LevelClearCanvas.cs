@@ -9,21 +9,34 @@ public class LevelClearCanvas : MonoBehaviour
 {
     [SerializeField] private Button _nextLevelBtn = null;
     [SerializeField] private TextMeshProUGUI _scoreText = null;
-    
-    void Awake() {
+    [SerializeField] private AudioSource _audioSource = null;
+    [SerializeField] private AudioClipGroup _levelClearSound = null;
+
+    void Awake()
+    {
         Debug.Assert(_nextLevelBtn != null, "_nextLevelBtn is not assigned");
         Debug.Assert(_scoreText != null, "_scoreText is not assigned");
+        Debug.Assert(_audioSource != null, "_audioSource is not assigned!");
+        Debug.Assert(_levelClearSound != null, "_levelClearSound is not assigned!");
     }
 
-    public void SetScore(int inScore, int inHighscore) {
+    private void OnEnable()
+    {
+        _levelClearSound.PlayOneShot(_audioSource);
+    }
+
+    public void SetScore(int inScore, int inHighscore)
+    {
         _scoreText.text = "Score: " + inScore.ToString();
-        if (inHighscore > 0) { // Means there was a prev highscore.
+        if (inHighscore > 0)
+        { // Means there was a prev highscore.
             if (inScore > inHighscore) _scoreText.text += "\nNEW HIGHSCORE!";
             else _scoreText.text += "\nHighscore: " + inHighscore.ToString();
         }
     }
 
-    public void SetNextLevelButton(UnityAction inNextLevelClicked) {
+    public void SetNextLevelButton(UnityAction inNextLevelClicked)
+    {
         _nextLevelBtn.onClick.RemoveAllListeners();
         _nextLevelBtn.onClick.AddListener(inNextLevelClicked);
     }

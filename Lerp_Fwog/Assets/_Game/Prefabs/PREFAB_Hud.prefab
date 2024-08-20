@@ -1067,6 +1067,8 @@ MonoBehaviour:
   _toolbar: {fileID: 483905639731360794}
   _audioSource: {fileID: 6707545505221278896}
   _resetSound: {fileID: 11400000, guid: c40097b76680e914b9827f3261f70538, type: 2}
+  _playSound: {fileID: 11400000, guid: ff6bf6c2a1f23c4499b64d335a4874fe, type: 2}
+  _pauseSound: {fileID: 11400000, guid: b764b29be318cdf47bc40deccb54546a, type: 2}
   _changeWidget: {fileID: 11400000, guid: ee3362e5f5699b642a606a1e35cd1a22, type: 2}
 --- !u!82 &6707545505221278896
 AudioSource:

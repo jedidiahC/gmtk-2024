@@ -12,6 +12,8 @@ public class Hud : MonoBehaviour
     [SerializeField] private UIToolbarFrame _toolbar = null;
     [SerializeField] private AudioSource _audioSource = null;
     [SerializeField] private AudioClipGroup _resetSound = null;
+    [SerializeField] private AudioClipGroup _playSound = null;
+    [SerializeField] private AudioClipGroup _pauseSound = null;
     [SerializeField] private AudioClipGroup _changeWidget = null;
 
     private TransformConstraints _currentContraints;
@@ -38,6 +40,8 @@ public class Hud : MonoBehaviour
         Debug.Assert(_audioSource != null, "_audioSource is not assigned!");
         Debug.Assert(_resetSound != null, "_resetSound is not assigned!");
         Debug.Assert(_changeWidget != null, "_changeWidget is not assigned!");
+        Debug.Assert(_playSound != null, "_playSound is not assigned!");
+        Debug.Assert(_pauseSound != null, "_pauseSound is not assigned!");
 
         _toolbar.SetAllInUseToFalse();
     }
@@ -61,12 +65,14 @@ public class Hud : MonoBehaviour
     {
         if (_stage.GetIsSimulating())
         {
+            _playSound.PlayOneShot(_audioSource);
             _toolbar.TogglePlayInteractable(false, false);
             _onReset.interactable = false;
             _toolbar.ToggleResetInteractable(false);
         }
         else
         {
+            _pauseSound.PlayOneShot(_audioSource);
             _toolbar.TogglePlayInteractable(true, false);
             _onReset.interactable = true;
             _toolbar.ToggleResetInteractable(true);
