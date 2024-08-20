@@ -50,6 +50,7 @@ public class TransformHandler : MonoBehaviour
     private TransformConstraints _targetConstraints;
     [SerializeField] private LineRenderer _constraintLineRen = null;
     [SerializeField] private LineRenderer _gizmoLineRen = null;
+    [SerializeField] private SpriteRenderer _gizmoSpriteRen = null;
 
     public void SetTarget(Transform inTarget, TransformConstraints constraints = new TransformConstraints())
     {
@@ -83,31 +84,31 @@ public class TransformHandler : MonoBehaviour
 
     private void SetSprite()
     {
-        if (_spriteRen == null) return; // Might not be initialised yet.
+        _gizmoSpriteRen.transform.localScale = Vector3.one * _gizmoSpriteScale;
         if (_target == null)
         {
-            _spriteRen.sprite = null;
+            _gizmoSpriteRen.sprite = null;
             return;
         }
 
         switch (_transformType)
         {
             case eTransformType.Scale:
-                _spriteRen.sprite = _scaleSprite;
+                _gizmoSpriteRen.sprite = _scaleSprite;
                 break;
             case eTransformType.Rotation:
-                _spriteRen.sprite = _rotateSprite;
+                _gizmoSpriteRen.sprite = _rotateSprite;
                 break;
             case eTransformType.Translation:
-                _spriteRen.sprite = _translateSprite;
+                _gizmoSpriteRen.sprite = _translateSprite;
                 break;
         }
     }
 
-    private SpriteRenderer _spriteRen = null;
     [SerializeField] Sprite _scaleSprite = null;
     [SerializeField] Sprite _rotateSprite = null;
     [SerializeField] Sprite _translateSprite = null;
+    [SerializeField] private float _gizmoSpriteScale = 1.0f;
 
     public float deltaModifierT = 50.0f;
     public float deltaModifierR = 50.0f;
@@ -115,14 +116,13 @@ public class TransformHandler : MonoBehaviour
 
     void Awake()
     {
-        _spriteRen = GetComponent<SpriteRenderer>();
-        Debug.Assert(_spriteRen != null, "_spriteRen is not found!");
         Debug.Assert(_scaleSprite != null, "_scaleSprite is not assigned");
         Debug.Assert(_rotateSprite != null, "_rotateSprite is not assigned");
         Debug.Assert(_translateSprite != null, "_translateSprite is not assigned");
 
         Debug.Assert(_constraintLineRen != null, "_constraintLineRen is not assigned");
         Debug.Assert(_gizmoLineRen != null, "_gizmoLineRen is not assigned");
+        Debug.Assert(_gizmoSpriteRen != null, "_gizmoSpriteRen is not assigned");
 
         SetTarget(null);
     }
@@ -381,7 +381,7 @@ public class TransformHandler : MonoBehaviour
             Vector3 mousePosWorld = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mousePosWorld.z = 0;
 
-            if (Vector3.Distance(mousePosWorld, _target.position) < 1.0f) {
+            if (Vector3.Distance(mousePosWorld, _target.position) < (_gizmoSpriteScale + 0.25f)) {
                 _translateFrameData.savedWorldMousePosition = mousePosWorld;
                 _translateFrameData.mouseDowned = true;
                 _translateFrameData.targetPosOnMouseDown = _target.position;
