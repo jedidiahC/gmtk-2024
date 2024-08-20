@@ -14,6 +14,8 @@ public class StageLoader : MonoBehaviour
     [SerializeField] private int _currentSceneIndex = 0;
     public static int LevelIndexFromMenu = -1;
     [SerializeField] private StageManager _activeStage = null;
+    [SerializeField] private AudioSource _audioSource = null;
+    [SerializeField] private AudioClipGroup _whooshSound = null;
 
     private List<TransformValues>[] _savedSolutions;
 
@@ -32,8 +34,13 @@ public class StageLoader : MonoBehaviour
 
     private void Setup()
     {
+        Debug.Assert(_audioSource != null, "_audioSource is not assigned!");
+        Debug.Assert(_whooshSound != null, "_whooshSound is not assigned!");
+
         _savedSolutions = new List<TransformValues>[Constants.NUM_LEVELS];
+
         Debug.Assert(_globalCamera != null, "_globalCamera is not assigned!");
+
         _currentSceneIndex = 0;
         if (LevelIndexFromMenu > -1) _currentSceneIndex = LevelIndexFromMenu;
         // RAYNER TODO: Set the Camera to that position for this initial load.
@@ -115,5 +122,6 @@ public class StageLoader : MonoBehaviour
         }
 
         SceneManager.sceneLoaded -= OnSceneLoaded;
+        _whooshSound.PlayOneShot(_audioSource);
     }
 }
