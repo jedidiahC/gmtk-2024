@@ -153,7 +153,7 @@ public class StageManager : MonoBehaviour
             TargetArea curTargetArea = _targetAreas[i];
             if (curTargetArea.TargetType == TargetArea.eTargetType.Optional)
             {
-                _score += 100;
+                if (curTargetArea.ReachedTarget) _score += 100;
             }
             else
             {

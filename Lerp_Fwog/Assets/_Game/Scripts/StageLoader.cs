@@ -12,6 +12,7 @@ public class StageLoader : MonoBehaviour
 
     [SerializeField] private GameCamera _globalCamera = null;
     [SerializeField] private int _currentSceneIndex = 0;
+    public static int LevelIndexFromMenu = -1;
     [SerializeField] private StageManager _activeStage = null;
 
     private List<TransformValues>[] _savedSolutions;
@@ -31,6 +32,8 @@ public class StageLoader : MonoBehaviour
         _savedSolutions = new List<TransformValues>[Constants.NUM_LEVELS];
         Debug.Assert(_globalCamera != null, "_globalCamera is not assigned!");
         _currentSceneIndex = 0;
+        if (LevelIndexFromMenu > -1) _currentSceneIndex = LevelIndexFromMenu;
+        // RAYNER TODO: Set the Camera to that position for this initial load.
         LoadLevelScene(_currentSceneIndex, LoadSceneMode.Additive);
     }
 
