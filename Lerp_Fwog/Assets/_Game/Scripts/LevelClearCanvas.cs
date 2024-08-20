@@ -15,8 +15,12 @@ public class LevelClearCanvas : MonoBehaviour
         Debug.Assert(_scoreText != null, "_scoreText is not assigned");
     }
 
-    public void SetScore(int inScore) {
+    public void SetScore(int inScore, int inHighscore) {
         _scoreText.text = "Score: " + inScore.ToString();
+        if (inHighscore > 0) { // Means there was a prev highscore.
+            if (inScore > inHighscore) _scoreText.text += "\nNEW HIGHSCORE!";
+            else _scoreText.text += "\nHighscore: " + inHighscore.ToString();
+        }
     }
 
     public void SetNextLevelButton(UnityAction inNextLevelClicked) {

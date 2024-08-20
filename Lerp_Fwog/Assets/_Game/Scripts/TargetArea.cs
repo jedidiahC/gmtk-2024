@@ -48,6 +48,7 @@ public class TargetArea : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (_reachedTarget) return;
         if (other.gameObject.tag == Constants.TAG_TARGET_OBJ)
         {
             _targetCount++;

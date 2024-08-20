@@ -172,14 +172,23 @@ public class StageManager : MonoBehaviour
     [ContextMenu("Complete level")]
     public void CompleteLevel()
     {
-        ShowLevelClearText();
+        int levelIndex = Constants.LEVEL_INDEX_FROM_NAME(gameObject.scene.name);
+        Debug.Assert(levelIndex >= 0, "Level Index not found!");
+        int[] scores = SaveUtils.LoadScores();
+        int oldHighscore = scores[levelIndex];
+        if (_score > oldHighscore) {
+            scores[levelIndex] = _score;
+            SaveUtils.SaveScores(scores);
+        }
+
+        ShowLevelClearText(oldHighscore);
         OnStageClear.Invoke();
     }
 
-    public void ShowLevelClearText()
+    public void ShowLevelClearText(int inHighscore)
     {
         _levelClearCanvas.gameObject.SetActive(true);
-        _levelClearCanvas.SetScore(_score);
+        _levelClearCanvas.SetScore(_score, inHighscore);
     }
 
     public void ResetUIOnly()

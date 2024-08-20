@@ -12,4 +12,12 @@ public static class Constants {
         //"SCENE_Level_GravityBasics"
     };
     public static readonly int NUM_LEVELS = SCENE_LEVEL_NAMES.Length;
+    public static int LEVEL_INDEX_FROM_NAME(string inSceneName) {
+        for (int i = 0; i < NUM_LEVELS; i++) {
+            if (SCENE_LEVEL_NAMES[i] == inSceneName) {
+                return i;
+            }
+        }
+        return -1;
+    }
 }
