@@ -22,6 +22,7 @@ public class ScalableObject : MonoBehaviour
     [SerializeField] private float _dampingRatio = 0.5f, _angularFrequency = 0.1f, _timeStep = 1.0f;
     [SerializeField] private Vector3 _springPositionCurrent, _springPositionVelocity, _springPositionTarget;
     [SerializeField] private float _springRotationCurrent, _springRotationVelocity, _springRotationTarget;
+    private Vector3 _originalPosition;
 
     void Awake()
     {
@@ -35,6 +36,7 @@ public class ScalableObject : MonoBehaviour
 
         _spriteColor = _spriteRenderer.color;
 
+        _originalPosition = transform.position;
         _springPositionCurrent = transform.position;
         _springPositionTarget = _springPositionCurrent;
 
@@ -80,6 +82,13 @@ public class ScalableObject : MonoBehaviour
     void OnDestroy()
     {
         if (HandlerManager.Instance != null) HandlerManager.Instance.OnPauseTransformations.RemoveListener(ExitSelectedState);
+    }
+
+    public void ResetSpringValues()
+    {
+        _springPositionTarget = _originalPosition;
+        _springPositionCurrent = _originalPosition;
+        _springPositionVelocity = Vector3.zero;
     }
 
     public void SetTargetPosition(Vector3 targetPosition)

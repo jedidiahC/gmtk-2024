@@ -14,6 +14,7 @@ public class StageManager : MonoBehaviour
     [SerializeField] private List<TargetObject> _targetObjects = null;
     [SerializeField] private List<TargetArea> _targetAreas = null;
     [SerializeField] private List<Rigidbody2D> _dynamics = null;
+    private List<ScalableObject> _dynamicsSOScript = null;
     [SerializeField] private Camera _camera = null;
 
     public Camera GetStageCamera() { return _camera; }
@@ -69,6 +70,16 @@ public class StageManager : MonoBehaviour
         Debug.Assert(_dynamics != null && _dynamics.Count > 0, "_dynamics not assigned");
 
         _levelClearCanvas.SetNextLevelButton(() => { OnNextStage.Invoke(); });
+
+        // Yumi
+        _dynamicsSOScript = new List<ScalableObject>();
+        foreach (var dyno in _dynamics)
+        {
+            ScalableObject so = dyno.GetComponent<ScalableObject>();
+            if (!so) continue;
+            _dynamicsSOScript.Add(so);
+        }
+        //
 
         _dynamicTransformVals = new List<TransformValues>(_dynamics.Count);
         _originalDynamicTransformVals = new List<TransformValues>(_dynamics.Count);
@@ -254,6 +265,11 @@ public class StageManager : MonoBehaviour
             _targetAreas[i].ResetTarget();
         }
 
+        // Yumi
+        foreach (ScalableObject so in _dynamicsSOScript)
+        {
+            so.ResetSpringValues();
+        }
     }
 
     public void ResumePhysics()
