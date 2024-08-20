@@ -147,7 +147,7 @@ public class ScalableObject : MonoBehaviour
     {
         if (HandlerManager.Instance == null) return;
         if (!HandlerManager.Instance.AllowTransformations) return;
-        _spriteRenderer.color = Color.magenta;
+        _spriteRenderer.color = Color.Lerp(_spriteColor, new Color(1.0f, 0.0f, 1.0f), 0.25f);
 
         if (!_isMouseOver)
         {
