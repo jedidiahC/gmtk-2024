@@ -105,6 +105,11 @@ public class TransformHandler : MonoBehaviour
         SetTarget(null);
     }
 
+    private bool InputUp() { return Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow); }
+    private bool InputDown() { return Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow); }
+    private bool InputLeft() { return Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow); }
+    private bool InputRight() { return Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow); }
+
     void Update()
     {
         if (_target != null)
@@ -136,19 +141,19 @@ public class TransformHandler : MonoBehaviour
         if (_targetConstraints.IsUniformScaling)
         {
             Vector3 scaleDelta = Vector3.one * delta;
-            if (Input.GetKey(KeyCode.W))
+            if (InputUp())
             {
                 targetLocalScale += scaleDelta;
             }
-            if (Input.GetKey(KeyCode.S))
+            if (InputDown())
             {
                 targetLocalScale -= scaleDelta;
             }
-            if (Input.GetKey(KeyCode.D))
+            if (InputRight())
             {
                 targetLocalScale += scaleDelta;
             }
-            if (Input.GetKey(KeyCode.A))
+            if (InputLeft())
             {
                 targetLocalScale -= scaleDelta;
             }
@@ -156,19 +161,19 @@ public class TransformHandler : MonoBehaviour
         else
         {
 
-            if (Input.GetKey(KeyCode.W))
+            if (InputUp())
             {
                 targetLocalScale.y += delta;
             }
-            if (Input.GetKey(KeyCode.S))
+            if (InputDown())
             {
                 targetLocalScale.y -= delta;
             }
-            if (Input.GetKey(KeyCode.D))
+            if (InputRight())
             {
                 targetLocalScale.x += delta;
             }
-            if (Input.GetKey(KeyCode.A))
+            if (InputLeft())
             {
                 targetLocalScale.x -= delta;
             }
@@ -191,19 +196,19 @@ public class TransformHandler : MonoBehaviour
 
         Vector3 targetLocalEuler = _target.localEulerAngles;
         float delta = 36.0f * Time.deltaTime;
-        if (Input.GetKey(KeyCode.W))
+        if (InputUp())
         {
             targetLocalEuler.z -= delta;
         }
-        if (Input.GetKey(KeyCode.S))
+        if (InputDown())
         {
             targetLocalEuler.z += delta;
         }
-        if (Input.GetKey(KeyCode.D))
+        if (InputRight())
         {
             targetLocalEuler.z -= delta;
         }
-        if (Input.GetKey(KeyCode.A))
+        if (InputLeft())
         {
             targetLocalEuler.z += delta;
         }
