@@ -19,8 +19,10 @@ public class StageLoader : MonoBehaviour
 
     public static StageLoader GetInstance() { return _instance; }
 
-    void Awake() {
-        if (_instance == null) {
+    void Awake()
+    {
+        if (_instance == null)
+        {
             _instance = this;
             Setup();
         }
@@ -28,7 +30,8 @@ public class StageLoader : MonoBehaviour
     }
     void OnDestroy() { if (_instance == this) _instance = null; }
 
-    private void Setup() {
+    private void Setup()
+    {
         _savedSolutions = new List<TransformValues>[Constants.NUM_LEVELS];
         Debug.Assert(_globalCamera != null, "_globalCamera is not assigned!");
         _currentSceneIndex = 0;
@@ -38,8 +41,10 @@ public class StageLoader : MonoBehaviour
     }
 
     [ContextMenu("Load next scene")]
-    public void LoadNextScene() {
-        if (_currentSceneIndex >= Constants.NUM_LEVELS - 1) {
+    public void LoadNextScene()
+    {
+        if (_currentSceneIndex >= Constants.NUM_LEVELS - 1)
+        {
             // TODO: You can insert complete all levels here.
             return;
         }
@@ -50,7 +55,8 @@ public class StageLoader : MonoBehaviour
         LoadLevelScene(_currentSceneIndex, LoadSceneMode.Additive);
     }
 
-    public void SetStageActive(StageManager stage) {
+    public void SetStageActive(StageManager stage)
+    {
         _activeStage = stage;
         _activeStage.SetIsActive(true);
         _activeStage.ToggleHUD(true);
@@ -59,14 +65,16 @@ public class StageLoader : MonoBehaviour
 
     public StageManager GetActiveStage() { return _activeStage; }
 
-    private void UnloadActiveStage() {
+    private void UnloadActiveStage()
+    {
         Debug.Log("Disabling Scene: " + Constants.SCENE_LEVEL_NAMES[_currentSceneIndex]);
         _savedSolutions[_currentSceneIndex] = _activeStage.GetCurrentSolution();
         // RAYNER: Note - Hacky way to reset the UI immediately, but leave the objects there for resetting offscreen.
         _activeStage.ResetUIOnly();
         _activeStage.ToggleHUD(false);
         StartCoroutine(DelayedReset(_activeStage));
-        IEnumerator DelayedReset(StageManager inStageToReset) {
+        IEnumerator DelayedReset(StageManager inStageToReset)
+        {
             yield return new WaitForSeconds(2.0f);
             SceneManager.UnloadSceneAsync(inStageToReset.gameObject.scene.name);
             Debug.Log("Unloaded Stage: " + inStageToReset.gameObject.scene.name);
@@ -75,20 +83,19 @@ public class StageLoader : MonoBehaviour
     }
 
     // We disable the stage's camera and move the global camera to the new position.
-    private void UpdateCamera(Camera newStageCamera) {
-        _globalCamera.SetTargetPosition(newStageCamera.transform.position);
+    private void UpdateCamera(Camera newStageCamera)
+    {
+        _globalCamera.LerpToCameraProperties(newStageCamera);
         newStageCamera.gameObject.SetActive(false);
     }
 
-
-
-
-
-    private void LoadLevelScene(int inSceneIndex, LoadSceneMode inLoadSceneMode) {
+    private void LoadLevelScene(int inSceneIndex, LoadSceneMode inLoadSceneMode)
+    {
         // RAYNER: Note, we want to disable all eventSystems before loading the scenes.
         //         This will completely avoid the warnings.
         EventSystem[] eventSystems = FindObjectsOfType<EventSystem>();
-        for (int i = 0; i < eventSystems.Length; i++) {
+        for (int i = 0; i < eventSystems.Length; i++)
+        {
             eventSystems[i].gameObject.SetActive(false);
         }
 
@@ -98,9 +105,11 @@ public class StageLoader : MonoBehaviour
         _currentStageName = sceneName;
     }
 
-    void OnSceneLoaded(Scene inNewlyLoadedScene, LoadSceneMode inLoadSceneMode) {
+    void OnSceneLoaded(Scene inNewlyLoadedScene, LoadSceneMode inLoadSceneMode)
+    {
         EventSystem[] eventSystems = FindObjectsOfType<EventSystem>();
-        for (int i = 1; i < eventSystems.Length; i++) {
+        for (int i = 1; i < eventSystems.Length; i++)
+        {
             // Only enable the first one.
             eventSystems[i].gameObject.SetActive(i == 0);
         }
