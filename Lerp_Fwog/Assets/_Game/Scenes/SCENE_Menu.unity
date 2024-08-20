@@ -2389,7 +2389,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.2}
   m_AnchorMax: {x: 0.5, y: 0.2}
-  m_AnchoredPosition: {x: 0, y: -41.999985}
+  m_AnchoredPosition: {x: 0, y: -41.99999}
   m_SizeDelta: {x: 420, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1368532971
@@ -2478,6 +2478,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5532239671264319126, guid: cb5ca551751914025b38bb0a43768072, type: 3}
+      propertyPath: bgmClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 63cdf632b8ac42547817000f2efd3e79, type: 3}
     - target: {fileID: 8369331510759295308, guid: cb5ca551751914025b38bb0a43768072, type: 3}
       propertyPath: m_Name
       value: PREFAB_Audio Manager
