@@ -63,6 +63,7 @@ public class ScalableObject : MonoBehaviour
     private bool _mouseWasDown = false;
     private void OnMouseDown()
     {
+        if (HandlerManager.Instance == null) return;
         if (!HandlerManager.Instance.AllowTransformations) return;
         _lastMousePos = Input.mousePosition;
 
@@ -80,6 +81,7 @@ public class ScalableObject : MonoBehaviour
         {
             OnStopInteract.Invoke();
             _mouseWasDown = false;
+            if (HandlerManager.Instance == null) return;
             if (!HandlerManager.Instance.AllowTransformations) return;
 
             if (HandlerManager.Instance.GetTarget() == transform)
@@ -96,6 +98,7 @@ public class ScalableObject : MonoBehaviour
 
     private void OnMouseEnter()
     {
+        if (HandlerManager.Instance == null) return;
         if (!HandlerManager.Instance.AllowTransformations) return;
         _spriteRenderer.color = Color.magenta;
 
@@ -108,6 +111,7 @@ public class ScalableObject : MonoBehaviour
 
     private void OnMouseExit()
     {
+        if (HandlerManager.Instance == null) return;
         if (!HandlerManager.Instance.AllowTransformations) return;
         ExitSelectedState();
     }

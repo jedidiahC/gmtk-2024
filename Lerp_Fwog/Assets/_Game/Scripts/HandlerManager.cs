@@ -50,6 +50,8 @@ public class HandlerManager : MonoBehaviour
         Debug.Assert(_transformHandler != null, "_transformHandler not assigned");
         SetTarget(null);
         PauseTransformations();
+
+        DontDestroyOnLoad(gameObject);
     }
 
     public void SetTarget(Transform inTarget, TransformConstraints transformConstraints = new TransformConstraints())

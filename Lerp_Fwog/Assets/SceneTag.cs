@@ -5,6 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class SceneTag : MonoBehaviour
 {
-    public string sceneName;
-    public int isAdded { get; set; }
+    private string _sceneName;
+    public string sceneName { get { return _sceneName; } set { _sceneName = value; } }
 }

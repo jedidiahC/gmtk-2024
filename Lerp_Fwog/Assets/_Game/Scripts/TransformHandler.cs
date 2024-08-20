@@ -136,7 +136,7 @@ public class TransformHandler : MonoBehaviour
         if (!_targetConstraints.AllowScaling) { return; }
 
         Vector3 targetLocalScale = _target.localScale;
-        float delta = 1.5f * Time.deltaTime;
+        float delta = 5f * Time.deltaTime;
 
         if (_targetConstraints.IsUniformScaling)
         {
@@ -195,7 +195,7 @@ public class TransformHandler : MonoBehaviour
         if (!_targetConstraints.AllowRotation) { return; }
 
         Vector3 targetLocalEuler = _target.localEulerAngles;
-        float delta = 36.0f * Time.deltaTime;
+        float delta = 100f * Time.deltaTime;
         if (InputUp())
         {
             targetLocalEuler.z -= delta;
@@ -221,7 +221,7 @@ public class TransformHandler : MonoBehaviour
         if (!_targetConstraints.AllowTranslation) { return; }
 
         Vector3 targetPosition = _target.position;
-        float delta = 1.5f * Time.deltaTime;
+        float delta = 5f * Time.deltaTime;
 
         if (InputUp())
         {

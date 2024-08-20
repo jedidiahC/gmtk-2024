@@ -64,9 +64,8 @@ public class StageManager : MonoBehaviour
         Debug.Assert(_hudCanvas != null, "_hudCanvas not assigned");
         Debug.Assert(_targetObjects != null && _targetObjects.Count > 0, "_targetObjects not assigned");
         Debug.Assert(_targetAreas != null && _targetAreas.Count > 0, "_targetAreas not assigned");
-        // Debug.Assert(_dynamics != null && _dynamics.Count > 0, "_dynamics not assigned");
+        Debug.Assert(_dynamics != null && _dynamics.Count > 0, "_dynamics not assigned");
 
-        Debug.Assert(_levelClearCanvas != null, "_levelClearCanvas not assigned");
         _levelClearCanvas.SetNextLevelButton(() => {OnNextStage.Invoke();});
 
         _dynamicTransformVals = new List<TransformValues>(_dynamics.Count);
@@ -84,13 +83,16 @@ public class StageManager : MonoBehaviour
 
     private void FillObjectsList()
     {
+        string stageName = "";
+        if (StageLoader.GetInstance() == null) stageName = gameObject.scene.name;
+        else stageName = StageLoader._currentStageName;
         // Target Areas
         foreach (var obj in GameObject.FindGameObjectsWithTag("TargetArea"))
         {
             SceneTag sceneTag = obj.GetComponent<SceneTag>();
-            if (sceneTag == null || sceneTag.sceneName != StageLoader._currentStageName) continue;
-
-            sceneTag.sceneName = gameObject.scene.name;
+            if (sceneTag == null) continue;
+            if (string.IsNullOrEmpty(sceneTag.sceneName)) sceneTag.sceneName = gameObject.scene.name;
+            if (sceneTag.sceneName != stageName) continue;
 
             TargetArea objTargetArea = obj.GetComponent<TargetArea>();
             if (objTargetArea == null)
@@ -104,8 +106,9 @@ public class StageManager : MonoBehaviour
         foreach (var obj in GameObject.FindGameObjectsWithTag("TargetObj"))
         {
             SceneTag sceneTag = obj.GetComponent<SceneTag>();
-            if (sceneTag == null || sceneTag.sceneName != StageLoader._currentStageName) continue;
-            sceneTag.sceneName = gameObject.scene.name;
+            if (sceneTag == null) continue;
+            if (string.IsNullOrEmpty(sceneTag.sceneName)) sceneTag.sceneName = gameObject.scene.name;
+            if (sceneTag.sceneName != stageName) continue;
 
             Rigidbody2D rb = obj.GetComponent<Rigidbody2D>();
             TargetObject targetObj = obj.GetComponent<TargetObject>();
@@ -126,8 +129,9 @@ public class StageManager : MonoBehaviour
         foreach (var obj in GameObject.FindGameObjectsWithTag("DynamicObj"))
         {
             SceneTag sceneTag = obj.GetComponent<SceneTag>();
-            if (sceneTag == null || sceneTag.sceneName != StageLoader._currentStageName) continue;
-            sceneTag.sceneName = gameObject.scene.name;
+            if (sceneTag == null) continue;
+            if (string.IsNullOrEmpty(sceneTag.sceneName)) sceneTag.sceneName = gameObject.scene.name;
+            if (sceneTag.sceneName != stageName) continue;
 
             Rigidbody2D rb = obj.GetComponent<Rigidbody2D>();
             if (rb == null)

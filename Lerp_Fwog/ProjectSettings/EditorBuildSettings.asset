@@ -12,18 +12,9 @@ EditorBuildSettings:
     path: Assets/_Game/Scenes/SCENE_Game.unity
     guid: 8fea9e7591c444b60883cd2aa8f2383e
   - enabled: 1
-    path: Assets/_Game/Scenes/SCENE_Level_ManipulationBasics.unity
-    guid: 70eb77521642e9249ba6941dc5e09107
-  - enabled: 1
-    path: Assets/_Game/Scenes/SCENE_Level_ShooterBasics.unity
-    guid: bcfb1684b10e24444828cb5f2d828541
-  - enabled: 1
-    path: Assets/_Game/Scenes/SCENE_Level_GravityBasics.unity
-    guid: b2fee71245c8a3f45853601e5f633a02
-  - enabled: 1
-    path: Assets/_Game/Scenes/Puzzle Levels/SCENE_Level_1_1.unity
+    path: Assets/_Game/Scenes/SCENE_Level_1_1.unity
     guid: 8028b81164f47254b9881b775ff5f1d9
   - enabled: 1
-    path: Assets/_Game/Scenes/Puzzle Levels/SCENE_Level_1_2.unity
-    guid: da53665e0fa0ed248a4b2461ac531ac8
+    path: Assets/_Game/Scenes/SCENE_Level_1_2.unity
+    guid: fbdb91a8ac7041345a6f19d0030c4879
   m_configObjects: {}

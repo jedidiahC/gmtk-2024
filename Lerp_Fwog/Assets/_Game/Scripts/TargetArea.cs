@@ -55,10 +55,8 @@ public class TargetArea : MonoBehaviour
             _flashParticleSystem.Clear();
             _flashParticleSystem.Play();
 
-            if (_targetType == eTargetType.Mandatory) {
-                TargetObject targetObj = other.gameObject.GetComponent<TargetObject>();
-                targetObj.Consume();
-            }
+            TargetObject targetObj = other.gameObject.GetComponent<TargetObject>();
+            targetObj.Consume();
 
             _countLeftText.text = Mathf.Max(_targetGoalNum - _targetCount, 0).ToString();
             if (_targetCount >= _targetGoalNum)
