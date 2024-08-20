@@ -250,6 +250,15 @@ public class TransformHandler : MonoBehaviour
             targetPosition.x -= delta;
         }
 
+        // TODO: Mouse checks here.
+        if (Input.GetMouseButton(0)) {
+            Vector3 mousePos = Input.mousePosition;
+            Vector3 mousePosWorld = Camera.main.ScreenToWorldPoint(mousePos);
+            mousePosWorld.z = 0;
+            targetPosition += mousePosWorld - _target.position;
+            // Debug.Log("mousePosWorld: " + mousePosWorld + ", deltaPostion: " + (mousePosWorld - _target.position));;
+        }
+
         Vector3 originalPos = _targetConstraints.OriginalTransform.position;
 
         if (targetPosition.x < originalPos.x - _targetConstraints.MinTranslationOffset.x || targetPosition.x > originalPos.x + _targetConstraints.MaxTranslationOffset.x ||
@@ -259,7 +268,6 @@ public class TransformHandler : MonoBehaviour
             return;
         }
 
-        // _target.position = targetPosition;
         _targetScript.SetTargetPosition(targetPosition);
     }
 }
