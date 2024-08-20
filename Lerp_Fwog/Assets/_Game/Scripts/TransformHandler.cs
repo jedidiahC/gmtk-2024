@@ -223,19 +223,19 @@ public class TransformHandler : MonoBehaviour
         Vector3 targetPosition = _target.position;
         float delta = 1.5f * Time.deltaTime;
 
-        if (Input.GetKey(KeyCode.W))
+        if (InputUp())
         {
             targetPosition.y += delta;
         }
-        if (Input.GetKey(KeyCode.S))
+        if (InputDown())
         {
             targetPosition.y -= delta;
         }
-        if (Input.GetKey(KeyCode.D))
+        if (InputRight())
         {
             targetPosition.x += delta;
         }
-        if (Input.GetKey(KeyCode.A))
+        if (InputLeft())
         {
             targetPosition.x -= delta;
         }
