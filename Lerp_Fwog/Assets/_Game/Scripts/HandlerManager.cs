@@ -13,6 +13,9 @@ public class HandlerManager : MonoBehaviour
     public UnityEvent<eTransformType> OnSwitchMode = new();
     public UnityEvent OnSetTarget = new();
 
+    [SerializeField] private AudioSource _audioSource = null;
+    [SerializeField] private AudioClipGroup _selectSound = null;
+
     private bool _allowTransformations = true;
 
     public bool AllowTransformations { get { return _allowTransformations; } }
@@ -48,6 +51,8 @@ public class HandlerManager : MonoBehaviour
     void Setup()
     {
         Debug.Assert(_transformHandler != null, "_transformHandler not assigned");
+        Debug.Assert(_audioSource != null, "_audioSource is not assigned!");
+        Debug.Assert(_selectSound != null, "_selectSound is not assigned!");
         SetTarget(null);
         PauseTransformations();
 
@@ -57,6 +62,12 @@ public class HandlerManager : MonoBehaviour
     public void SetTarget(Transform inTarget, TransformConstraints transformConstraints = new TransformConstraints())
     {
         if (!_allowTransformations) return;
+
+        if (inTarget != null)
+        {
+            _selectSound.PlayOneShot(_audioSource);
+        }
+
         _transformHandler.SetTarget(inTarget, transformConstraints);
         OnSetTarget.Invoke();
     }

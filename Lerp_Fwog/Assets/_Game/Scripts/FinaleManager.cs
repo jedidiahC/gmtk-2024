@@ -65,9 +65,11 @@ public class FinaleManager : MonoBehaviour
         StopAllCoroutines();
         _finaleCanvasGroup.alpha = 0.0f;
         _showEnd = false;
+        _astroFrog.StopFireParticles();
     }
 
     IEnumerator ShowEndRoutine() {
+        _astroFrog.StartFireParticles();
         while (_finaleCanvasGroup.alpha < 1.0f) {
             _finaleCanvasGroup.alpha += Time.deltaTime * 0.25f;
             yield return null;
