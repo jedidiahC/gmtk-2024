@@ -48,6 +48,7 @@ public class TransformHandler : MonoBehaviour
     private Transform _target = null;
     private ScalableObject _targetScript = null;
     private TransformConstraints _targetConstraints;
+    private LineRenderer _lineRen = null;
 
     public void SetTarget(Transform inTarget, TransformConstraints constraints = new TransformConstraints())
     {
@@ -59,6 +60,8 @@ public class TransformHandler : MonoBehaviour
         }
         _targetConstraints = constraints;
         SetSprite();
+        if (inTarget == null) HideConstraints();
+        else DrawConstraints();
     }
 
     public Transform target { get { return _target; } }
@@ -70,6 +73,8 @@ public class TransformHandler : MonoBehaviour
     {
         _transformType = inTransformType;
         SetSprite();
+        HideConstraints();
+        DrawConstraints();
     }
 
     private void SetSprite()
@@ -112,6 +117,9 @@ public class TransformHandler : MonoBehaviour
         Debug.Assert(_rotateSprite != null, "_rotateSprite is not assigned");
         Debug.Assert(_translateSprite != null, "_translateSprite is not assigned");
 
+        _lineRen = GetComponent<LineRenderer>();
+        Debug.Assert(_lineRen != null, "_lineRedn is not found!");
+
         SetTarget(null);
     }
 
@@ -139,6 +147,38 @@ public class TransformHandler : MonoBehaviour
                     break;
             }
         }
+    }
+
+        
+    private void DrawConstraints() {
+        switch (_transformType)
+        {
+            case eTransformType.Scale:
+                break;
+            case eTransformType.Rotation:
+                break;
+            case eTransformType.Translation:
+                {
+                    Vector3 btmLeft = _targetConstraints.OriginalTransform.position - _targetConstraints.MinTranslationOffset;
+                    Vector3 topRight = _targetConstraints.OriginalTransform.position + _targetConstraints.MaxTranslationOffset;
+
+                    _lineRen.loop = true;
+                    _lineRen.positionCount = 4;
+                    _lineRen.SetPositions(new Vector3[] {
+                        new Vector3(btmLeft.x, btmLeft.y, 0f),
+                        new Vector3(btmLeft.x, topRight.y, 0f),
+                        new Vector3(topRight.x, topRight.y, 0f),
+                        new Vector3(topRight.x, btmLeft.y, 0f)
+                    });
+
+                    break;
+                }
+        }
+    }
+
+    private void HideConstraints() {
+        _lineRen.positionCount = 0;
+        _lineRen.SetPositions(new Vector3[0]);
     }
 
     private void HandleScaleInput()
