@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e35bd865d828b84ca9718321a9f94c7, type: 3}
+  m_Name: AUDIOCLIP_ChangeWidget
+  m_EditorClassIdentifier: 
+  m_clips:
+  - {fileID: 8300000, guid: 45e4b621a493d934f82993ffd711267a, type: 3}
+  - {fileID: 8300000, guid: c27d4419227db7d4bada1fc28a5fc57a, type: 3}
+  - {fileID: 8300000, guid: 6d3a114d48c7fb34d847e29e01e76e07, type: 3}
+  - {fileID: 8300000, guid: d0279c071aefbe54793be25dfc004453, type: 3}
+  - {fileID: 8300000, guid: 9bdbe595cbe09054eb82c7d3c06c4666, type: 3}
+  m_volume: 1
+  m_pitchVariance: {x: -0.03, y: 0.03}
+  m_minInterval: 0.05
