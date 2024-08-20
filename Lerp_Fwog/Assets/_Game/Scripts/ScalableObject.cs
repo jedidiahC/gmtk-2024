@@ -20,7 +20,7 @@ public class ScalableObject : MonoBehaviour
 
     [SerializeField] private float _dampingRatio = 0.5f, _angularFrequency = 0.1f, _timeStep = 1.0f;
     private Vector3 _springPositionCurrent, _springPositionVelocity, _springPositionTarget;
-    private Vector3 _springRotationCurrent, _springRotationVelocity, _springRotationTarget;
+    private float _springRotationCurrent, _springRotationVelocity, _springRotationTarget;
 
     void Awake()
     {
@@ -67,6 +67,9 @@ public class ScalableObject : MonoBehaviour
         
         SpringMath.Lerp(ref _springPositionCurrent, ref _springPositionVelocity, _springPositionTarget, _dampingRatio, _angularFrequency, _timeStep);
         transform.position = _springPositionCurrent;
+
+        SpringMath.Lerp(ref _springRotationCurrent, ref _springRotationVelocity, _springRotationTarget, _dampingRatio, _angularFrequency, _timeStep);
+        transform.localEulerAngles = Vector3.forward * _springRotationCurrent;
     }
 
     void OnDestroy()
@@ -79,6 +82,11 @@ public class ScalableObject : MonoBehaviour
         _springPositionTarget.x = targetPosition.x;
         _springPositionTarget.y = targetPosition.y;
         // _springPositionTarget.z = targetPosition.z;
+    }
+
+    public void SetTargetRotation(float targetRotation)
+    {
+        _springRotationTarget = targetRotation;
     }
 
     private Vector3 _lastMousePos;

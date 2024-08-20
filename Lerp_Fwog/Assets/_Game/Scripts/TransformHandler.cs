@@ -321,13 +321,15 @@ public class TransformHandler : MonoBehaviour
             _rotateFrameData.mouseDowned = false;
         }
 
-        const float DAMPING_RATIO = 0.5f;
-        const float ANGULAR_FREQUENCY = 0.1f;
-        const float TIME_STEP = 1.0f;
-        SpringMath.Lerp(ref _rotateFrameData.currentAngle, ref _rotateFrameData.velocityAngle, _rotateFrameData.targetAngle, DAMPING_RATIO, ANGULAR_FREQUENCY, TIME_STEP);
-        targetLocalEuler = Vector3.forward * (_rotateFrameData.angleRef + _rotateFrameData.currentAngle);
+        // const float DAMPING_RATIO = 0.5f;
+        // const float ANGULAR_FREQUENCY = 0.1f;
+        // const float TIME_STEP = 1.0f;
+        // SpringMath.Lerp(ref _rotateFrameData.currentAngle, ref _rotateFrameData.velocityAngle, _rotateFrameData.targetAngle, DAMPING_RATIO, ANGULAR_FREQUENCY, TIME_STEP);
+        // targetLocalEuler = Vector3.forward * (_rotateFrameData.angleRef + _rotateFrameData.currentAngle);
 
-        _target.localEulerAngles = targetLocalEuler;
+        // _target.localEulerAngles = targetLocalEuler;
+
+        _targetScript.SetTargetRotation(_rotateFrameData.angleRef + _rotateFrameData.targetAngle);
     }
 
     private void HandleTranslateInput()
