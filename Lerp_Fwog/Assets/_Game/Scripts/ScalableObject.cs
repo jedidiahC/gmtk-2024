@@ -18,6 +18,10 @@ public class ScalableObject : MonoBehaviour
 
     private bool _isMouseOver = false;
 
+    [SerializeField] private float _dampingRatio = 0.5f, _angularFrequency = 0.1f, _timeStep = 1.0f;
+    private Vector3 _springPositionCurrent, _springPositionVelocity, _springPositionTarget;
+    private Vector3 _springRotationCurrent, _springRotationVelocity, _springRotationTarget;
+
     void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
@@ -29,6 +33,9 @@ public class ScalableObject : MonoBehaviour
         Debug.Assert(IsPositionWithinConstraints(), "check the position bro make sure within the constraints " + gameObject.name);
 
         _spriteColor = _spriteRenderer.color;
+
+        _springPositionCurrent = transform.position;
+        _springPositionTarget = _springPositionCurrent;
     }
 
     private bool IsScaleWithinConstraints()
@@ -54,9 +61,24 @@ public class ScalableObject : MonoBehaviour
         HandlerManager.Instance.OnPauseTransformations.AddListener(ExitSelectedState);
     }
 
+    private void Update()
+    {
+        if (!HandlerManager.Instance.AllowTransformations) return;
+        
+        SpringMath.Lerp(ref _springPositionCurrent, ref _springPositionVelocity, _springPositionTarget, _dampingRatio, _angularFrequency, _timeStep);
+        transform.position = _springPositionCurrent;
+    }
+
     void OnDestroy()
     {
         if (HandlerManager.Instance != null) HandlerManager.Instance.OnPauseTransformations.RemoveListener(ExitSelectedState);
+    }
+
+    public void SetTargetPosition(Vector3 targetPosition)
+    {
+        _springPositionTarget.x = targetPosition.x;
+        _springPositionTarget.y = targetPosition.y;
+        // _springPositionTarget.z = targetPosition.z;
     }
 
     private Vector3 _lastMousePos;
@@ -89,7 +111,8 @@ public class ScalableObject : MonoBehaviour
                 const float TOLERANCE = 1.0f;
                 if (Vector3.Distance(_lastMousePos, Input.mousePosition) < TOLERANCE)
                 {
-                    HandlerManager.Instance.SetTarget(null);
+                    Debug.Log("deselect currently commented out");
+                    // HandlerManager.Instance.SetTarget(null);
                 }
             }
             else HandlerManager.Instance.SetTarget(transform, _transformConstraints);

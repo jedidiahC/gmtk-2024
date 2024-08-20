@@ -46,11 +46,17 @@ public struct TransformConstraints
 public class TransformHandler : MonoBehaviour
 {
     private Transform _target = null;
+    private ScalableObject _targetScript = null;
     private TransformConstraints _targetConstraints;
 
     public void SetTarget(Transform inTarget, TransformConstraints constraints = new TransformConstraints())
     {
         _target = inTarget;
+        if (_target)
+        {
+            _targetScript = _target.GetComponent<ScalableObject>();
+            Debug.Assert(_targetScript, String.Format("No ScalableObject.cs on {0}!", name));
+        }
         _targetConstraints = constraints;
         SetSprite();
     }
@@ -94,6 +100,10 @@ public class TransformHandler : MonoBehaviour
     [SerializeField] Sprite _rotateSprite = null;
     [SerializeField] Sprite _translateSprite = null;
 
+    public float deltaModifierT = 50.0f;
+    public float deltaModifierR = 50.0f;
+    public float deltaModifierS = 10.0f;
+
     void Awake()
     {
         _spriteRen = GetComponent<SpriteRenderer>();
@@ -136,7 +146,7 @@ public class TransformHandler : MonoBehaviour
         if (!_targetConstraints.AllowScaling) { return; }
 
         Vector3 targetLocalScale = _target.localScale;
-        float delta = 5f * Time.deltaTime;
+        float delta = deltaModifierS * Time.deltaTime;
 
         if (_targetConstraints.IsUniformScaling)
         {
@@ -195,7 +205,7 @@ public class TransformHandler : MonoBehaviour
         if (!_targetConstraints.AllowRotation) { return; }
 
         Vector3 targetLocalEuler = _target.localEulerAngles;
-        float delta = 100f * Time.deltaTime;
+        float delta = deltaModifierR * Time.deltaTime;
         if (InputUp())
         {
             targetLocalEuler.z -= delta;
@@ -221,7 +231,7 @@ public class TransformHandler : MonoBehaviour
         if (!_targetConstraints.AllowTranslation) { return; }
 
         Vector3 targetPosition = _target.position;
-        float delta = 5f * Time.deltaTime;
+        float delta = deltaModifierT * Time.deltaTime;
 
         if (InputUp())
         {
@@ -249,6 +259,7 @@ public class TransformHandler : MonoBehaviour
             return;
         }
 
-        _target.position = targetPosition;
+        // _target.position = targetPosition;
+        _targetScript.SetTargetPosition(targetPosition);
     }
 }
