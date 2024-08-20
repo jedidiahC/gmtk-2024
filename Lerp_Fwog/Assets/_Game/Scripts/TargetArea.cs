@@ -74,7 +74,7 @@ public class TargetArea : MonoBehaviour
             if (_targetCount >= _targetGoalNum)
             {
                 _reachedTarget = true;
-                _circleSpriteRen.color = _goalReachedColor;
+                // _circleSpriteRen.color = _goalReachedColor;
                 _confettiParticleSystem.Play();
                 OnGoalReached.Invoke();
             }
