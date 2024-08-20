@@ -378,12 +378,16 @@ public class TransformHandler : MonoBehaviour
         }
 
         if (Input.GetMouseButtonDown(0)) {
-            _translateFrameData.savedWorldMousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            _translateFrameData.savedWorldMousePosition.z = 0;
-            _translateFrameData.mouseDowned = true;
-            _translateFrameData.targetPosOnMouseDown = _target.position;
+            Vector3 mousePosWorld = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            mousePosWorld.z = 0;
+
+            if (Vector3.Distance(mousePosWorld, _target.position) < 1.0f) {
+                _translateFrameData.savedWorldMousePosition = mousePosWorld;
+                _translateFrameData.mouseDowned = true;
+                _translateFrameData.targetPosOnMouseDown = _target.position;
+            }
         }
-        if (Input.GetMouseButton(0)) {
+        if (_translateFrameData.mouseDowned && Input.GetMouseButton(0)) {
             Vector3 mousePosWorld = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mousePosWorld.z = 0;
             Vector3 deltaMousePos = mousePosWorld - _translateFrameData.savedWorldMousePosition;
