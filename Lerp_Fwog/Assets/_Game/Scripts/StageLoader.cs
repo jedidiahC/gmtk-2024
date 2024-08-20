@@ -40,7 +40,7 @@ public class StageLoader : MonoBehaviour
             // TODO: You can insert complete all levels here.
             return;
         }
-        if (_activeStage != null) DisableActiveStage();
+        if (_activeStage != null) UnloadActiveStage();
 
         _currentSceneIndex++;
         Debug.Log("Loading scene: " + Constants.SCENE_LEVEL_NAMES[_currentSceneIndex]);
@@ -48,8 +48,6 @@ public class StageLoader : MonoBehaviour
     }
 
     public void SetStageActive(StageManager stage) {
-        if (_activeStage != null) DisableActiveStage();
-
         _activeStage = stage;
         _activeStage.SetIsActive(true);
         _activeStage.ToggleHUD(true);
@@ -58,7 +56,7 @@ public class StageLoader : MonoBehaviour
 
     public StageManager GetActiveStage() { return _activeStage; }
 
-    private void DisableActiveStage() {
+    private void UnloadActiveStage() {
         Debug.Log("Disabling Scene: " + Constants.SCENE_LEVEL_NAMES[_currentSceneIndex]);
         _savedSolutions[_currentSceneIndex] = _activeStage.GetCurrentSolution();
         // RAYNER: Note - Hacky way to reset the UI immediately, but leave the objects there for resetting offscreen.
@@ -66,8 +64,8 @@ public class StageLoader : MonoBehaviour
         _activeStage.ToggleHUD(false);
         StartCoroutine(DelayedReset(_activeStage));
         IEnumerator DelayedReset(StageManager inStageToReset) {
-            yield return new WaitForSeconds(1.0f);
-            inStageToReset.Reset();
+            yield return new WaitForSeconds(2.0f);
+            SceneManager.UnloadSceneAsync(inStageToReset.gameObject.scene.name);
             Debug.Log("RAN RESET on " + inStageToReset.gameObject.scene.name);
         }
         _activeStage.SetIsActive(false);
