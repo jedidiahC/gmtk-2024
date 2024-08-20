@@ -15,9 +15,12 @@ public static class Constants {
         "SCENE_Level_1_8",
         "SCENE_Level_1_9",
         "SCENE_Level_1_10",
-        //"SCENE_Level_ManipulationBasics",
-        //"SCENE_Level_ShooterBasics",
-        //"SCENE_Level_GravityBasics"
+        "SCENE_Level_1_11",
+        "SCENE_Level_1_12",
+        "SCENE_Level_1_13",
+        "SCENE_Level_1_14",
+        "SCENE_Level_1_15",
+        "SCENE_Level_Finale"
     };
     public static readonly int NUM_LEVELS = SCENE_LEVEL_NAMES.Length;
     public static int LEVEL_INDEX_FROM_NAME(string inSceneName) {
