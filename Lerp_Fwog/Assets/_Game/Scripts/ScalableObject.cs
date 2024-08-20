@@ -19,8 +19,8 @@ public class ScalableObject : MonoBehaviour
     private bool _isMouseOver = false;
 
     [SerializeField] private float _dampingRatio = 0.5f, _angularFrequency = 0.1f, _timeStep = 1.0f;
-    private Vector3 _springPositionCurrent, _springPositionVelocity, _springPositionTarget;
-    private float _springRotationCurrent, _springRotationVelocity, _springRotationTarget;
+    [SerializeField] private Vector3 _springPositionCurrent, _springPositionVelocity, _springPositionTarget;
+    [SerializeField] private float _springRotationCurrent, _springRotationVelocity, _springRotationTarget;
 
     void Awake()
     {
@@ -36,6 +36,9 @@ public class ScalableObject : MonoBehaviour
 
         _springPositionCurrent = transform.position;
         _springPositionTarget = _springPositionCurrent;
+
+        _springRotationCurrent = transform.localEulerAngles.z;
+        _springRotationTarget = _springRotationCurrent;
     }
 
     private bool IsScaleWithinConstraints()
