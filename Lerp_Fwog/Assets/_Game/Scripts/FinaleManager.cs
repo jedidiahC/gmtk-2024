@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class FinaleManager : MonoBehaviour
 {
@@ -41,7 +42,7 @@ public class FinaleManager : MonoBehaviour
 
         const float MAX_FROG_DISTANCE_Y = 5.0f;
         Vector2 camFromFrog = _astroFrog.transform.position - Camera.main.transform.position;
-        Debug.Log(camFromFrog);
+        // Debug.Log(camFromFrog);
         if (camFromFrog.y > MAX_FROG_DISTANCE_Y) {
             cameraTarget += Vector3.up * (camFromFrog.y - MAX_FROG_DISTANCE_Y);
         } else if (camFromFrog.y < -MAX_FROG_DISTANCE_Y) {
@@ -72,6 +73,11 @@ public class FinaleManager : MonoBehaviour
             ShowEnd();
         }
 
+        if (_canReturnToMenu) {
+            if (Input.anyKeyDown) {
+                SceneManager.LoadScene(Constants.SCENE_MENU);
+            }
+        }
     }
 
     void ShowEnd() {
@@ -92,12 +98,15 @@ public class FinaleManager : MonoBehaviour
         FindObjectOfType<Hud>().gameObject.SetActive(false);
     }
 
+    bool _canReturnToMenu = false;
     IEnumerator ShowEndRoutine() {
         _astroFrog.StartFireParticles();
         while (_finaleCanvasGroup.alpha < 1.0f) {
             _finaleCanvasGroup.alpha += Time.deltaTime * 0.25f;
             yield return null;
         }
+
+        _canReturnToMenu = true;
     }
 }
 
