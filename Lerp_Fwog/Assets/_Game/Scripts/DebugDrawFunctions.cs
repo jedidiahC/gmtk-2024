@@ -16,7 +16,13 @@ public class DebugDrawFunctions : MonoBehaviour
     private float _angleRef;
     private float _angleResult;
 
-    private bool _doAngleShit;
+    public bool _doAngleShit;
+    public bool _doScaleShit;
+
+    private void Start()
+    {
+        _angleText.gameObject.SetActive(_doAngleShit);
+    }
 
     private void Update()
     {
