@@ -63,7 +63,7 @@ public class ScalableObject : MonoBehaviour
 
     private void Update()
     {
-        if (!HandlerManager.Instance.AllowTransformations) return;
+        if (!HandlerManager.Instance.AllowTransformations || HandlerManager.Instance.GetTarget() == null || HandlerManager.Instance.GetTarget().transform != transform) return;
 
         SpringMath.Lerp(ref _springPositionCurrent, ref _springPositionVelocity, _springPositionTarget, _dampingRatio, _angularFrequency, _timeStep);
         transform.position = _springPositionCurrent;
