@@ -31,4 +31,8 @@ public class GameCamera : MonoBehaviour
         transform.position = Vector3.Slerp(_originPosition, _targetPosition, t * t);
         _camera.orthographicSize = Mathf.Lerp(_originOrthoSize, _targetOrthoSize, t * t);
     }
+
+    public void SetTargetPos(Vector3 inTargetCamPos) {
+        _targetPosition = inTargetCamPos;
+    }
 }
