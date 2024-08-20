@@ -62,12 +62,9 @@ public class TransformHandler : MonoBehaviour
         _targetConstraints = constraints;
         SetSprite();
         if (inTarget == null) {
-            HideConstraints();
             HideGizmoLines();
-        } else {
-            DrawConstraints();
-            DrawGizmoLines();
-        }
+            HideConstraints();
+        } else DrawConstraints();
     }
 
     public Transform target { get { return _target; } }
@@ -79,10 +76,9 @@ public class TransformHandler : MonoBehaviour
     {
         _transformType = inTransformType;
         SetSprite();
+        HideGizmoLines();
         HideConstraints();
         DrawConstraints();
-        HideGizmoLines();
-        DrawGizmoLines();
     }
 
     private void SetSprite()
@@ -141,20 +137,17 @@ public class TransformHandler : MonoBehaviour
         if (_target != null)
         {
             transform.position = _target.position;
-
+            HideGizmoLines();
             switch (_transformType)
             {
                 case eTransformType.Scale:
                     HandleScaleInput();
-                    HideGizmoLines();
                     break;
                 case eTransformType.Rotation:
                     HandleRotationInput();
-                    DrawGizmoLines();
                     break;
                 case eTransformType.Translation:
                     HandleTranslateInput();
-                    HideGizmoLines();
                     break;
             }
         }
@@ -195,70 +188,9 @@ public class TransformHandler : MonoBehaviour
     }
 
 
-    private bool _mouseDowned;
-    private Vector3 _savedMousePosition;
-    private float _angleResult;
-    private float _angleRef;
-    private float _currentAngle, _velocityAngle, _targetAngle;
-    private float _dampingRatio = 0.5f, _angularFrequency = 0.1f, _timeStep = 1.0f;
-
-    private void DrawGizmoLines() {
-        _gizmoLineRen.startWidth = 0.1f;
-        _gizmoLineRen.endWidth = 0.1f;
-        switch (_transformType)
-        {
-            case eTransformType.Scale:
-                break;
-            case eTransformType.Rotation: {
-                    _gizmoLineRen.loop = false;
-                    _gizmoLineRen.positionCount = 3;
-                    Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                    mouseWorldPosition.z = 0f;
-                    if (!_mouseDowned)
-                    {
-                        _savedMousePosition = mouseWorldPosition;
-                        // _lineLength = Vector3.Distance(transform.position, mouseWorldPosition);
-                        _gizmoLineRen.SetPosition(2, _savedMousePosition);
-                    }
-                    else
-                    {
-                        _gizmoLineRen.SetPosition(2, mouseWorldPosition);
-                    }
-                    _gizmoLineRen.SetPosition(1, _target.position);
-                    _gizmoLineRen.SetPosition(0, _savedMousePosition);
+    
 
 
-                    Vector3 v1 = _savedMousePosition - transform.position;
-                    Vector3 v2 = mouseWorldPosition - transform.position;
-                    v1.z = 0;
-                    v2.z = 0;
-                    _angleResult = Vector3.SignedAngle(v1, v2, Vector3.forward);
-                    // if (_angleResult < 0) { _angleResult += 360.0f; }
-
-                    if (Input.GetMouseButtonDown(0))
-                    {
-                        _mouseDowned = true;
-                        _angleRef = transform.eulerAngles.z;
-                        _currentAngle = 0.0f;
-                    }
-                    if (Input.GetMouseButton(0))
-                    {
-                        _targetAngle = _angleResult;
-                    }
-                    if (Input.GetMouseButtonUp(0))
-                    {
-                        _mouseDowned = false;
-                    }
-                    // Debug.DrawLine(_savedMousePosition, mouseWorldPosition);}
-
-                    SpringMath.Lerp(ref _currentAngle, ref _velocityAngle, _targetAngle, _dampingRatio, _angularFrequency, _timeStep);
-                    transform.localEulerAngles = Vector3.forward * (_angleRef + _currentAngle);
-                    break;
-                }
-            case eTransformType.Translation:
-                break;
-        }
-    }
     private void HideGizmoLines() {
         _gizmoLineRen.positionCount = 0;
         _gizmoLineRen.SetPositions(new Vector3[0]);
@@ -323,6 +255,7 @@ public class TransformHandler : MonoBehaviour
     }
 
 
+    private RotateFrameData _rotateFrameData = new RotateFrameData();
     private void HandleRotationInput()
     {
         if (!_targetConstraints.AllowRotation) { return; }
@@ -345,6 +278,54 @@ public class TransformHandler : MonoBehaviour
         {
             targetLocalEuler.z += delta;
         }
+
+        _gizmoLineRen.startWidth = 0.1f;
+        _gizmoLineRen.endWidth = 0.1f;
+        _gizmoLineRen.loop = false;
+        _gizmoLineRen.positionCount = 3;
+
+        Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mouseWorldPosition.z = 0f;
+        if (_rotateFrameData.mouseDowned)
+        {
+            _gizmoLineRen.SetPosition(2, mouseWorldPosition);
+        }
+        else
+        {
+            _rotateFrameData.savedMousePosition = mouseWorldPosition;
+            _gizmoLineRen.SetPosition(2, _rotateFrameData.savedMousePosition);
+        }
+        _gizmoLineRen.SetPosition(1, _target.position);
+        _gizmoLineRen.SetPosition(0, _rotateFrameData.savedMousePosition);
+
+
+        Vector3 v1 = _rotateFrameData.savedMousePosition - _target.position;
+        Vector3 v2 = mouseWorldPosition - _target.position;
+        v1.z = 0;
+        v2.z = 0;
+        _rotateFrameData.angleResult = Vector3.SignedAngle(v1, v2, Vector3.forward);
+        // if (_angleResult < 0) { _angleResult += 360.0f; }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            _rotateFrameData.mouseDowned = true;
+            _rotateFrameData.angleRef = _target.eulerAngles.z;
+            _rotateFrameData.currentAngle = 0.0f;
+        }
+        if (Input.GetMouseButton(0))
+        {
+            _rotateFrameData.targetAngle = _rotateFrameData.angleResult;
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            _rotateFrameData.mouseDowned = false;
+        }
+
+        const float DAMPING_RATIO = 0.5f;
+        const float ANGULAR_FREQUENCY = 0.1f;
+        const float TIME_STEP = 1.0f;
+        SpringMath.Lerp(ref _rotateFrameData.currentAngle, ref _rotateFrameData.velocityAngle, _rotateFrameData.targetAngle, DAMPING_RATIO, ANGULAR_FREQUENCY, TIME_STEP);
+        targetLocalEuler = Vector3.forward * (_rotateFrameData.angleRef + _rotateFrameData.currentAngle);
 
         _target.localEulerAngles = targetLocalEuler;
     }
@@ -373,7 +354,6 @@ public class TransformHandler : MonoBehaviour
             targetPosition.x -= delta;
         }
 
-        // TODO: Mouse checks here.
         if (Input.GetMouseButton(0)) {
             Vector3 mousePos = Input.mousePosition;
             Vector3 mousePosWorld = Camera.main.ScreenToWorldPoint(mousePos);
@@ -392,5 +372,16 @@ public class TransformHandler : MonoBehaviour
         }
 
         _targetScript.SetTargetPosition(targetPosition);
+    }
+
+
+
+    struct RotateFrameData
+    {
+        public bool mouseDowned;
+        public Vector3 savedMousePosition;
+        public float angleResult;
+        public float angleRef;
+        public float currentAngle, velocityAngle, targetAngle;
     }
 }
