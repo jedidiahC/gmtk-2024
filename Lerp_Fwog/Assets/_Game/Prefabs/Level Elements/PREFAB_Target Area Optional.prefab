@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7012510867935058016}
   - component: {fileID: 7129362360979932508}
+  - component: {fileID: 6605486059318197255}
+  - component: {fileID: 6767302877272589214}
   m_Layer: 0
   m_Name: Circle
   m_TagString: Untagged
@@ -29,7 +31,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.34, y: 0.34, z: 0.34}
   m_ConstrainProportionsScale: 1
-  m_Children: []
+  m_Children:
+  - {fileID: 177757475733262168}
   m_Father: {fileID: 3920025689425829493}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7129362360979932508
@@ -84,6 +87,79 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6605486059318197255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1631858971910767787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57c008f954fe54a8bb972de1018a2cb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RootBone: {fileID: 177757475733262168}
+  m_BoneTransforms:
+  - {fileID: 177757475733262168}
+  - {fileID: 8089470608339253623}
+  m_Bounds:
+    m_Center: {x: -0.018601477, y: -0.0029017925, z: 0}
+    m_Extent: {x: 0.96569884, y: 1.050102, z: 0}
+  m_AlwaysUpdate: 1
+  m_AutoRebind: 1
+--- !u!95 &6767302877272589214
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1631858971910767787}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 380f067b50b218f4f977783db0b66ffa, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &2505452721560193610
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8089470608339253623}
+  m_Layer: 0
+  m_Name: bone_2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8089470608339253623
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2505452721560193610}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0.012620965, w: 0.99992037}
+  m_LocalPosition: {x: 2.0767975, y: -0.00000012345518, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 177757475733262168}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2582672382219560517
 GameObject:
   m_ObjectHideFlags: 0
@@ -302,6 +378,38 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &7437445972776644938
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 177757475733262168}
+  m_Layer: 0
+  m_Name: bone_1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &177757475733262168
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7437445972776644938}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0.68673867, w: 0.7269044}
+  m_LocalPosition: {x: -0.04913391, y: -2.42721, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8089470608339253623}
+  m_Father: {fileID: 7012510867935058016}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7559945893708619812
 GameObject:
   m_ObjectHideFlags: 0
@@ -379,6 +487,7 @@ MonoBehaviour:
   _confettiParticleSystem: {fileID: 5528415099785917670}
   _audioSource: {fileID: 8971596853355419929}
   _eatSound: {fileID: 11400000, guid: 615ac426d7732274c87b019cded666ae, type: 2}
+  _animator: {fileID: 6767302877272589214}
 --- !u!58 &6366592098437318989
 CircleCollider2D:
   m_ObjectHideFlags: 0
