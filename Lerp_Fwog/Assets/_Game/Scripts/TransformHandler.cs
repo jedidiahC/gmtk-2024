@@ -196,6 +196,8 @@ public class TransformHandler : MonoBehaviour
         _gizmoLineRen.SetPositions(new Vector3[0]);
     }
 
+
+    private ScaleFrameData _scaleFrameData;
     private void HandleScaleInput()
     {
         if (!_targetConstraints.AllowScaling) { return; }
@@ -242,6 +244,29 @@ public class TransformHandler : MonoBehaviour
             {
                 targetLocalScale.x -= delta;
             }
+        }
+
+
+        Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mouseWorldPosition.z = 0.0f;
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            _scaleFrameData.savedMousePosition = mouseWorldPosition;
+            _scaleFrameData.scaleOnMouseDown = _target.localScale;
+        }
+
+        Vector2 targetScale = Vector2.zero;
+        if (Input.GetMouseButton(0))
+        {
+            if (_targetConstraints.IsUniformScaling) {
+                targetScale.x = Vector3.Distance(_scaleFrameData.savedMousePosition, mouseWorldPosition) * Mathf.Clamp(mouseWorldPosition.x - _scaleFrameData.savedMousePosition.x, -1, 1);
+                targetScale.y = targetScale.x;
+            } else {
+                targetScale.x = mouseWorldPosition.x - _scaleFrameData.savedMousePosition.x;
+                targetScale.y = mouseWorldPosition.y - _scaleFrameData.savedMousePosition.y;
+            }
+            targetLocalScale = new Vector3(_scaleFrameData.scaleOnMouseDown.x + targetScale.x, _scaleFrameData.scaleOnMouseDown.y + targetScale.y, 1.0f);
         }
 
         if (targetLocalScale.x < _targetConstraints.MinScale.x || targetLocalScale.x > _targetConstraints.MaxScale.x ||
@@ -385,5 +410,11 @@ public class TransformHandler : MonoBehaviour
         public float angleResult;
         public float angleRef;
         public float currentAngle, velocityAngle, targetAngle;
+    }
+
+    struct ScaleFrameData
+    {
+        public Vector3 savedMousePosition;
+        public Vector3 scaleOnMouseDown;
     }
 }
