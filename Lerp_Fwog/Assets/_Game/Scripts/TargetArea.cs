@@ -6,7 +6,8 @@ using UnityEngine.Events;
 
 public class TargetArea : MonoBehaviour
 {
-    public enum eTargetType {
+    public enum eTargetType
+    {
         Mandatory,
         Optional
     }
@@ -22,6 +23,8 @@ public class TargetArea : MonoBehaviour
     [SerializeField] private Color _goalReachedColor = Color.green;
     [SerializeField] private ParticleSystem _flashParticleSystem = null;
     [SerializeField] private ParticleSystem _confettiParticleSystem = null;
+    [SerializeField] private AudioSource _audioSource = null;
+    [SerializeField] private AudioClipGroup _eatSound = null;
     private Color _circleInitialColor;
     private int _targetCount = 0;
     private bool _reachedTarget = false;
@@ -36,6 +39,8 @@ public class TargetArea : MonoBehaviour
         Debug.Assert(_circleSpriteRen != null, "_circleSpriteRen is not assigned");
         Debug.Assert(_flashParticleSystem != null, "_flashParticleSystem is not assigned");
         Debug.Assert(_confettiParticleSystem != null, "_confettiParticleSystem is not assigned");
+        Debug.Assert(_audioSource != null, "_audioSource is not assigned");
+        Debug.Assert(_eatSound != null, "_eatSound is not assigned");
 
         _circleInitialColor = _circleSpriteRen.color;
 
@@ -51,6 +56,7 @@ public class TargetArea : MonoBehaviour
         if (_reachedTarget) return;
         if (other.gameObject.tag == Constants.TAG_TARGET_OBJ)
         {
+            _eatSound.PlayOneShot(_audioSource);
             _targetCount++;
             _flashParticleSystem.Stop();
             _flashParticleSystem.Clear();
