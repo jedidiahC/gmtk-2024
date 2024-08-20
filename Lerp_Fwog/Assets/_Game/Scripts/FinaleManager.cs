@@ -30,7 +30,7 @@ public class FinaleManager : MonoBehaviour
         }
         _totalScoreText.text = "Total Score: \n" + totalScore.ToString();
 
-        _stageManager.OnSimulateChange.AddListener(Reset);
+        _stageManager.OnSimulateChange.AddListener(CommitToFinale);
 
         // NOTE: If this is null, means development mode solo stage.
         _gameCamera = FindObjectOfType<GameCamera>();
@@ -71,6 +71,7 @@ public class FinaleManager : MonoBehaviour
         if (_astroFrog.transform.position.y > 25.0f) {
             ShowEnd();
         }
+
     }
 
     void ShowEnd() {
@@ -85,6 +86,10 @@ public class FinaleManager : MonoBehaviour
         _finaleCanvasGroup.alpha = 0.0f;
         _showEnd = false;
         _astroFrog.StopFireParticles();
+    }
+
+    void CommitToFinale() {
+        FindObjectOfType<Hud>().gameObject.SetActive(false);
     }
 
     IEnumerator ShowEndRoutine() {
