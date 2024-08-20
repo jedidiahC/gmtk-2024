@@ -101,7 +101,7 @@ public class FWOGBuildScript
             outputFileName = "FWOG_" + inBuildScheme.ToString() + "_v" + VersionClass.BUNDLE_VERSION + "_WebGL";
 #endif
             Debug.Log("Output File Name: " + outputFileName);
-            outputFileName = "one small leap for frog.exe";
+            outputFileName = "one small leap for frog";
 
             if (!Directory.Exists(buildDirectory)) Directory.CreateDirectory(buildDirectory);
             if (inBuildScheme != eBuildScheme.RELEASE) { // NOTE: Respect the settings in the Build Settings, only if it's not a release build.
