@@ -619,6 +619,9 @@ MonoBehaviour:
   _targetAreas: []
   _dynamics: []
   _camera: {fileID: 1165462318}
+  OnSimulateChange:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &949484558
 MonoBehaviour:
   m_ObjectHideFlags: 0

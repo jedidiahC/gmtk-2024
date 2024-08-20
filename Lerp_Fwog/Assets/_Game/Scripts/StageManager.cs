@@ -86,6 +86,8 @@ public class StageManager : MonoBehaviour
             SceneTag sceneTag = obj.GetComponent<SceneTag>();
             if (sceneTag == null || sceneTag.sceneName != StageLoader._currentStageName) continue;
 
+            sceneTag.sceneName = gameObject.scene.name;
+
             TargetArea objTargetArea = obj.GetComponent<TargetArea>();
             if (objTargetArea == null)
             {
@@ -99,6 +101,7 @@ public class StageManager : MonoBehaviour
         {
             SceneTag sceneTag = obj.GetComponent<SceneTag>();
             if (sceneTag == null || sceneTag.sceneName != StageLoader._currentStageName) continue;
+            sceneTag.sceneName = gameObject.scene.name;
 
             Rigidbody2D rb = obj.GetComponent<Rigidbody2D>();
             TargetObject targetObj = obj.GetComponent<TargetObject>();
@@ -120,6 +123,7 @@ public class StageManager : MonoBehaviour
         {
             SceneTag sceneTag = obj.GetComponent<SceneTag>();
             if (sceneTag == null || sceneTag.sceneName != StageLoader._currentStageName) continue;
+            sceneTag.sceneName = gameObject.scene.name;
 
             Rigidbody2D rb = obj.GetComponent<Rigidbody2D>();
             if (rb == null)
