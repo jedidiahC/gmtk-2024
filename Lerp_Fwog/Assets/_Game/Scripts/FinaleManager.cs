@@ -49,12 +49,12 @@ public class FinaleManager : MonoBehaviour
             cameraTarget += Vector3.up * (camFromFrog.y + MAX_FROG_DISTANCE_Y);
         }
 
-        const float MAX_FROG_DISTANCE_X = 15.0f;
-        if (camFromFrog.x > MAX_FROG_DISTANCE_X) {
-            cameraTarget += Vector3.right * (camFromFrog.x - MAX_FROG_DISTANCE_X);
-        } else if (camFromFrog.x < -MAX_FROG_DISTANCE_X) {
-            cameraTarget += Vector3.right * (camFromFrog.x + MAX_FROG_DISTANCE_X);
-        }
+        // const float MAX_FROG_DISTANCE_X = 15.0f;
+        // if (camFromFrog.x > MAX_FROG_DISTANCE_X) {
+        //     cameraTarget += Vector3.right * (camFromFrog.x - MAX_FROG_DISTANCE_X);
+        // } else if (camFromFrog.x < -MAX_FROG_DISTANCE_X) {
+        //     cameraTarget += Vector3.right * (camFromFrog.x + MAX_FROG_DISTANCE_X);
+        // }
 
         if (_gameCamera != null) {
             _gameCamera.SetTargetPos(cameraTarget);
