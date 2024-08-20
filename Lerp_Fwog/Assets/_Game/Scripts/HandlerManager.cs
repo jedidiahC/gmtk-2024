@@ -64,7 +64,7 @@ public class HandlerManager : MonoBehaviour
 
     public void SwitchMode(eTransformType inTransformType)
     {
-        Debug.Log("Switch mode " + inTransformType);
+        //Debug.Log("Switch mode " + inTransformType);
         _transformHandler.SetTransformType(inTransformType);
         OnSwitchMode.Invoke(inTransformType);
     }

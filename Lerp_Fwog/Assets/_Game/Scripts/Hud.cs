@@ -14,7 +14,14 @@ public class Hud : MonoBehaviour
     private TransformConstraints _currentContraints;
     private eTransformType _currentActiveType;
     private StageManager _stage;
-    public void SetStageManager(StageManager inStage) { _stage = inStage; }
+    public void SetStageManager(StageManager inStage) {
+        if (_stage != null) {
+            _stage.OnSimulateChange.RemoveListener(OnSimulateChange);
+        }
+        _stage = inStage;
+        _stage.OnSimulateChange.AddListener(OnSimulateChange);
+        OnSimulateChange();
+    }
 
     private void Awake()
     {
@@ -23,7 +30,6 @@ public class Hud : MonoBehaviour
         Debug.Assert(_onSelectRotate != null, "_onSelectRotate is not assigned!");
         Debug.Assert(_onSelectScale != null, "_onSelectScale is not assigned!");
         Debug.Assert(_toolbar != null, "_toolbar is not assigned!");
-        // _toolbar.ToggleTransformInUse(eTransformType.Rotation);
         _toolbar.SetAllInUseToFalse();
     }
 
@@ -40,8 +46,7 @@ public class Hud : MonoBehaviour
         Debug.Assert(_stage != null, "_stage is not assigned yet by StageManager!");
     }
 
-    // TODO: Make this into event.
-    private void LateUpdate() {
+    public void OnSimulateChange() {
         if (_stage.GetIsSimulating()) {
             _onPlay.interactable = false;
             _toolbar.TogglePlayInteractable(false);
@@ -116,7 +121,7 @@ public class Hud : MonoBehaviour
 
     private void OnSwitchMode(eTransformType transformType)
     {
-        Debug.Log("Switched to " + transformType);
+        //Debug.Log("Switched to " + transformType);
         _currentActiveType = transformType;
         _toolbar.ToggleTransformInUse(transformType);
     }

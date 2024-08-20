@@ -29,6 +29,13 @@ public class StageManager : MonoBehaviour
         _isActive = isActive;
     }
     public bool GetIsSimulating() { return _isSimulating; }
+    public UnityEvent OnSimulateChange = new();
+    private void SetSimulate(bool inIsSimulating) {
+        if (inIsSimulating != _isSimulating) {
+            _isSimulating = inIsSimulating;
+            if (OnSimulateChange != null) OnSimulateChange.Invoke();
+        }
+    }
 
     public List<TransformValues> GetCurrentSolution() { return _dynamicTransformVals; }
 
@@ -57,7 +64,7 @@ public class StageManager : MonoBehaviour
         Debug.Assert(_dynamics != null && _dynamics.Count > 0, "_dynamics not assigned");
         _dynamicTransformVals = new List<TransformValues>(_dynamics.Count);
         _originalDynamicTransformVals = new List<TransformValues>(_dynamics.Count);
-        _isSimulating = false;
+        SetSimulate(false);
 
         Debug.Assert(_hudCanvas.GetComponent<Hud>() != null, "_hudCanvas does not have a Hud component!");
         _hudCanvas.GetComponent<Hud>().SetStageManager(this);
@@ -112,7 +119,7 @@ public class StageManager : MonoBehaviour
     public void ToggleHUD(bool inIsVisible) { _hudCanvas.SetActive(inIsVisible); }
     public void Reset()
     {
-        _isSimulating = false;
+        SetSimulate(false);
         ResetUIOnly();
 
         for (int i = 0; i < _dynamics.Count; i++)
@@ -138,7 +145,7 @@ public class StageManager : MonoBehaviour
 
     public void ResetStage()
     {
-        _isSimulating = false;
+        SetSimulate(false);
         ResetUIOnly();
 
         for (int i = 0; i < _dynamics.Count; i++)
@@ -166,7 +173,7 @@ public class StageManager : MonoBehaviour
     public void ResumePhysics()
     {
         if (_isSimulating) return;
-        _isSimulating = true;
+        SetSimulate(true);
         HandlerManager.Instance.PauseTransformations();
         StoreTransformValues();
 
