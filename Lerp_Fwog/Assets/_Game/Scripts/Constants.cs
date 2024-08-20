@@ -17,9 +17,6 @@ public static class Constants {
         "SCENE_Level_1_10",
         "SCENE_Level_1_11",
         "SCENE_Level_1_12",
-        "SCENE_Level_1_13",
-        "SCENE_Level_1_14",
-        "SCENE_Level_1_15",
         "SCENE_Level_Finale"
     };
     public static readonly int NUM_LEVELS = SCENE_LEVEL_NAMES.Length;
