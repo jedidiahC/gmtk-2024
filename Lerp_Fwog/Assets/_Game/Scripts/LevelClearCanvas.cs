@@ -11,6 +11,8 @@ public class LevelClearCanvas : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _scoreText = null;
     [SerializeField] private AudioSource _audioSource = null;
     [SerializeField] private AudioClipGroup _levelClearSound = null;
+    [SerializeField] private AudioClipGroup _onButtonClick = null;
+    [SerializeField] private AudioClipGroup _onButtonHover = null;
 
     void Awake()
     {
@@ -18,6 +20,8 @@ public class LevelClearCanvas : MonoBehaviour
         Debug.Assert(_scoreText != null, "_scoreText is not assigned");
         Debug.Assert(_audioSource != null, "_audioSource is not assigned!");
         Debug.Assert(_levelClearSound != null, "_levelClearSound is not assigned!");
+        Debug.Assert(_onButtonClick != null, "_onButtonClick is not assigned!");
+        Debug.Assert(_onButtonHover != null, "_onButtonHover is not assigned!");
     }
 
     private void OnEnable()
@@ -39,5 +43,16 @@ public class LevelClearCanvas : MonoBehaviour
     {
         _nextLevelBtn.onClick.RemoveAllListeners();
         _nextLevelBtn.onClick.AddListener(inNextLevelClicked);
+        _nextLevelBtn.onClick.AddListener(OnNextLevelClicked);
+    }
+
+    private void OnNextLevelClicked()
+    {
+        _onButtonClick.PlayOneShot(_audioSource);
+    }
+
+    public void PlayButtonHover()
+    {
+        _onButtonHover.PlayOneShot(_audioSource);
     }
 }
