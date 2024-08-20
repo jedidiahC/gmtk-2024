@@ -31,8 +31,10 @@ public class StageManager : MonoBehaviour
     }
     public bool GetIsSimulating() { return _isSimulating; }
     public UnityEvent OnSimulateChange = new();
-    private void SetSimulate(bool inIsSimulating) {
-        if (inIsSimulating != _isSimulating) {
+    private void SetSimulate(bool inIsSimulating)
+    {
+        if (inIsSimulating != _isSimulating)
+        {
             _isSimulating = inIsSimulating;
             if (OnSimulateChange != null) OnSimulateChange.Invoke();
         }
@@ -66,7 +68,7 @@ public class StageManager : MonoBehaviour
         Debug.Assert(_targetAreas != null && _targetAreas.Count > 0, "_targetAreas not assigned");
         Debug.Assert(_dynamics != null && _dynamics.Count > 0, "_dynamics not assigned");
 
-        _levelClearCanvas.SetNextLevelButton(() => {OnNextStage.Invoke();});
+        _levelClearCanvas.SetNextLevelButton(() => { OnNextStage.Invoke(); });
 
         _dynamicTransformVals = new List<TransformValues>(_dynamics.Count);
         _originalDynamicTransformVals = new List<TransformValues>(_dynamics.Count);
@@ -157,7 +159,8 @@ public class StageManager : MonoBehaviour
             }
             else
             {
-                if (curTargetArea.ReachedTarget) {
+                if (curTargetArea.ReachedTarget)
+                {
                     // TODO: Add score based on timer?
                     continue;
                 }
@@ -176,7 +179,8 @@ public class StageManager : MonoBehaviour
         Debug.Assert(levelIndex >= 0, "Level Index not found!");
         int[] scores = SaveUtils.LoadScores();
         int oldHighscore = scores[levelIndex];
-        if (_score > oldHighscore) {
+        if (_score > oldHighscore)
+        {
             scores[levelIndex] = _score;
             SaveUtils.SaveScores(scores);
         }
@@ -302,13 +306,10 @@ public class StageManager : MonoBehaviour
 
     public void Play()
     {
-        if (_isActive && !_isSimulating)
+        if (_isActive)
         {
-            ResumePhysics();
-        }
-        else
-        {
-            Reset();
+            if (!_isSimulating) ResumePhysics();
+            else Reset();
         }
     }
 

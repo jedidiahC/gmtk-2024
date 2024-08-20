@@ -14,8 +14,10 @@ public class Hud : MonoBehaviour
     private TransformConstraints _currentContraints;
     private eTransformType _currentActiveType;
     private StageManager _stage;
-    public void SetStageManager(StageManager inStage) {
-        if (_stage != null) {
+    public void SetStageManager(StageManager inStage)
+    {
+        if (_stage != null)
+        {
             _stage.OnSimulateChange.RemoveListener(OnSimulateChange);
         }
         _stage = inStage;
@@ -30,6 +32,7 @@ public class Hud : MonoBehaviour
         Debug.Assert(_onSelectRotate != null, "_onSelectRotate is not assigned!");
         Debug.Assert(_onSelectScale != null, "_onSelectScale is not assigned!");
         Debug.Assert(_toolbar != null, "_toolbar is not assigned!");
+
         _toolbar.SetAllInUseToFalse();
     }
 
@@ -37,6 +40,8 @@ public class Hud : MonoBehaviour
     {
         HandlerManager.Instance.OnSetTarget.AddListener(OnSetTarget);
         HandlerManager.Instance.OnSwitchMode.AddListener(OnSwitchMode);
+        _onPlay.onClick.RemoveAllListeners();
+        _onReset.onClick.RemoveAllListeners();
         _onReset.onClick.AddListener(OnReset);
         _onPlay.onClick.AddListener(OnPlay);
         _onSelectTranslate.onClick.AddListener(OnSelectTranslate);
@@ -46,28 +51,31 @@ public class Hud : MonoBehaviour
         Debug.Assert(_stage != null, "_stage is not assigned yet by StageManager!");
     }
 
-    public void OnSimulateChange() {
-        if (_stage.GetIsSimulating()) {
-            _onPlay.interactable = false;
-            _toolbar.TogglePlayInteractable(false);
-            _onReset.interactable = true;
-            _toolbar.ToggleResetInteractable(true);
-        } else {
-            _onPlay.interactable = true;
-            _toolbar.TogglePlayInteractable(true);
+    public void OnSimulateChange()
+    {
+        if (_stage.GetIsSimulating())
+        {
+            _toolbar.TogglePlayInteractable(false, false);
             _onReset.interactable = false;
             _toolbar.ToggleResetInteractable(false);
+        }
+        else
+        {
+            _toolbar.TogglePlayInteractable(true, false);
+            _onReset.interactable = true;
+            _toolbar.ToggleResetInteractable(true);
         }
     }
 
     public void OnSetTarget()
     {
-        if (HandlerManager.Instance.GetTarget() == null) {
+        if (HandlerManager.Instance.GetTarget() == null)
+        {
             _toolbar.SetAllInUseToFalse();
             _toolbar.ToggleTransformControls(false, false, false);
             return;
         }
-        
+
         _currentContraints = HandlerManager.Instance.GetConstraints();
         _toolbar.ToggleTransformControls(_currentContraints.AllowTranslation, _currentContraints.AllowRotation, _currentContraints.AllowScaling);
 
@@ -88,7 +96,8 @@ public class Hud : MonoBehaviour
             HandlerManager.Instance.SwitchMode(eTransformType.Translation);
         }
 
-        if (_currentActiveType != HandlerManager.Instance.GetTransformType()) {
+        if (_currentActiveType != HandlerManager.Instance.GetTransformType())
+        {
             // Rayner: Note - I think should switch to the last used transform type when possible?
             HandlerManager.Instance.SwitchMode(_currentActiveType);
         }
@@ -96,12 +105,14 @@ public class Hud : MonoBehaviour
         _toolbar.ToggleTransformInUse(_currentActiveType);
     }
 
-    public void OnReset() {
-        _stage.Reset();
+    public void OnReset()
+    {
+        _stage.ResetStage();
     }
 
-    public void OnPlay() {
-        _stage.ResumePhysics();
+    public void OnPlay()
+    {
+        _stage.Play();
     }
 
     public void OnSelectTranslate()

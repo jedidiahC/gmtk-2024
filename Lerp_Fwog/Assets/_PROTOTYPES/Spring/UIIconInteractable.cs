@@ -24,6 +24,10 @@ public class UIIconInteractable : MonoBehaviour, IPointerEnterHandler, IPointerE
     public float rectWidth;
     public bool isUsingBool;
     public bool isOnBool;
+    public Sprite disabledSprite;
+    public bool useDisabledSprite;
+
+    private Sprite enabledSprite;
 
     private void Awake()
     {
@@ -33,6 +37,8 @@ public class UIIconInteractable : MonoBehaviour, IPointerEnterHandler, IPointerE
 
         _imageComponent = GetComponent<Image>();
         _buttonComponent = GetComponent<Button>();
+
+        enabledSprite = _imageComponent.sprite;
     }
 
     private void Update()
@@ -44,13 +50,26 @@ public class UIIconInteractable : MonoBehaviour, IPointerEnterHandler, IPointerE
         transform.localScale = Vector3.one + Vector3.one * _currentScale;
     }
 
-    public void ToggleIcon(bool isOn)
+    public void ToggleIcon(bool isOn, bool handleInteractivity = true)
     {
-        // Debug.Log(String.Format("{0} toggled isOn {1}", name, isOn));
         isOnBool = isOn;
-        _imageComponent.color = isOn ? _enabledColour : _disabledColour;
-        _imageComponent.raycastTarget = isOn;
-        _buttonComponent.interactable = isOn;
+
+        if (useDisabledSprite)
+        {
+            _imageComponent.sprite = isOn ? enabledSprite : disabledSprite;
+        }
+        else
+        {
+            _imageComponent.color = isOn ? _enabledColour : _disabledColour;
+        }
+
+        // Debug.Log(String.Format("{0} toggled isOn {1}", name, isOn));
+
+        if (handleInteractivity)
+        {
+            _imageComponent.raycastTarget = isOn;
+            _buttonComponent.interactable = isOn;
+        }
     }
 
     public void ToggleIsUsing(bool isUsing)
