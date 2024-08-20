@@ -9,7 +9,11 @@ public class StageManager : MonoBehaviour
     public UnityEvent OnNextStage = new();
     public UnityEvent OnStageClear = new();
 
+    // RAYNER: Note - Ideally we don't want this _levelClearCanvas GO anymore, replace with _levelClear
+    //          But left here and LevelClearCanvas grabbed from _levelClearCanvas cause don't want to
+    //          affect the other scenes right now.
     [SerializeField] private GameObject _levelClearCanvas = null;
+    private LevelClearCanvas _levelClear = null;
     [SerializeField] private GameObject _hudCanvas = null;
     [SerializeField] private List<TargetObject> _targetObjects = null;
     [SerializeField] private List<TargetArea> _targetAreas = null;
@@ -64,6 +68,9 @@ public class StageManager : MonoBehaviour
         Debug.Assert(_targetObjects != null && _targetObjects.Count > 0, "_targetObjects not assigned");
         Debug.Assert(_targetAreas != null && _targetAreas.Count > 0, "_targetAreas not assigned");
         // Debug.Assert(_dynamics != null && _dynamics.Count > 0, "_dynamics not assigned");
+        _levelClear = _levelClearCanvas.GetComponent<LevelClearCanvas>();
+        Debug.Assert(_levelClear != null, "_levelClear not found");
+        _levelClear.SetNextLevelButton(() => {OnNextStage.Invoke();});
 
         _dynamicTransformVals = new List<TransformValues>(_dynamics.Count);
         _originalDynamicTransformVals = new List<TransformValues>(_dynamics.Count);
@@ -165,11 +172,6 @@ public class StageManager : MonoBehaviour
     public void ShowLevelClearText()
     {
         _levelClearCanvas.SetActive(true);
-    }
-
-    public void NextStage()
-    {
-        OnNextStage.Invoke();
     }
 
     public void ResetUIOnly()
