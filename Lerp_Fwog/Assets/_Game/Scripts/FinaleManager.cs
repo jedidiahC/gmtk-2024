@@ -95,7 +95,10 @@ public class FinaleManager : MonoBehaviour
     }
 
     void CommitToFinale() {
-        FindObjectOfType<Hud>().gameObject.SetActive(false);
+        Hud _hud = FindObjectOfType<Hud>();
+        if (_hud != null) {
+            _hud.gameObject.SetActive(false);
+        }
     }
 
     bool _canReturnToMenu = false;
