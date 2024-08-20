@@ -66,7 +66,7 @@ public class StageLoader : MonoBehaviour
         IEnumerator DelayedReset(StageManager inStageToReset) {
             yield return new WaitForSeconds(2.0f);
             SceneManager.UnloadSceneAsync(inStageToReset.gameObject.scene.name);
-            Debug.Log("RAN RESET on " + inStageToReset.gameObject.scene.name);
+            Debug.Log("Unloaded Stage: " + inStageToReset.gameObject.scene.name);
         }
         _activeStage.SetIsActive(false);
     }

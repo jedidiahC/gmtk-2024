@@ -772,11 +772,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ee76cfa3c3e02646abd23399edd2b88, type: 3}
---- !u!1 &904974647 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1978597855879899610, guid: 1ee76cfa3c3e02646abd23399edd2b88, type: 3}
+--- !u!114 &904974648 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6444372635532230320, guid: 1ee76cfa3c3e02646abd23399edd2b88, type: 3}
   m_PrefabInstance: {fileID: 904974646}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a14f0e4a9739244b78e23d6831a7fe6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &949484556
 GameObject:
   m_ObjectHideFlags: 0
@@ -813,7 +819,7 @@ MonoBehaviour:
   OnStageClear:
     m_PersistentCalls:
       m_Calls: []
-  _levelClearCanvas: {fileID: 904974647}
+  _levelClearCanvas: {fileID: 904974648}
   _hudCanvas: {fileID: 2079518615}
   _targetObjects:
   - {fileID: 7423585728694809070}
@@ -825,6 +831,9 @@ MonoBehaviour:
   - {fileID: 1284744834}
   - {fileID: 1087244296}
   _camera: {fileID: 1165462318}
+  OnSimulateChange:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &949484558
 MonoBehaviour:
   m_ObjectHideFlags: 0

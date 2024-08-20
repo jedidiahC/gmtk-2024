@@ -677,7 +677,7 @@ MonoBehaviour:
   OnStageClear:
     m_PersistentCalls:
       m_Calls: []
-  _levelClearCanvas: {fileID: 7275134154914363455}
+  _levelClearCanvas: {fileID: 3773390767696711795}
   _hudCanvas: {fileID: 6313696983322971710}
   _targetObjects:
   - {fileID: 7423585728694809070}
@@ -685,6 +685,9 @@ MonoBehaviour:
   - {fileID: 1176366272}
   _dynamics: []
   _camera: {fileID: 1165462318}
+  OnSimulateChange:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &949484558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1624,14 +1627,33 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3340980874872523077, guid: 1ee76cfa3c3e02646abd23399edd2b88, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3340980874872523077, guid: 1ee76cfa3c3e02646abd23399edd2b88, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 949484557}
+      objectReference: {fileID: 0}
+    - target: {fileID: 3340980874872523077, guid: 1ee76cfa3c3e02646abd23399edd2b88, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ee76cfa3c3e02646abd23399edd2b88, type: 3}
+--- !u!114 &3773390767696711795 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6444372635532230320, guid: 1ee76cfa3c3e02646abd23399edd2b88, type: 3}
+  m_PrefabInstance: {fileID: 3773390767696711794}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a14f0e4a9739244b78e23d6831a7fe6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6313696983322971709
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1777,11 +1799,6 @@ PrefabInstance:
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7275134154487967848, guid: 92435082e2236724faf9101df466a105, type: 3}
   m_PrefabInstance: {fileID: 6313696983322971709}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &7275134154914363455 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1978597855879899610, guid: 1ee76cfa3c3e02646abd23399edd2b88, type: 3}
-  m_PrefabInstance: {fileID: 3773390767696711794}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7423585728694809069
 PrefabInstance:
