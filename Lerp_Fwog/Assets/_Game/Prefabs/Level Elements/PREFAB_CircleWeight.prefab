@@ -48,7 +48,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cdddeb8a2fd1a548a3f61b4e3370152, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: 
 --- !u!212 &7127201005238400270
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -146,7 +145,7 @@ MonoBehaviour:
     AllowRotation: 1
     IsUniformScaling: 0
     MinScale: {x: 0.5, y: 0.5, z: 0.5}
-    MaxScale: {x: 5, y: 5, z: 5}
+    MaxScale: {x: 12, y: 12, z: 12}
     MinTranslationOffset: {x: 50, y: 50, z: 50}
     MaxTranslationOffset: {x: 50, y: 50, z: 50}
   OnEnter:

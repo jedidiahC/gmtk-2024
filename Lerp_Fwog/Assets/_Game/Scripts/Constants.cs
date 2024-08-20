@@ -7,6 +7,9 @@ public static class Constants {
     public static readonly string[] SCENE_LEVEL_NAMES = {
         "SCENE_Level_1_1",
         "SCENE_Level_1_2",
+        "SCENE_Level_1_3",
+        "SCENE_Level_1_4",
+        "SCENE_Level_1_5",
         //"SCENE_Level_ManipulationBasics",
         //"SCENE_Level_ShooterBasics",
         //"SCENE_Level_GravityBasics"
