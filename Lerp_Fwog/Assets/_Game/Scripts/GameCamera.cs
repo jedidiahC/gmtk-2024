@@ -16,6 +16,7 @@ public class GameCamera : MonoBehaviour
 
     public void LerpToCameraProperties(Camera camera)
     {
+        _camera.backgroundColor = camera.backgroundColor;
         _originPosition = transform.position;
         _originOrthoSize = camera.orthographicSize;
         _targetPosition = camera.transform.position;
