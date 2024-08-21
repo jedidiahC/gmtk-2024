@@ -265,7 +265,7 @@ public class TransformHandler : MonoBehaviour
 
     private Vector3 GetScaleDeltaFromKeyboardInput(float axisDelta)
     {
-        if (_targetConstraints.IsUniformScaling && )
+        if (_targetConstraints.IsUniformScaling && (InputLeft() || InputRight() || InputDown() || InputUp()))
         {
             return Vector3.one * axisDelta * ((InputLeft() || InputRight()) ? -1 : 1);
         }

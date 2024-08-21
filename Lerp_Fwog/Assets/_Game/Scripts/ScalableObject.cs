@@ -7,21 +7,19 @@ using UnityEngine.UIElements;
 
 public class ScalableObject : MonoBehaviour
 {
-    [SerializeField] private TransformConstraints _transformConstraints = new TransformConstraints(new TransformValues());
-
     public UnityEvent OnEnter = new();
     public UnityEvent OnExit = new();
     public UnityEvent OnStartInteract = new();
     public UnityEvent OnStopInteract = new();
 
-    private SpriteRenderer _spriteRenderer;
-    private Color _spriteColor;
-
-    private bool _isMouseOver = false;
-
+    [SerializeField] private TransformConstraints _transformConstraints = new TransformConstraints(new TransformValues());
     [SerializeField] private float _dampingRatio = 0.5f, _angularFrequency = 0.1f, _timeStep = 1.0f;
     [SerializeField] private Vector3 _springPositionCurrent, _springPositionVelocity, _springPositionTarget;
     [SerializeField] private float _springRotationCurrent, _springRotationVelocity, _springRotationTarget;
+
+    private SpriteRenderer _spriteRenderer;
+    private Color _spriteColor;
+    private bool _isMouseOver = false;
     private Vector3 _originalPosition;
     private float _originalRotation;
 
@@ -52,8 +50,6 @@ public class ScalableObject : MonoBehaviour
         transform.localScale.y >= _transformConstraints.MinScale.y && transform.localScale.y <= _transformConstraints.MaxScale.y &&
         transform.localScale.z >= _transformConstraints.MinScale.z && transform.localScale.z <= _transformConstraints.MaxScale.z;
     }
-
-
 
     private bool IsPositionWithinConstraints()
     {
@@ -119,13 +115,12 @@ public class ScalableObject : MonoBehaviour
         _springRotationTarget = targetRotation;
     }
 
-    private Vector3 _lastMousePos;
     private bool _mouseWasDown = false;
+
     private void OnMouseDown()
     {
         if (HandlerManager.Instance == null) return;
         if (!HandlerManager.Instance.AllowTransformations) return;
-        _lastMousePos = Input.mousePosition;
 
         if (!_mouseWasDown)
         {
