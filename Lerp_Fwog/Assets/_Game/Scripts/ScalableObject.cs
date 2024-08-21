@@ -23,6 +23,7 @@ public class ScalableObject : MonoBehaviour
     [SerializeField] private Vector3 _springPositionCurrent, _springPositionVelocity, _springPositionTarget;
     [SerializeField] private float _springRotationCurrent, _springRotationVelocity, _springRotationTarget;
     private Vector3 _originalPosition;
+    private float _originalRotation;
 
     void Awake()
     {
@@ -40,6 +41,7 @@ public class ScalableObject : MonoBehaviour
         _springPositionCurrent = transform.position;
         _springPositionTarget = _springPositionCurrent;
 
+        _originalRotation = transform.localEulerAngles.z;
         _springRotationCurrent = transform.localEulerAngles.z;
         _springRotationTarget = _springRotationCurrent;
     }
@@ -74,9 +76,9 @@ public class ScalableObject : MonoBehaviour
         SpringMath.Lerp(ref _springPositionCurrent, ref _springPositionVelocity, _springPositionTarget, _dampingRatio, _angularFrequency, _timeStep);
         transform.position = _springPositionCurrent;
 
-        // SpringMath.Lerp(ref _springRotationCurrent, ref _springRotationVelocity, _springRotationTarget, _dampingRatio, _angularFrequency, _timeStep);
+        SpringMath.Lerp(ref _springRotationCurrent, ref _springRotationVelocity, _springRotationTarget, _dampingRatio, _angularFrequency, _timeStep);
         // if (_springRotationCurrent > 360.0f) { _springRotationCurrent -= 360.0f; };
-        // transform.localEulerAngles = Vector3.forward * _springRotationCurrent;
+        transform.localEulerAngles = Vector3.forward * _springRotationCurrent;
     }
 
     void OnDestroy()
@@ -89,6 +91,11 @@ public class ScalableObject : MonoBehaviour
         _springPositionTarget = _originalPosition;
         _springPositionCurrent = _originalPosition;
         _springPositionVelocity = Vector3.zero;
+
+        _springRotationTarget = _originalRotation;
+        _springRotationCurrent = _originalRotation;
+        _springRotationVelocity = 0.0f;
+        // Debug.Log(String.Format("{0} {1} {2} {3}", _springRotationTarget, _springRotationCurrent, _springRotationVelocity, transform.localEulerAngles.z));
     }
 
     public void SetTargetPosition(Vector3 targetPosition)
@@ -98,11 +105,14 @@ public class ScalableObject : MonoBehaviour
         // _springPositionTarget.z = targetPosition.z;
     }
 
+    public void SetCurrentRotation(float currentRotation)
+    {
+        _springRotationCurrent = currentRotation;
+    }
+
     public void SetTargetRotation(float targetRotation)
     {
         _springRotationTarget = targetRotation;
-        if (_springRotationTarget >= 360.0f) { _springRotationTarget -= 360.0f; }
-        // Debug.Log(String.Format("{0} {1}", _springRotationTarget, _springRotationCurrent));
     }
 
     private Vector3 _lastMousePos;

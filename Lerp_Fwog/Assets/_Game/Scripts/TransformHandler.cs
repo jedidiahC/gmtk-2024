@@ -62,10 +62,12 @@ public class TransformHandler : MonoBehaviour
         }
         _targetConstraints = constraints;
         SetSprite();
-        if (inTarget == null) {
+        if (inTarget == null)
+        {
             HideGizmoLines();
             HideConstraints();
-        } else DrawConstraints();
+        }
+        else DrawConstraints();
     }
 
     public Transform target { get { return _target; } }
@@ -153,8 +155,9 @@ public class TransformHandler : MonoBehaviour
         }
     }
 
-        
-    private void DrawConstraints() {
+
+    private void DrawConstraints()
+    {
         _constraintLineRen.startWidth = 0.1f;
         _constraintLineRen.endWidth = 0.1f;
         switch (_transformType)
@@ -182,16 +185,18 @@ public class TransformHandler : MonoBehaviour
         }
     }
 
-    private void HideConstraints() {
+    private void HideConstraints()
+    {
         _constraintLineRen.positionCount = 0;
         _constraintLineRen.SetPositions(new Vector3[0]);
     }
 
 
-    
 
 
-    private void HideGizmoLines() {
+
+    private void HideGizmoLines()
+    {
         _gizmoLineRen.positionCount = 0;
         _gizmoLineRen.SetPositions(new Vector3[0]);
     }
@@ -259,10 +264,13 @@ public class TransformHandler : MonoBehaviour
         Vector2 targetScale = Vector2.zero;
         if (Input.GetMouseButton(0))
         {
-            if (_targetConstraints.IsUniformScaling) {
+            if (_targetConstraints.IsUniformScaling)
+            {
                 targetScale.x = Vector3.Distance(_scaleFrameData.savedMousePosition, mouseWorldPosition) * Mathf.Clamp(mouseWorldPosition.x - _scaleFrameData.savedMousePosition.x, -1, 1);
                 targetScale.y = targetScale.x;
-            } else {
+            }
+            else
+            {
                 targetScale.x = mouseWorldPosition.x - _scaleFrameData.savedMousePosition.x;
                 targetScale.y = mouseWorldPosition.y - _scaleFrameData.savedMousePosition.y;
             }
@@ -322,6 +330,8 @@ public class TransformHandler : MonoBehaviour
         {
             _rotateFrameData.savedMousePosition = mouseWorldPosition;
             _gizmoLineRen.SetPosition(2, _rotateFrameData.savedMousePosition);
+
+            _rotateFrameData.previousFrameMousePosition = mouseWorldPosition;
         }
         _gizmoLineRen.SetPosition(1, _target.position);
         _gizmoLineRen.SetPosition(0, _rotateFrameData.savedMousePosition);
@@ -330,6 +340,10 @@ public class TransformHandler : MonoBehaviour
         {
             _rotateFrameData.mouseDowned = true;
             _rotateFrameData.angleOnMouseDown = _target.localEulerAngles.z;
+
+            _rotateFrameData.previousFrameMousePosition = mouseWorldPosition;
+            _rotateFrameData.totalAngleRotated = 0.0f;
+            _targetScript.SetCurrentRotation(_target.localEulerAngles.z);
         }
         if (Input.GetMouseButton(0))
         {
@@ -337,19 +351,35 @@ public class TransformHandler : MonoBehaviour
             Vector2 to = (mouseWorldPosition - _target.position).normalized;
             float signedAngle = (Mathf.Atan2(to.y, to.x) - Mathf.Atan2(from.y, from.x)) * Mathf.Rad2Deg;
 
-            if (signedAngle > 180) signedAngle -= 360;
-            else if (signedAngle < -180) signedAngle += 360;
+            Vector2 fromPreviousFrame = (_rotateFrameData.previousFrameMousePosition - _target.position).normalized;
+            float signedAngleFromPreviousFrame = Vector2.SignedAngle(fromPreviousFrame, to);
+            _rotateFrameData.totalAngleRotated += signedAngleFromPreviousFrame;
+            _rotateFrameData.previousFrameMousePosition = mouseWorldPosition;
+
+            if (signedAngle > 180)
+            {
+                signedAngle -= 360;
+            }
+            else if (signedAngle < -180)
+            {
+                signedAngle += 360;
+            }
 
             targetLocalEuler.z = _rotateFrameData.angleOnMouseDown + signedAngle;
-            Debug.Log("Signed: " + signedAngle + "_target: " + _target.localEulerAngles.z + ", onMouseDown: " + _rotateFrameData.angleOnMouseDown + ", targetLocalEuler: " + targetLocalEuler.z);
+            // Debug.Log("Signed: " + signedAngle + "_target: " + _target.localEulerAngles.z + ", onMouseDown: " + _rotateFrameData.angleOnMouseDown + ", targetLocalEuler: " + targetLocalEuler.z);
         }
         if (Input.GetMouseButtonUp(0))
         {
             _rotateFrameData.mouseDowned = false;
+            _rotateFrameData.totalAngleRotated = 0.0f;
         }
 
-        _target.localEulerAngles = targetLocalEuler;
-        _targetScript.SetTargetRotation(_target.localEulerAngles.z);
+        if (_rotateFrameData.mouseDowned)
+        {
+            _targetScript.SetTargetRotation(_rotateFrameData.angleOnMouseDown + _rotateFrameData.totalAngleRotated);
+        }
+
+        // _target.localEulerAngles = targetLocalEuler;
     }
 
     private TranslateFrameData _translateFrameData = new TranslateFrameData();
@@ -377,23 +407,27 @@ public class TransformHandler : MonoBehaviour
             targetPosition.x -= delta;
         }
 
-        if (Input.GetMouseButtonDown(0)) {
+        if (Input.GetMouseButtonDown(0))
+        {
             Vector3 mousePosWorld = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mousePosWorld.z = 0;
 
-            if (Vector3.Distance(mousePosWorld, _target.position) < (_gizmoSpriteScale + 0.25f)) {
+            if (Vector3.Distance(mousePosWorld, _target.position) < (_gizmoSpriteScale + 0.25f))
+            {
                 _translateFrameData.savedWorldMousePosition = mousePosWorld;
                 _translateFrameData.mouseDowned = true;
                 _translateFrameData.targetPosOnMouseDown = _target.position;
             }
         }
-        if (_translateFrameData.mouseDowned && Input.GetMouseButton(0)) {
+        if (_translateFrameData.mouseDowned && Input.GetMouseButton(0))
+        {
             Vector3 mousePosWorld = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mousePosWorld.z = 0;
             Vector3 deltaMousePos = mousePosWorld - _translateFrameData.savedWorldMousePosition;
             targetPosition = _translateFrameData.targetPosOnMouseDown + deltaMousePos;
         }
-        if (Input.GetMouseButtonUp(0)) {
+        if (Input.GetMouseButtonUp(0))
+        {
             _translateFrameData.mouseDowned = false;
         }
 
@@ -422,6 +456,9 @@ public class TransformHandler : MonoBehaviour
         public bool mouseDowned;
         public Vector3 savedMousePosition;
         public float angleOnMouseDown;
+
+        public Vector3 previousFrameMousePosition;
+        public float totalAngleRotated;
     }
 
     struct ScaleFrameData

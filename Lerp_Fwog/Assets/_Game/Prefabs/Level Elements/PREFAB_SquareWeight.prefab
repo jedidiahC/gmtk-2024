@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 9125353597590215322}
   - component: {fileID: 478448835242176530}
   - component: {fileID: 2569728997573868109}
-  - component: {fileID: 3498207341859950639}
   m_Layer: 0
   m_Name: PREFAB_SquareWeight
   m_TagString: DynamicObj
@@ -89,6 +88,13 @@ MonoBehaviour:
   _dampingRatio: 0.5
   _angularFrequency: 0.1
   _timeStep: 1
+  _springPositionCurrent: {x: 0, y: 0, z: 0}
+  _springPositionVelocity: {x: 0, y: 0, z: 0}
+  _springPositionTarget: {x: 0, y: 0, z: 0}
+  _springRotationCurrent: 0
+  _springRotationVelocity: 0
+  _springRotationTarget: 0
+  springRotationTarget: 0
 --- !u!114 &5930243805345324770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -227,21 +233,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &3498207341859950639
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2293624710870529133}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4326928fb13122c4cac11ca646c7c882, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _angleText: {fileID: 7366446361410123933}
-  _doAngleShit: 0
-  _doScaleShit: 0
 --- !u!1 &2873448061624634232
 GameObject:
   m_ObjectHideFlags: 0
