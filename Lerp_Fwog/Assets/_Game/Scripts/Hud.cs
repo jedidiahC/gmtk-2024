@@ -17,8 +17,9 @@ public class Hud : MonoBehaviour
     [SerializeField] private AudioClipGroup _changeWidget = null;
 
     private TransformConstraints _currentContraints;
-    private eTransformType _currentActiveType;
+    private eTransformType _lastActiveTransformType;
     private StageManager _stage;
+
     public void SetStageManager(StageManager inStage)
     {
         if (_stage != null)
@@ -50,8 +51,10 @@ public class Hud : MonoBehaviour
     {
         HandlerManager.Instance.OnSetTarget.AddListener(OnSetTarget);
         HandlerManager.Instance.OnSwitchMode.AddListener(OnSwitchMode);
+
         _onPlay.onClick.RemoveAllListeners();
         _onReset.onClick.RemoveAllListeners();
+
         _onReset.onClick.AddListener(OnReset);
         _onPlay.onClick.AddListener(OnPlay);
         _onSelectTranslate.onClick.AddListener(OnSelectTranslate);
@@ -66,55 +69,28 @@ public class Hud : MonoBehaviour
         if (_stage.GetIsSimulating())
         {
             _playSound.PlayOneShot(_audioSource);
-            _toolbar.TogglePlayInteractable(false, false);
-            _onReset.interactable = false;
-            _toolbar.ToggleResetInteractable(false);
         }
         else
         {
             _pauseSound.PlayOneShot(_audioSource);
-            _toolbar.TogglePlayInteractable(true, false);
-            _onReset.interactable = true;
-            _toolbar.ToggleResetInteractable(true);
         }
+
+        SetPlayResetInteractable(!_stage.GetIsSimulating());
     }
 
     public void OnSetTarget()
     {
-        if (HandlerManager.Instance.GetTarget() == null)
+        if (!IsTargetSelected())
         {
             _toolbar.SetAllInUseToFalse();
             _toolbar.ToggleTransformControls(false, false, false);
             return;
         }
 
-        _currentContraints = HandlerManager.Instance.GetConstraints();
+        UpdateTransformType();
+
+        _toolbar.ToggleTransformInUse(_lastActiveTransformType);
         _toolbar.ToggleTransformControls(_currentContraints.AllowTranslation, _currentContraints.AllowRotation, _currentContraints.AllowScaling);
-
-        // This is really horrible and it makes me want to cry
-        if (_currentActiveType == eTransformType.Translation && !_currentContraints.AllowTranslation)
-        {
-            Debug.Log("doesn't allow translation, changing to rotation");
-            HandlerManager.Instance.SwitchMode(eTransformType.Rotation);
-        }
-        if (_currentActiveType == eTransformType.Rotation && !_currentContraints.AllowRotation)
-        {
-            Debug.Log("doesn't allow rotation, changing to scaling");
-            HandlerManager.Instance.SwitchMode(eTransformType.Scale);
-        }
-        if (_currentActiveType == eTransformType.Scale && !_currentContraints.AllowScaling)
-        {
-            Debug.Log("doesn't allow scaling, changing to translate");
-            HandlerManager.Instance.SwitchMode(eTransformType.Translation);
-        }
-
-        if (_currentActiveType != HandlerManager.Instance.GetTransformType())
-        {
-            // Rayner: Note - I think should switch to the last used transform type when possible?
-            HandlerManager.Instance.SwitchMode(_currentActiveType);
-        }
-
-        _toolbar.ToggleTransformInUse(_currentActiveType);
     }
 
     public void OnReset()
@@ -130,23 +106,73 @@ public class Hud : MonoBehaviour
 
     public void OnSelectTranslate()
     {
-        HandlerManager.Instance.SwitchMode(eTransformType.Translation);
+
+        SwitchMode(eTransformType.Translation);
     }
 
     public void OnSelectRotate()
     {
-        HandlerManager.Instance.SwitchMode(eTransformType.Rotation);
+        SwitchMode(eTransformType.Rotation);
     }
 
     public void OnSelectScale()
     {
-        HandlerManager.Instance.SwitchMode(eTransformType.Scale);
+        SwitchMode(eTransformType.Scale);
+    }
+
+    private void UpdateTransformType()
+    {
+        _currentContraints = HandlerManager.Instance.GetConstraints();
+
+        // Try to switch to the previously selected transform type if it's allowed by the new selected target.
+        if (_currentContraints.IsTransformTypeAllowed(_lastActiveTransformType))
+        {
+            SwitchMode(_lastActiveTransformType);
+        }
+        else
+        {
+            // Switch to the first allowed transform type in this order.
+            eTransformType[] availableTransformTypePriority = new eTransformType[] { eTransformType.Translation, eTransformType.Rotation, eTransformType.Scale };
+
+            foreach (eTransformType transformType in availableTransformTypePriority)
+            {
+                if (_currentContraints.IsTransformTypeAllowed(transformType))
+                {
+                    SwitchMode(transformType);
+                    break;
+                }
+            }
+
+            // If no transform types allowed, too bad!
+        }
+    }
+
+    private void SetPlayResetInteractable(bool canInteract)
+    {
+        _toolbar.TogglePlayInteractable(canInteract, false);
+        _toolbar.ToggleResetInteractable(canInteract);
+
+        _onReset.interactable = canInteract;
+    }
+
+    private void SwitchMode(eTransformType transformType)
+    {
+        if (!IsTargetSelected()) { return; }
+
+        HandlerManager.Instance.SwitchMode(transformType);
+    }
+
+    private bool IsTargetSelected()
+    {
+        return HandlerManager.Instance != null && HandlerManager.Instance.GetTarget() != null;
     }
 
     private void OnSwitchMode(eTransformType transformType)
     {
-        //Debug.Log("Switched to " + transformType);
-        _currentActiveType = transformType;
+        if (!IsTargetSelected()) { return; }
+
+        _lastActiveTransformType = transformType;
+
         _toolbar.ToggleTransformInUse(transformType);
         _changeWidget.PlayOneShot(_audioSource);
     }
