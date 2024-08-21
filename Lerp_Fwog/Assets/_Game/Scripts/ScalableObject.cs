@@ -71,8 +71,12 @@ public class ScalableObject : MonoBehaviour
 
     private void Update()
     {
-        if (!HandlerManager.Instance.AllowTransformations || HandlerManager.Instance.GetTarget() == null || HandlerManager.Instance.GetTarget().transform != transform) return;
+        if (!IsInEditMode() || !IsCurrentHandlerTarget()) return;
+        LerpTransform();
+    }
 
+    private void LerpTransform()
+    {
         SpringMath.Lerp(ref _springPositionCurrent, ref _springPositionVelocity, _springPositionTarget, _dampingRatio, _angularFrequency, _timeStep);
         transform.position = _springPositionCurrent;
 
@@ -133,31 +137,39 @@ public class ScalableObject : MonoBehaviour
 
     private void OnMouseUp()
     {
-        if (_mouseWasDown)
-        {
-            OnStopInteract.Invoke();
-            _mouseWasDown = false;
-            if (HandlerManager.Instance == null) return;
-            if (!HandlerManager.Instance.AllowTransformations) return;
+        if (!_mouseWasDown) { return; }
 
-            if (HandlerManager.Instance.GetTarget() == transform)
-            {
-                const float TOLERANCE = 1.0f;
-                if (Vector3.Distance(_lastMousePos, Input.mousePosition) < TOLERANCE)
-                {
-                    Debug.Log("deselect currently commented out");
-                    // HandlerManager.Instance.SetTarget(null);
-                }
-            }
-            else HandlerManager.Instance.SetTarget(transform, _transformConstraints);
+        OnStopInteract.Invoke();
+        _mouseWasDown = false;
+
+        if (!IsInEditMode()) { return; }
+
+        if (!IsCurrentHandlerTarget())
+        {
+            SetSelfAsHandlerTarget();
         }
+    }
+
+    private void SetSelfAsHandlerTarget()
+    {
+        HandlerManager.Instance.SetTarget(transform, _transformConstraints);
+    }
+
+    private bool IsInEditMode()
+    {
+        return HandlerManager.Instance != null && HandlerManager.Instance.AllowTransformations;
+    }
+
+    private bool IsCurrentHandlerTarget()
+    {
+        return HandlerManager.Instance.GetTarget() == transform;
     }
 
     private void OnMouseEnter()
     {
-        if (HandlerManager.Instance == null) return;
-        if (!HandlerManager.Instance.AllowTransformations) return;
-        _spriteRenderer.color = Color.Lerp(_spriteColor, new Color(1.0f, 0.0f, 1.0f), 0.25f);
+        if (!IsInEditMode()) return;
+
+        EnterSelectedState();
 
         if (!_isMouseOver)
         {
@@ -171,6 +183,11 @@ public class ScalableObject : MonoBehaviour
         if (HandlerManager.Instance == null) return;
         if (!HandlerManager.Instance.AllowTransformations) return;
         ExitSelectedState();
+    }
+
+    private void EnterSelectedState()
+    {
+        _spriteRenderer.color = Color.Lerp(_spriteColor, new Color(1.0f, 0.0f, 1.0f), 0.25f);
     }
 
     private void ExitSelectedState()
