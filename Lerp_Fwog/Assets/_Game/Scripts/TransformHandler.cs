@@ -41,6 +41,21 @@ public struct TransformConstraints
         MinTranslationOffset = Vector3.one * 50.0f;
         MaxTranslationOffset = Vector3.one * 50.0f;
     }
+
+    public bool IsTransformTypeAllowed(eTransformType transformType)
+    {
+        switch (transformType)
+        {
+            case eTransformType.Rotation:
+                return AllowRotation;
+            case eTransformType.Scale:
+                return AllowScaling;
+            case eTransformType.Translation:
+                return AllowTranslation;
+            default:
+                return false;
+        }
+    }
 }
 
 public class TransformHandler : MonoBehaviour
@@ -55,19 +70,23 @@ public class TransformHandler : MonoBehaviour
     public void SetTarget(Transform inTarget, TransformConstraints constraints = new TransformConstraints())
     {
         _target = inTarget;
+
         if (_target)
         {
             _targetScript = _target.GetComponent<ScalableObject>();
             Debug.Assert(_targetScript, String.Format("No ScalableObject.cs on {0}!", name));
         }
+
         _targetConstraints = constraints;
-        SetSprite();
+
         if (inTarget == null)
         {
             HideGizmoLines();
             HideConstraints();
         }
         else DrawConstraints();
+
+        SetSprite();
     }
 
     public Transform target { get { return _target; } }
@@ -160,6 +179,7 @@ public class TransformHandler : MonoBehaviour
     {
         _constraintLineRen.startWidth = 0.1f;
         _constraintLineRen.endWidth = 0.1f;
+
         switch (_transformType)
         {
             case eTransformType.Scale:
@@ -191,16 +211,11 @@ public class TransformHandler : MonoBehaviour
         _constraintLineRen.SetPositions(new Vector3[0]);
     }
 
-
-
-
-
     private void HideGizmoLines()
     {
         _gizmoLineRen.positionCount = 0;
         _gizmoLineRen.SetPositions(new Vector3[0]);
     }
-
 
     private ScaleFrameData _scaleFrameData;
     private void HandleScaleInput()
@@ -210,47 +225,7 @@ public class TransformHandler : MonoBehaviour
         Vector3 targetLocalScale = _target.localScale;
         float delta = deltaModifierS * Time.deltaTime;
 
-        if (_targetConstraints.IsUniformScaling)
-        {
-            Vector3 scaleDelta = Vector3.one * delta;
-            if (InputUp())
-            {
-                targetLocalScale += scaleDelta;
-            }
-            if (InputDown())
-            {
-                targetLocalScale -= scaleDelta;
-            }
-            if (InputRight())
-            {
-                targetLocalScale += scaleDelta;
-            }
-            if (InputLeft())
-            {
-                targetLocalScale -= scaleDelta;
-            }
-        }
-        else
-        {
-
-            if (InputUp())
-            {
-                targetLocalScale.y += delta;
-            }
-            if (InputDown())
-            {
-                targetLocalScale.y -= delta;
-            }
-            if (InputRight())
-            {
-                targetLocalScale.x += delta;
-            }
-            if (InputLeft())
-            {
-                targetLocalScale.x -= delta;
-            }
-        }
-
+        targetLocalScale += GetScaleDeltaFromKeyboardInput(delta);
 
         Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mouseWorldPosition.z = 0.0f;
@@ -262,6 +237,7 @@ public class TransformHandler : MonoBehaviour
         }
 
         Vector2 targetScale = Vector2.zero;
+
         if (Input.GetMouseButton(0))
         {
             if (_targetConstraints.IsUniformScaling)
@@ -287,6 +263,34 @@ public class TransformHandler : MonoBehaviour
         _target.localScale = targetLocalScale;
     }
 
+    private Vector3 GetScaleDeltaFromKeyboardInput(float axisDelta)
+    {
+        if (_targetConstraints.IsUniformScaling && )
+        {
+            return Vector3.one * axisDelta * ((InputLeft() || InputRight()) ? -1 : 1);
+        }
+        else
+        {
+            Vector3 scaleDelta = Vector3.zero;
+            if (InputUp())
+            {
+                scaleDelta.y += axisDelta;
+            }
+            if (InputDown())
+            {
+                scaleDelta.y -= axisDelta;
+            }
+            if (InputRight())
+            {
+                scaleDelta.x += axisDelta;
+            }
+            if (InputLeft())
+            {
+                scaleDelta.x -= axisDelta;
+            }
+            return scaleDelta;
+        }
+    }
 
     private RotateFrameData _rotateFrameData = new RotateFrameData();
     private void HandleRotationInput()
@@ -311,9 +315,6 @@ public class TransformHandler : MonoBehaviour
         {
             targetLocalEuler.z += delta;
         }
-
-
-
 
         _gizmoLineRen.startWidth = 0.1f;
         _gizmoLineRen.endWidth = 0.1f;
